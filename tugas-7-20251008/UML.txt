@@ -1,0 +1,105 @@
+@startuml
+
+' ===========================
+' CLASS DEFINITIONS
+' ===========================
+
+class Time {
+  - int hour
+  - int minute
+  - int second
+  --
+  + Time()
+  + Time(int hour, int minute, int second)
+  --
+  + getHour(): int
+  + setHour(int hour): void
+  + getMinute(): int
+  + setMinute(int minute): void
+  + getSecond(): int
+  + setSecond(int second): void
+}
+
+class Date {
+  - int year
+  - int month
+  - int day
+  --
+  + Date()
+  + Date(int year, int month, int day)
+  --
+  + getYear(): int
+  + setYear(int year): void
+  + getMonth(): int
+  + setMonth(int month): void
+  + getDay(): int
+  + setDay(int day): void
+}
+
+class Waktu {
+  - Time time
+  - Date date
+  --
+  + Waktu()
+  + Waktu(Time time, Date date)
+  --
+  + getTime(): Time
+  + setTime(Time time): void
+  + getDate(): Date
+  + setDate(Date date): void
+}
+
+class WaktuHelper {
+  + WaktuHelper()
+  + Map<String, String> getDifference(Waktu a, Waktu b)
+}
+
+class ParkedVehicle {
+  - String noKendaraan
+  - JenisKendaraan jenisKendaraan
+  - Status status
+  - Waktu datang
+  - Waktu pulang
+  --
+  + ParkedVehicle()
+  + ParkedVehicle(String noKendaraan, JenisKendaraan jenisKendaraan, Status status, Waktu datang, Waktu pulang)
+  --
+  + getNoKendaraan(): String
+  + setNoKendaraan(String noKendaraan): void
+  + getJenisKendaraan(): JenisKendaraan
+  + setJenisKendaraan(JenisKendaraan jenisKendaraan): void
+  + getStatus(): Status
+  + setStatus(Status status): void
+  + getDatang(): Waktu
+  + setDatang(Waktu datang): void
+  + getPulang(): Waktu
+  + setPulang(Waktu pulang): void
+}
+
+class ParkedVehicleHelper {
+  + ParkedVehicleHelper()
+  + int getPay()
+}
+
+enum JenisKendaraan {
+  Motor
+  Mobil
+}
+
+enum Status {
+  menginap
+  regular
+}
+
+' ===========================
+' RELATIONSHIPS
+' ===========================
+Waktu --> Time
+Waktu --> Date
+ParkedVehicle --> Waktu
+WaktuHelper --* Waktu
+ParkedVehicleHelper --* ParkedVehicle
+ParkedVehicle --> JenisKendaraan
+ParkedVehicle --> Status
+
+@enduml
