@@ -7,15 +7,20 @@ using namespace std;
 
 // === ENUMS ===
 enum JenisKendaraan { MOTOR, MOBIL };
+
 enum Status { REGULAR, MENGINAP };
 
 // === CLASS TIME ===
 class Time {
 private:
     int hour, minute, second;
+
 public:
-    Time() : hour(0), minute(0), second(0) {}
-    Time(int h, int m, int s) : hour(h), minute(m), second(s) {}
+    Time() : hour(0), minute(0), second(0) {
+    }
+
+    Time(int h, int m, int s) : hour(h), minute(m), second(s) {
+    }
 
     int getHour() const { return hour; }
     int getMinute() const { return minute; }
@@ -28,8 +33,8 @@ public:
     string toString() const {
         ostringstream oss;
         oss << setw(2) << setfill('0') << hour << ":"
-            << setw(2) << minute << ":"
-            << setw(2) << second;
+                << setw(2) << minute << ":"
+                << setw(2) << second;
         return oss.str();
     }
 };
@@ -38,9 +43,13 @@ public:
 class Date {
 private:
     int year, month, day;
+
 public:
-    Date() : year(0), month(0), day(0) {}
-    Date(int y, int m, int d) : year(y), month(m), day(d) {}
+    Date() : year(0), month(0), day(0) {
+    }
+
+    Date(int y, int m, int d) : year(y), month(m), day(d) {
+    }
 
     int getYear() const { return year; }
     int getMonth() const { return month; }
@@ -53,8 +62,8 @@ public:
     string toString() const {
         ostringstream oss;
         oss << setw(4) << setfill('0') << year << "/"
-            << setw(2) << month << "/"
-            << setw(2) << day;
+                << setw(2) << month << "/"
+                << setw(2) << day;
         return oss.str();
     }
 };
@@ -64,9 +73,13 @@ class Waktu {
 private:
     Time time;
     Date date;
+
 public:
-    Waktu() {}
-    Waktu(Time t, Date d) : time(t), date(d) {}
+    Waktu() {
+    }
+
+    Waktu(Time t, Date d) : time(t), date(d) {
+    }
 
     Time getTime() const { return time; }
     Date getDate() const { return date; }
@@ -89,7 +102,7 @@ private:
     }
 
 public:
-    static Waktu calculateTimeDifference(const Waktu& datang, const Waktu& pulang) {
+    static Waktu calculateTimeDifference(const Waktu &datang, const Waktu &pulang) {
         Date d1 = datang.getDate();
         Time t1 = datang.getTime();
         Date d2 = pulang.getDate();
@@ -158,7 +171,8 @@ private:
 
 public:
     ParkedVehicle(string no, JenisKendaraan k, Status s, Waktu d, Waktu p)
-        : noKendaraan(no), kendaraan(k), status(s), datang(d), pulang(p) {}
+        : noKendaraan(no), kendaraan(k), status(s), datang(d), pulang(p) {
+    }
 
     string getNoKendaraan() const { return noKendaraan; }
     JenisKendaraan getKendaraan() const { return kendaraan; }
@@ -170,7 +184,7 @@ public:
 // === HELPER UNTUK HITUNG BAYAR ===
 class ParkedVehicleHelper {
 public:
-    static int getPay(const ParkedVehicle& v, int totalJam, int totalHari) {
+    static int getPay(const ParkedVehicle &v, int totalJam, int totalHari) {
         int pay = 0;
         if (v.getStatus() == MENGINAP) {
             int rate = (v.getKendaraan() == MOTOR) ? 15000 : 25000;
@@ -184,7 +198,7 @@ public:
 };
 
 // === FUNGSI PARSER UNTUK INPUT ===
-Time parseTime(const string& s) {
+Time parseTime(const string &s) {
     int h, m, sec;
     char sep;
     istringstream iss(s);
@@ -192,7 +206,7 @@ Time parseTime(const string& s) {
     return Time(h, m, sec);
 }
 
-Date parseDate(const string& s) {
+Date parseDate(const string &s) {
     int y, m, d;
     char sep;
     istringstream iss(s);
@@ -201,7 +215,7 @@ Date parseDate(const string& s) {
 }
 
 // === OUTPUT RINCIAN KENDARAAN ===
-void printVehicleSummary(const ParkedVehicle& pv, const Waktu& diff, int totalHari, int totalJam, int pay) {
+void printVehicleSummary(const ParkedVehicle &pv, const Waktu &diff, int totalHari, int totalJam, int pay) {
     cout << "\n--- RINCIAN KENDARAAN ---\n";
     cout << "Nomor Kendaraan : " << pv.getNoKendaraan() << endl;
     cout << "Jenis Kendaraan : " << (pv.getKendaraan() == MOTOR ? "Motor" : "Mobil") << endl;
@@ -261,7 +275,7 @@ int main() {
         parkedVehicles.push_back(ParkedVehicle(no, kendaraan, status, datang, pulang));
     }
 
-    for (auto& pv : parkedVehicles) {
+    for (auto &pv: parkedVehicles) {
         Waktu diff = WaktuHelper::calculateTimeDifference(pv.getDatang(), pv.getPulang());
         Time tDiff = diff.getTime();
         Date dDiff = diff.getDate();
