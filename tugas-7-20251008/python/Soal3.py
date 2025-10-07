@@ -16,14 +16,17 @@ class Time:
 
     @staticmethod
     def parse(s):
-        h, m, s = map(int, s.split(":"))
-        return Time(h, m, s)
+        h, m, sec = map(int, s.split(":"))
+        return Time(h, m, sec)
 
     def total_seconds(self):
         return self.hour * 3600 + self.minute * 60 + self.second
 
     def __str__(self):
         return f"{self.hour:02d}:{self.minute:02d}:{self.second:02d}"
+
+    def __format__(self, fmt):
+        return str(self)
 
 
 class Date:
@@ -39,6 +42,9 @@ class Date:
 
     def __str__(self):
         return f"{self.year:04d}/{self.month:02d}/{self.day:02d}"
+
+    def __format__(self, fmt):
+        return str(self)
 
 
 class Waktu:
@@ -100,6 +106,7 @@ class ParkedVehicle:
 
 
 def get_pay(vehicle, diff):
+    # Behavior preserved from original: Menginap = per hari (diff.date.day)
     if vehicle.status == "MENGINAP":
         multiplier = 15000 if vehicle.jenis == "MOTOR" else 25000
         pay = multiplier * diff.date.day
@@ -124,29 +131,75 @@ def input_vehicle(i):
     return ParkedVehicle(no, jenis, status, datang, pulang)
 
 
+def seconds_to_hms_str(total_seconds):
+    hours = total_seconds // 3600
+    rem = total_seconds % 3600
+    minutes = rem // 60
+    seconds = rem % 60
+    return f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+
+
 def print_vehicle_summary(vehicles):
-    line = "+-----------------+-----------------+------------+-----------------+-----------------+--------------+--------------+------------+------------+------------+"
-    header = "| {:15} | {:15} | {:10} | {:15} | {:15} | {:12} | {:12} | {:10} | {:10} | {:10} |".format(
+    # column widths
+    widths = [15, 15, 10, 15, 15, 12, 12, 10, 12, 12]
+    # alignment: True => left, False => right
+    aligns = [True, True, True, True, True, True, True, False, False, False]
+
+    # build format tokens
+    tokens = []
+    for w, left in zip(widths, aligns):
+        if left:
+            tokens.append(f"{{:<{w}}}")
+        else:
+            tokens.append(f"{{:>{w}}}")
+
+    row_fmt = "| " + " | ".join(tokens) + " |"
+    border = "+" + "+".join("-" * (w + 2) for w in widths) + "+"
+
+    headers = [
         "No Kendaraan", "Jenis Kendaraan", "Status", "Tanggal Datang", "Tanggal Pulang",
         "Jam Datang", "Jam Pulang", "Lama Hari", "Lama Jam", "Biaya"
-    )
-    print("\n" + line)
-    print(header)
-    print(line)
+    ]
+
+    print("\n" + border)
+    print(row_fmt.format(*headers))
+    print(border)
+
     for v in vehicles:
         diff = calculate_time_difference(v.datang, v.pulang)
-        lama_jam = diff.time.hour + diff.date.day * 24
+
+        # total seconds across days + time
+        total_seconds = diff.date.day * 24 * 3600 + diff.time.total_seconds()
+        lama_jam_str = seconds_to_hms_str(total_seconds)
+
+        # lama hari as integer
+        lama_hari_str = str(diff.date.day)
+
         pay = get_pay(v, diff)
-        print("| {:15} | {:15} | {:10} | {:15} | {:15} | {:12} | {:12} | {:10} | {:10} | {:10} |".format(
-            v.no_kendaraan, v.jenis, v.status, v.datang.date, v.pulang.date,
-            v.datang.time, v.pulang.time, diff.date.day,
-            f"{lama_jam:02d}:{diff.time.minute:02d}:{diff.time.second:02d}", pay
-        ))
-        print(line)
+
+        row_values = [
+            v.no_kendaraan,
+            v.jenis,
+            v.status,
+            str(v.datang.date),
+            str(v.pulang.date),
+            str(v.datang.time),
+            str(v.pulang.time),
+            lama_hari_str,
+            lama_jam_str,
+            str(pay)
+        ]
+
+        print(row_fmt.format(*row_values))
+        print(border)
 
 
 def main():
-    n = int(input("Masukkan jumlah kendaraan: "))
+    try:
+        n = int(input("Masukkan jumlah kendaraan: "))
+    except ValueError:
+        print("Input jumlah kendaraan harus bilangan bulat.")
+        return
     vehicles = [input_vehicle(i) for i in range(n)]
     print_vehicle_summary(vehicles)
 
