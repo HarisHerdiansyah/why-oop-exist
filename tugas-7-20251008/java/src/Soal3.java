@@ -1,3 +1,13 @@
+/*
+Nama - NPM    : ~ Raissa Christabel Sebayang - 140810240008
+                ~ Abraham Gomes Samosir - 140810240044
+                ~ Haris Herdiansyah - 140810240074
+Kelas         : B
+Nama File     : Soal3.java
+Deskripsi     : Membuat program untuk menghitung biaya parkir kendaraan
+                berdasarkan waktu datang dan pulang menggunakan array.
+*/
+
 import java.util.Scanner;
 
 enum JenisKendaraan {MOTOR, MOBIL}

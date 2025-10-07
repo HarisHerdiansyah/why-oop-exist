@@ -1,3 +1,13 @@
+"""
+Nama - NPM    : ~ Raissa Christabel Sebayang - 140810240008
+                ~ Abraham Gomes Samosir - 140810240044
+                ~ Haris Herdiansyah - 140810240074
+Kelas         : B
+Nama File     : Soal2.py
+Deskripsi     : Membuat program untuk menghitung nilai ujian lari mahasiswa
+                berdasarkan waktu mulai dan selesai lari menggunakan array.
+"""
+
 class Waktu:
     def __init__(self, jam=0, menit=0, detik=0):
         self.jam = jam

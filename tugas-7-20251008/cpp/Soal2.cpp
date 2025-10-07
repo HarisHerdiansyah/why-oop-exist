@@ -10,211 +10,130 @@ Deskripsi     : Membuat program untuk menghitung nilai ujian lari mahasiswa
 
 #include <iostream>
 #include <iomanip>
+#include <vector>
 #include <string>
-#include <map>
-using namespace std;
+#include <sstream>
 
 class Waktu {
-private:
-    int jam;
-    int menit;
-    int detik;
-
 public:
-    Waktu() : jam(0), menit(0), detik(0) {
+    int jam, menit, detik;
+    Waktu(int j = 0, int m = 0, int d = 0) : jam(j), menit(m), detik(d) {}
+
+    static Waktu parseTime(const std::string& t) {
+        int j, m, d;
+        char sep;
+        std::istringstream iss(t);
+        iss >> j >> sep >> m >> sep >> d;
+        return Waktu(j, m, d);
     }
-
-    Waktu(int jam, int menit, int detik) {
-        this->jam = jam;
-        this->menit = menit;
-        this->detik = detik;
-    }
-
-    int getJam() const { return jam; }
-    void setJam(int jam) { this->jam = jam; }
-
-    int getMenit() const { return menit; }
-    void setMenit(int menit) { this->menit = menit; }
-
-    int getDetik() const { return detik; }
-    void setDetik(int detik) { this->detik = detik; }
 
     int totalTimeInSeconds() const {
-        return (jam * 3600) + (menit * 60) + detik;
+        return jam * 3600 + menit * 60 + detik;
     }
 
-    string toString() const {
-        ostringstream oss;
-        oss << setfill('0') << setw(2) << jam << ":"
-                << setw(2) << menit << ":"
-                << setw(2) << detik;
+    std::string toString() const {
+        std::ostringstream oss;
+        oss << std::setw(2) << std::setfill('0') << jam << ":"
+            << std::setw(2) << std::setfill('0') << menit << ":"
+            << std::setw(2) << std::setfill('0') << detik;
         return oss.str();
     }
 };
 
-class Mahasiswa {
-private:
-    string name;
-    string npm;
-    Waktu mulai;
-    Waktu selesai;
-
-public:
-    Mahasiswa() {
-    }
-
-    Mahasiswa(string name, string npm, Waktu mulai, Waktu selesai) {
-        this->name = name;
-        this->npm = npm;
-        this->mulai = mulai;
-        this->selesai = selesai;
-    }
-
-    string getName() const { return name; }
-    void setName(string name) { this->name = name; }
-
-    string getNpm() const { return npm; }
-    void setNpm(string npm) { this->npm = npm; }
-
-    Waktu getSelesai() const { return selesai; }
-    void setSelesai(Waktu selesai) { this->selesai = selesai; }
-
-    Waktu getMulai() const { return mulai; }
-    void setMulai(Waktu mulai) { this->mulai = mulai; }
-};
-
-class LarikMahasiswa {
-private:
-    Mahasiswa *daftarMahasiswa;
-    int size;
-    int indexPointer;
-
-public:
-    LarikMahasiswa(int size) {
-        this->size = size;
-        this->indexPointer = 0;
-        daftarMahasiswa = new Mahasiswa[size];
-    }
-
-    ~LarikMahasiswa() {
-        delete[] daftarMahasiswa;
-    }
-
-    void push(const Mahasiswa &mahasiswa) {
-        if (indexPointer >= size) {
-            cout << "Maximum size of array exceeded." << endl;
-            return;
-        }
-        daftarMahasiswa[indexPointer++] = mahasiswa;
-    }
-
-    Mahasiswa getMahasiswaAt(int index) const {
-        return daftarMahasiswa[index];
-    }
-
-    int getIndexPointer() const {
-        return indexPointer;
-    }
-};
-
-Waktu parseTime(const string &t) {
-    int jam, menit, detik;
-    char sep1;
-    istringstream iss(t);
-    iss >> jam >> sep1 >> menit >> sep1 >> detik;
+Waktu difference(const Waktu& mulai, const Waktu& selesai) {
+    int totalMulai = mulai.totalTimeInSeconds();
+    int totalSelesai = selesai.totalTimeInSeconds();
+    int selisih = totalSelesai - totalMulai;
+    if (selisih < 0) selisih += 24 * 3600;
+    int jam = selisih / 3600;
+    int menit = (selisih % 3600) / 60;
+    int detik = selisih % 60;
     return Waktu(jam, menit, detik);
 }
 
+class Mahasiswa {
+public:
+    std::string name, npm;
+    Waktu mulai, selesai;
+    Mahasiswa(const std::string& n, const std::string& np, const Waktu& m, const Waktu& s)
+        : name(n), npm(np), mulai(m), selesai(s) {}
+};
+
+struct Hasil {
+    std::string HM;
+    std::string status;
+};
+
+Hasil calculateGrade(const Mahasiswa& mhs, Waktu& lama) {
+    lama = difference(mhs.mulai, mhs.selesai);
+    int totalDetik = lama.totalTimeInSeconds();
+    Hasil hasil;
+    hasil.status = "Lulus";
+    if (totalDetik >= 0 && totalDetik < (7.5 * 60)) {
+        hasil.HM = "A";
+    } else if (totalDetik >= (7.5 * 60) && totalDetik < (12.5 * 60)) {
+        hasil.HM = "B";
+    } else if (totalDetik >= (12.5 * 60) && totalDetik < (30 * 60)) {
+        hasil.HM = "C";
+    } else {
+        hasil.HM = "D";
+        hasil.status = "Gagal";
+    }
+    return hasil;
+}
+
 Mahasiswa inputMahasiswa() {
-    string name, npm, mulaiStr, selesaiStr;
-    cout << "Masukkan Nama: ";
-    getline(cin, name);
-    cout << "Masukkan NPM: ";
-    getline(cin, npm);
-    cout << "Masukkan Waktu Mulai (hh:mm:ss): ";
-    getline(cin, mulaiStr);
-    cout << "Masukkan Waktu Selesai (hh:mm:ss): ";
-    getline(cin, selesaiStr);
-
-    Waktu mulai = parseTime(mulaiStr);
-    Waktu selesai = parseTime(selesaiStr);
-
+    std::string name, npm, mulaiStr, selesaiStr;
+    std::cout << "\nMasukkan nama: ";
+    std::getline(std::cin, name);
+    std::cout << "Masukkan npm: ";
+    std::getline(std::cin, npm);
+    std::cout << "Masukkan waktu mulai (HH:mm:ss): ";
+    std::getline(std::cin, mulaiStr);
+    std::cout << "Masukkan waktu selesai (HH:mm:ss): ";
+    std::getline(std::cin, selesaiStr);
+    Waktu mulai = Waktu::parseTime(mulaiStr);
+    Waktu selesai = Waktu::parseTime(selesaiStr);
     return Mahasiswa(name, npm, mulai, selesai);
 }
 
-Waktu difference(Waktu mulai, Waktu selesai) {
-    int jamMulai = mulai.getJam();
-    int menitMulai = mulai.getMenit();
-    int detikMulai = mulai.getDetik();
-    int jamSelesai = selesai.getJam();
-    int menitSelesai = selesai.getMenit();
-    int detikSelesai = selesai.getDetik();
-
-    int selisiDetik = detikSelesai - detikMulai;
-    if (detikSelesai < detikMulai) {
-        selisiDetik += 60;
-        menitSelesai -= 1;
+void outputTable(const std::vector<Mahasiswa>& mahasiswaList) {
+    std::cout << "\nUjian Lari\n";
+    std::cout << "-------------------------------------------------------------------------------------------------------------\n";
+    std::cout << "| " << std::setw(20) << std::left << "Nama"
+              << " | " << std::setw(12) << "NPM"
+              << " | " << std::setw(10) << "Huruf Mutu"
+              << " | " << std::setw(8) << "Status"
+              << " | " << std::setw(12) << "Waktu Mulai"
+              << " | " << std::setw(14) << "Waktu Selesai"
+              << " | " << std::setw(10) << "Lama Lari"
+              << " |\n";
+    std::cout << "-------------------------------------------------------------------------------------------------------------\n";
+    for (const auto& mhs : mahasiswaList) {
+        Waktu lama;
+        Hasil hasil = calculateGrade(mhs, lama);
+        std::cout << "| " << std::setw(20) << std::left << mhs.name
+                  << " | " << std::setw(12) << mhs.npm
+                  << " | " << std::setw(10) << hasil.HM
+                  << " | " << std::setw(8) << hasil.status
+                  << " | " << std::setw(12) << mhs.mulai.toString()
+                  << " | " << std::setw(14) << mhs.selesai.toString()
+                  << " | " << std::setw(10) << lama.toString()
+                  << " |\n";
+        std::cout << "-------------------------------------------------------------------------------------------------------------\n";
     }
-
-    int selisiMenit = menitSelesai - menitMulai;
-    if (menitSelesai < menitMulai) {
-        selisiMenit += 60;
-        jamSelesai -= 1;
-    }
-
-    int selisiJam = jamSelesai - jamMulai;
-
-    return Waktu(selisiJam, selisiMenit, selisiDetik);
-}
-
-map<string, string> calculateGrade(Mahasiswa mhs) {
-    map<string, string> result;
-    Waktu selisih = difference(mhs.getMulai(), mhs.getSelesai());
-    int totalSeconds = selisih.totalTimeInSeconds();
-
-    result["status"] = "Lulus";
-    if (totalSeconds >= 0 && totalSeconds < (7.5 * 60)) {
-        result["HM"] = "A";
-    } else if (totalSeconds >= (7.5 * 60) && totalSeconds < (12.5 * 60)) {
-        result["HM"] = "B";
-    } else if (totalSeconds >= (12.5 * 60) && totalSeconds < (30 * 60)) {
-        result["HM"] = "C";
-    } else {
-        result["HM"] = "D";
-        result["status"] = "Gagal";
-    }
-    return result;
-}
-
-void outputBuilder(Mahasiswa mhs, map<string, string> hasil) {
-    cout << "\n=== Ujian Lari ===\n";
-    cout << "Nama Mahasiswa: " << mhs.getName() << endl;
-    cout << "NPM Mahasiswa: " << mhs.getNpm() << endl;
-    cout << "Huruf Mutu: " << hasil["HM"] << endl;
-    cout << "Status: " << hasil["status"] << endl;
-    cout << "Waktu Mulai: " << mhs.getMulai().toString() << endl;
-    cout << "Waktu Selesai: " << mhs.getSelesai().toString() << endl;
-    cout << "Lama Lari: " << difference(mhs.getMulai(), mhs.getSelesai()).toString() << endl;
 }
 
 int main() {
     int n;
-    cout << "Masukkan jumlah mahasiswa: ";
-    cin >> n;
-    cin.ignore(); // To ignore the newline character after the integer input
-
-    LarikMahasiswa larik(n);
-    for (int i = 0; i < n; i++) {
-        cout << "\nInput data mahasiswa ke-" << (i + 1) << ":\n";
-        Mahasiswa mhs = inputMahasiswa();
-        larik.push(mhs);
+    std::cout << "Masukkan jumlah mahasiswa: ";
+    std::cin >> n;
+    std::cin.ignore();
+    std::vector<Mahasiswa> mahasiswaList;
+    for (int i = 0; i < n; ++i) {
+        mahasiswaList.push_back(inputMahasiswa());
     }
-
-    for (int i = 0; i < larik.getIndexPointer(); i++) {
-        Mahasiswa mhs = larik.getMahasiswaAt(i);
-        map<string, string> hasil = calculateGrade(mhs);
-        outputBuilder(mhs, hasil);
-    }
-
+    outputTable(mahasiswaList);
     return 0;
 }
+
