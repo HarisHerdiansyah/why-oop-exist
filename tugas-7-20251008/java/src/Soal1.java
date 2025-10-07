@@ -1,3 +1,14 @@
+/*
+Nama - NPM    : ~ Raissa Christabel Sebayang - 140810240008
+                ~ Abraham Gomes Samosir - 140810240044
+                ~ Haris Herdiansyah - 140810240074
+Kelas         : B
+Nama File     : Soal1.java
+Deskripsi     : Membuat program untuk menghitung nilai ujian lari mahasiswa
+                berdasarkan waktu mulai dan selesai lari menggunakan konsep OOP.
+*/
+
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
