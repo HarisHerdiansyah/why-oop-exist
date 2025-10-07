@@ -239,8 +239,38 @@ class ParkedVehicleHelper {
    }
 }
 
+class LarikParkedVehicle {
+    private final ParkedVehicle[] daftarKendaraan;
+    private final int size;
+    private int indexPointer = 0;
+
+    public LarikParkedVehicle(int size) {
+         this.daftarKendaraan = new ParkedVehicle[size];
+         this.size = size;
+    }
+
+    public void add(ParkedVehicle pv) {
+         if (indexPointer < size) {
+              daftarKendaraan[indexPointer++] = pv;
+         } else {
+              System.out.println("Larik penuh, tidak dapat menambah kendaraan lagi.");
+         }
+    }
+
+    public ParkedVehicle get(int index) {
+         if (index >= 0 && index < indexPointer) {
+              return daftarKendaraan[index];
+         }
+         return null;
+    }
+
+    public int getSize() {
+         return indexPointer;
+    }
+}
+
 public class Soal3 {
-   private static final Scanner SC = new Scanner(System.in);
+   private static final Scanner SCANNER = new Scanner(System.in);
    private static final List<ParkedVehicle> parkedVehicles = new ArrayList<>();
    private static int totalPay = 0;
 
@@ -263,11 +293,36 @@ public class Soal3 {
        System.out.println("Tanggal Pulang  : " + pv.getPulang().getDate());
        System.out.println("Jam Datang      : " + pv.getDatang().getTime());
        System.out.println("Jam Pulang      : " + pv.getPulang().getTime());
-       System.out.println("Selisih Tanggal : " + diff.getDate());
-       System.out.println("Selisih Waktu   : " + diff.getTime());
        System.out.println("Total Hari      : " + totalHari);
        System.out.println("Total Jam       : " + totalJam);
        System.out.println("Biaya           : " + pay);
+   }
+
+   private static void printVehicleSummaryTable(List<ParkedVehicle> vehicles) {
+       String format = "| %-15s | %-15s | %-10s | %-15s | %-15s | %-12s | %-12s | %-10s | %-10s | %-10s |%n";
+       String line = "+-----------------+-----------------+------------+-----------------+-----------------+--------------+--------------+------------+------------+------------+";
+       System.out.println("\n" + line);
+       System.out.printf(format, "No Kendaraan", "Jenis Kendaraan", "Status", "Tanggal Datang", "Tanggal Pulang", "Jam Datang", "Jam Pulang", "Lama Hari", "Lama Jam", "Biaya");
+       System.out.println(line);
+       for (ParkedVehicle pv : vehicles) {
+           Waktu diff = WaktuHelper.calculateTimeDifference(pv.getDatang(), pv.getPulang());
+           int totalHari = diff.getDate().getDay();
+           int totalJam = diff.getTime().getHour();
+           int pay = ParkedVehicleHelper.getPay(pv, totalJam, totalHari);
+           System.out.printf(format,
+               pv.getNoKendaraan(),
+               pv.getKendaraan(),
+               pv.getStatus(),
+               pv.getDatang().getDate(),
+               pv.getPulang().getDate(),
+               pv.getDatang().getTime(),
+               pv.getPulang().getTime(),
+               totalHari,
+               totalJam,
+               pay
+           );
+           System.out.println(line);
+       }
    }
 
    private static void calculateAndPrint() {
@@ -277,7 +332,7 @@ public class Soal3 {
            Date dateDiff = diff.getDate();
 
            int totalHari = dateDiff.getDay();
-           int totalJam = timeDiff.getHour();
+           int totalJam = totalHari * 24 + timeDiff.getHour();
            if (timeDiff.getMinute() > 0 || timeDiff.getSecond() > 0) totalJam++;
 
            int pay = ParkedVehicleHelper.getPay(pv, totalJam, totalHari);
@@ -292,23 +347,23 @@ public class Soal3 {
        for (int i = 0; i < n; i++) {
            System.out.println("\n--- Data Kendaraan ke-" + (i + 1) + " ---");
            System.out.print("Nomor Kendaraan: ");
-           String no = SC.nextLine();
+           String no = SCANNER.nextLine();
            System.out.print("Jenis Kendaraan (0: Motor, 1: Mobil): ");
-           int jenis = Integer.parseInt(SC.nextLine());
+           int jenis = Integer.parseInt(SCANNER.nextLine());
            System.out.print("Status Parkir (0: Regular, 1: Menginap): ");
-           int stat = Integer.parseInt(SC.nextLine());
+           int stat = Integer.parseInt(SCANNER.nextLine());
 
            System.out.println("\nWaktu Kedatangan");
            System.out.print("Tanggal (yyyy/MM/dd): ");
-           String datangTgl = SC.nextLine();
+           String datangTgl = SCANNER.nextLine();
            System.out.print("Jam (HH:mm:ss): ");
-           String datangJam = SC.nextLine();
+           String datangJam = SCANNER.nextLine();
 
            System.out.println("\nWaktu Kepulangan");
            System.out.print("Tanggal (yyyy/MM/dd): ");
-           String pulangTgl = SC.nextLine();
+           String pulangTgl = SCANNER.nextLine();
            System.out.print("Jam (HH:mm:ss): ");
-           String pulangJam = SC.nextLine();
+           String pulangJam = SCANNER.nextLine();
 
            Waktu datang = new Waktu(parseTime(datangJam), parseDate(datangTgl));
            Waktu pulang = new Waktu(parseTime(pulangJam), parseDate(pulangTgl));
@@ -322,8 +377,9 @@ public class Soal3 {
 
    public static void main(String[] args) {
        System.out.print("Masukkan jumlah kendaraan: ");
-       int n = Integer.parseInt(SC.nextLine());
+       int n = Integer.parseInt(SCANNER.nextLine());
        inputVehicle(n);
        calculateAndPrint();
+       printVehicleSummaryTable(parkedVehicles);
    }
 }
