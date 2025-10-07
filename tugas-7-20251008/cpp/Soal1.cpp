@@ -98,28 +98,17 @@ Mahasiswa input() {
 }
 
 Waktu difference(Waktu mulai, Waktu selesai) {
-    int jamMulai = mulai.getJam();
-    int menitMulai = mulai.getMenit();
-    int detikMulai = mulai.getDetik();
-    int jamSelesai = selesai.getJam();
-    int menitSelesai = selesai.getMenit();
-    int detikSelesai = selesai.getDetik();
+    int totalDetikMulai = mulai.totalTimeInSeconds();
+    int totalDetikSelesai = selesai.totalTimeInSeconds();
+    int selisihDetikTotal = totalDetikSelesai - totalDetikMulai;
 
-    int selisiDetik = detikSelesai - detikMulai;
-    if (detikSelesai < detikMulai) {
-        selisiDetik += 60;
-        menitSelesai -= 1;
-    }
+    if (selisihDetikTotal < 0) selisihDetikTotal += 24 * 3600;
 
-    int selisiMenit = menitSelesai - menitMulai;
-    if (menitSelesai < menitMulai) {
-        selisiMenit += 60;
-        jamSelesai -= 1;
-    }
+    int selisihJam = selisihDetikTotal / 3600;
+    int selisihMenit = (selisihDetikTotal % 3600) / 60;
+    int selisihDetik = selisihDetikTotal % 60;
 
-    int selisiJam = jamSelesai - jamMulai;
-
-    return Waktu(selisiJam, selisiMenit, selisiDetik);
+    return Waktu(selisihJam, selisihMenit, selisihDetik);
 }
 
 map<string, string> calculateGrade(Mahasiswa mhs) {
@@ -143,13 +132,24 @@ map<string, string> calculateGrade(Mahasiswa mhs) {
 
 void outputBuilder(Mahasiswa mhs, map<string, string> hasil) {
     cout << "\n=== Hasil Ujian Lari ===\n";
-    cout << "Nama Mahasiswa : " << mhs.getName() << endl;
-    cout << "NPM Mahasiswa  : " << mhs.getNpm() << endl;
-    cout << "Waktu Mulai    : " << mhs.getMulai().toString() << endl;
-    cout << "Waktu Selesai  : " << mhs.getSelesai().toString() << endl;
-    cout << "Lama Lari      : " << difference(mhs.getMulai(), mhs.getSelesai()).toString() << endl;
-    cout << "Huruf Mutu     : " << hasil["HM"] << endl;
-    cout << "Status         : " << hasil["status"] << endl;
+    cout << left
+         << "| " << setw(20) << "Nama"
+         << "| " << setw(12) << "NPM"
+         << "| " << setw(12) << "Waktu Mulai"
+         << "| " << setw(14) << "Waktu Selesai"
+         << "| " << setw(12) << "Lama Lari"
+         << "| " << setw(12) << "Huruf Mutu"
+         << "| " << setw(10) << "Status" << "|" << endl;
+    cout << string(108, '-') << endl;
+    cout << left
+         << "| " << setw(20) << mhs.getName()
+         << "| " << setw(12) << mhs.getNpm()
+         << "| " << setw(12) << mhs.getMulai().toString()
+         << "| " << setw(14) << mhs.getSelesai().toString()
+         << "| " << setw(12) << difference(mhs.getMulai(), mhs.getSelesai()).toString()
+         << "| " << setw(12) << hasil["HM"]
+         << "| " << setw(10) << hasil["status"] << "|" << endl;
+    cout << string(108, '-') << endl;
 }
 
 int main() {
