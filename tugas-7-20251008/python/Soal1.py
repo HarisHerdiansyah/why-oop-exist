@@ -4,25 +4,7 @@ class Waktu:
         self.menit = menit
         self.detik = detik
 
-    def get_jam(self):
-        return self.jam
-
-    def set_jam(self, jam):
-        self.jam = jam
-
-    def get_menit(self):
-        return self.menit
-
-    def set_menit(self, menit):
-        self.menit = menit
-
-    def get_detik(self):
-        return self.detik
-
-    def set_detik(self, detik):
-        self.detik = detik
-
-    def conv_to_second(self):
+    def total_time_in_seconds(self):
         return (self.jam * 3600) + (self.menit * 60) + self.detik
 
     def __str__(self):
@@ -30,90 +12,79 @@ class Waktu:
 
 
 class MahasiswaTPB:
-    def __init__(self, nama, npm):
+    def __init__(self, nama, npm, mulai, selesai):
         self.nama = nama
         self.npm = npm
+        self.mulai = mulai
+        self.selesai = selesai
 
-    def get_nama(self):
-        return self.nama
-
-    def set_nama(self, nama):
-        self.nama = nama
-
-    def get_npm(self):
-        return self.npm
-
-    def set_npm(self, npm):
-        self.npm = npm
+    def get_nama(self): return self.nama
+    def get_npm(self): return self.npm
+    def get_mulai(self): return self.mulai
+    def get_selesai(self): return self.selesai
 
 
 class Main:
-    def __init__(self):
-        pass
+    def parse_time(self, t):
+        h, m, s = map(int, t.split(":"))
+        return Waktu(h, m, s)
 
-    def input_mhs(self):
-        nama = input("Masukkan nama : ")
-        npm = input("Masukkan npm : ")
-        return MahasiswaTPB(nama, npm)
+    def input_data(self):
+        nama = input("Masukkan nama: ")
+        npm = input("Masukkan npm: ")
+        mulai = self.parse_time(input("Masukkan waktu mulai (HH:mm:ss): "))
+        selesai = self.parse_time(input("Masukkan waktu selesai (HH:mm:ss): "))
+        return MahasiswaTPB(nama, npm, mulai, selesai)
 
-    def input_waktu(self):
-        jam = int(input("Masukkan jam : "))
-        menit = int(input("Masukkan menit : "))
-        detik = int(input("Masukkan detik : "))
-
-        if not (0 <= jam < 24 and 0 <= menit < 60 and 0 <= detik < 60):
-            print("Input waktu tidak valid! Harus dalam format 0-23 jam, 0-59 menit, 0-59 detik.")
-            exit()
-
+    def difference(self, start, end):
+        total_mulai = start.total_time_in_seconds()
+        total_selesai = end.total_time_in_seconds()
+        selisih = total_selesai - total_mulai
+        if selisih < 0: selisih += 24 * 3600
+        jam = selisih // 3600
+        menit = (selisih % 3600) // 60
+        detik = selisih % 60
         return Waktu(jam, menit, detik)
 
-    def get_time_diff(self, start, end):
-        start_sec = start.conv_to_second()
-        end_sec = end.conv_to_second()
-
-        diff_sec = end_sec - start_sec
-        if diff_sec < 0:
-            diff_sec += 24 * 3600
-
-        jam = diff_sec // 3600
-        sisa = diff_sec % 3600
-        menit = sisa // 60
-        detik = sisa % 60
-
-        return Waktu(jam, menit, detik)
-
-    def get_grade(self, diff):
-        total_detik = diff.conv_to_second()
-
+    def calculate_grade(self, mhs):
+        selisih = self.difference(mhs.get_mulai(), mhs.get_selesai())
+        total_detik = selisih.total_time_in_seconds()
         if 0 <= total_detik < 7.5 * 60:
-            return "A", "Lulus"
+            return {"HM": "A", "status": "Lulus"}
         elif 7.5 * 60 <= total_detik < 12.5 * 60:
-            return "B", "Lulus"
+            return {"HM": "B", "status": "Lulus"}
         elif 12.5 * 60 <= total_detik < 30 * 60:
-            return "C", "Lulus"
+            return {"HM": "C", "status": "Lulus"}
         else:
-            return "D", "Gagal"
+            return {"HM": "D", "status": "Gagal"}
+
+    def output_builder(self, mhs, hasil):
+        print("\n=== Hasil Ujian Lari ===")
+        print(
+            "| " + "Nama".ljust(20) +
+            "| " + "NPM".ljust(12) +
+            "| " + "Waktu Mulai".ljust(12) +
+            "| " + "Waktu Selesai".ljust(14) +
+            "| " + "Lama Lari".ljust(12) +
+            "| " + "Huruf Mutu".ljust(12) +
+            "| " + "Status".ljust(10) + "|"
+        )
+        print("-" * 108)
+        print(
+            "| " + mhs.get_nama().ljust(20) +
+            "| " + mhs.get_npm().ljust(12) +
+            "| " + str(mhs.get_mulai()).ljust(12) +
+            "| " + str(mhs.get_selesai()).ljust(14) +
+            "| " + str(self.difference(mhs.get_mulai(), mhs.get_selesai())).ljust(12) +
+            "| " + hasil["HM"].ljust(12) +
+            "| " + hasil["status"].ljust(10) + "|"
+        )
+        print("-" * 108)
 
     def execute(self):
-        mhs = self.input_mhs()
-
-        print("\nMasukkan waktu mulai:")
-        start = self.input_waktu()
-
-        print("\nMasukkan waktu selesai:")
-        end = self.input_waktu()
-
-        diff = self.get_time_diff(start, end)
-        hm, status = self.get_grade(diff)
-
-        print("\n===== HASIL UJIAN LARI =====")
-        print(f"Nama Mahasiswa : {mhs.get_nama()}")
-        print(f"NPM            : {mhs.get_npm()}")
-        print(f"Waktu Mulai    : {start}")
-        print(f"Waktu Selesai  : {end}")
-        print(f"Lama Lari      : {diff}")
-        print(f"Huruf Mutu     : {hm}")
-        print(f"Status         : {status}")
+        mhs = self.input_data()
+        hasil = self.calculate_grade(mhs)
+        self.output_builder(mhs, hasil)
 
 
 def main():
