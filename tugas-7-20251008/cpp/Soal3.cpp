@@ -2,7 +2,6 @@
 #include <iomanip>
 #include <string>
 #include <sstream>
-#include <vector>
 #include <cmath>
 using namespace std;
 
@@ -62,7 +61,7 @@ public:
     }
 };
 
-// === CLASS WAKTU (gabungan DATE + TIME) ===
+// === CLASS WAKTU ===
 class Waktu {
 private:
     Time time;
@@ -88,6 +87,7 @@ private:
     Waktu datang, pulang;
 
 public:
+    ParkedVehicle() {} // === PERUBAHAN: tambahkan konstruktor default
     ParkedVehicle(string no, JenisKendaraan k, Status s, Waktu d, Waktu p)
         : noKendaraan(no), kendaraan(k), status(s), datang(d), pulang(p) {}
 
@@ -96,9 +96,17 @@ public:
     Status getStatus() const { return status; }
     Waktu getDatang() const { return datang; }
     Waktu getPulang() const { return pulang; }
+
+    void setData(string no, JenisKendaraan k, Status s, Waktu d, Waktu p) {
+        noKendaraan = no;
+        kendaraan = k;
+        status = s;
+        datang = d;
+        pulang = p;
+    }
 };
 
-// === HELPER: Hitung selisih waktu (dalam hari & jam) ===
+// === HELPER: HITUNG SELISIH WAKTU ===
 class WaktuHelper {
 public:
     static void calculateTotalTime(const Waktu &datang, const Waktu &pulang, int &totalHari, int &totalJam) {
@@ -132,7 +140,7 @@ public:
     }
 };
 
-// === HELPER: Hitung biaya ===
+// === HELPER: HITUNG BIAYA ===
 class ParkedVehicleHelper {
 public:
     static int getPay(const ParkedVehicle &v, int totalJam, int totalHari) {
@@ -178,6 +186,32 @@ void printVehicleSummary(const ParkedVehicle &pv, int totalHari, int totalJam, i
     cout << "Biaya           : Rp " << pay << endl;
 }
 
+// === CLASS ARRAY KENDARAAN ===
+class LarikKendaraan {
+private:
+    ParkedVehicle kendaraan[10];
+    int n;
+
+public:
+    LarikKendaraan() : n(0) {}
+
+    void tambahData(const ParkedVehicle &pv) {
+        kendaraan[n++] = pv;
+    }
+
+    void tampilData() {
+        int totalBayar = 0;
+        for (int i = 0; i < n; i++) {
+            int totalHari, totalJam;
+            WaktuHelper::calculateTotalTime(kendaraan[i].getDatang(), kendaraan[i].getPulang(), totalHari, totalJam);
+            int pay = ParkedVehicleHelper::getPay(kendaraan[i], totalJam, totalHari);
+            totalBayar += pay;
+            printVehicleSummary(kendaraan[i], totalHari, totalJam, pay);
+        }
+        cout << "\nTotal Bayar Keseluruhan : Rp " << totalBayar << endl;
+    }
+};
+
 // === MAIN ===
 int main() {
     int n;
@@ -185,8 +219,7 @@ int main() {
     cin >> n;
     cin.ignore();
 
-    vector<ParkedVehicle> vehicles;
-    int totalPay = 0;
+    LarikKendaraan daftar; // === PERUBAHAN: ganti vector jadi objek array
 
     for (int i = 0; i < n; i++) {
         cout << "\n--- Data Kendaraan ke-" << i + 1 << " ---\n";
@@ -215,22 +248,15 @@ int main() {
 
         Waktu datang(parseTime(datangJam), parseDate(datangTgl));
         Waktu pulang(parseTime(pulangJam), parseDate(pulangTgl));
-
         JenisKendaraan jk = (jenis == 0) ? MOTOR : MOBIL;
         Status st = (stat == 0) ? REGULAR : MENGINAP;
 
-        vehicles.emplace_back(no, jk, st, datang, pulang);
+        ParkedVehicle pv;
+        pv.setData(no, jk, st, datang, pulang);
+
+        daftar.tambahData(pv); // === PERUBAHAN
     }
 
-    for (auto &pv : vehicles) {
-        int totalHari, totalJam;
-        WaktuHelper::calculateTotalTime(pv.getDatang(), pv.getPulang(), totalHari, totalJam);
-        int pay = ParkedVehicleHelper::getPay(pv, totalJam, totalHari);
-        totalPay += pay;
-
-        printVehicleSummary(pv, totalHari, totalJam, pay);
-    }
-
-    cout << "\nTotal Bayar Keseluruhan : Rp " << totalPay << endl;
+    daftar.tampilData(); // === PERUBAHAN
     return 0;
 }
