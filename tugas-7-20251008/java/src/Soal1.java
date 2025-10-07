@@ -112,35 +112,24 @@ public class Soal1 {
        String nama = SCANNER.nextLine();
        System.out.print("Masukkan npm: ");
        String npm = SCANNER.nextLine();
-       System.out.println("Masukkan waktu mulai (HH:mm:ss): ");
+       System.out.print("Masukkan waktu mulai (HH:mm:ss): ");
        String mulai = SCANNER.nextLine();
-       System.out.println("Masukkan waktu selesai (HH:mm:ss): ");
+       System.out.print("Masukkan waktu selesai (HH:mm:ss): ");
        String selesai = SCANNER.nextLine();
 
        return new Mahasiswa(nama, npm, parseTime(mulai), parseTime(selesai));
    }
 
    private static Waktu difference(Waktu mulai, Waktu selesai) {
-       int jamMulai = mulai.getJam();
-       int menitMulai = mulai.getMenit();
-       int detikMulai = mulai.getDetik();
-       int jamSelesai = selesai.getJam();
-       int menitSelesai = selesai.getMenit();
-       int detikSelesai = selesai.getDetik();
+       int totalDetikMulai = mulai.totalTimeInSeconds();
+       int totalDetikSelesai = selesai.totalTimeInSeconds();
+       int selisihDetikTotal = totalDetikSelesai - totalDetikMulai;
 
-       int selisihDetik = detikSelesai - detikMulai;
-       if (detikSelesai < detikMulai) {
-           selisihDetik += 60;
-           menitSelesai -= 1;
-       }
+       if (selisihDetikTotal < 0) selisihDetikTotal += 24 * 3600;
 
-       int selisihMenit = menitSelesai - menitMulai;
-       if (menitSelesai < menitMulai) {
-           selisihMenit += 60;
-           jamSelesai -= 1;
-       }
-
-       int selisihJam = jamSelesai - jamMulai;
+       int selisihJam = selisihDetikTotal / 3600;
+       int selisihMenit = (selisihDetikTotal % 3600) / 60;
+       int selisihDetik = selisihDetikTotal % 60;
 
        return new Waktu(selisihJam, selisihMenit, selisihDetik);
    }
@@ -166,14 +155,22 @@ public class Soal1 {
    }
 
    private static void outputBuilder(Mahasiswa mhs, Map<String, String> hasil) {
+       String format = "| %-20s | %-12s | %-10s | %-8s | %-12s | %-14s | %-10s |%n";
        System.out.println("\nUjian Lari");
-       System.out.println("Nama Mahasiswa: " + mhs.getName());
-       System.out.println("NPM Mahasiswa: " + mhs.getNpm());
-       System.out.println("Huruf Mutu: " + hasil.get("HM"));
-       System.out.println("Status: " + hasil.get("status"));
-       System.out.println("Waktu Mulai: " + mhs.getMulai().toString());
-       System.out.println("Waktu Selesai: " + mhs.getSelesai().toString());
-       System.out.println("Lama Lari: " + difference(mhs.getMulai(), mhs.getSelesai()));
+       System.out.println("-------------------------------------------------------------------------------------------------------------");
+       System.out.format(format, "Nama", "NPM", "Huruf Mutu", "Status", "Waktu Mulai", "Waktu Selesai", "Lama Lari");
+       System.out.println("-------------------------------------------------------------------------------------------------------------");
+       Waktu lamaLari = difference(mhs.getMulai(), mhs.getSelesai());
+       System.out.format(format,
+           mhs.getName(),
+           mhs.getNpm(),
+           hasil.get("HM"),
+           hasil.get("status"),
+           mhs.getMulai().toString(),
+           mhs.getSelesai().toString(),
+           lamaLari
+       );
+       System.out.println("-------------------------------------------------------------------------------------------------------------");
    }
 
    public static void main(String[] args) {

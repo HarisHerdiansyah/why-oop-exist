@@ -17,20 +17,11 @@ class Time:
     def get_hour(self):
         return self.__hour
 
-    def set_hour(self, hour):
-        self.__hour = hour
-
     def get_minute(self):
         return self.__minute
 
-    def set_minute(self, minute):
-        self.__minute = minute
-
     def get_second(self):
         return self.__second
-
-    def set_second(self, second):
-        self.__second = second
 
     def __str__(self):
         return f"{self.__hour:02d}:{self.__minute:02d}:{self.__second:02d}"
@@ -44,20 +35,11 @@ class Date:
     def get_year(self):
         return self.__year
 
-    def set_year(self, year):
-        self.__year = year
-
     def get_month(self):
         return self.__month
 
-    def set_month(self, month):
-        self.__month = month
-
     def get_day(self):
         return self.__day
-
-    def set_day(self, day):
-        self.__day = day
 
     def __str__(self):
         return f"{self.__year:04d}/{self.__month:02d}/{self.__day:02d}"
@@ -70,71 +52,8 @@ class Waktu:
     def get_time(self):
         return self.__time
 
-    def set_time(self, time):
-        self.__time = time
-
     def get_date(self):
         return self.__date
-
-    def set_date(self, date):
-        self.__date = date
-
-class WaktuHelper:
-    @staticmethod
-    def is_leap_year(year):
-        return (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)
-
-    @staticmethod
-    def days_in_month(year, month):
-        days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-        if month == 2 and WaktuHelper.is_leap_year(year):
-            return 29
-        return days[month - 1]
-
-    @staticmethod
-    def calculate_time_difference(datang, pulang):
-        d1 = datang.get_date()
-        t1 = datang.get_time()
-        d2 = pulang.get_date()
-        t2 = pulang.get_time()
-
-        yearD, monthD, dayD = d1.get_year(), d1.get_month(), d1.get_day()
-        hourD, minuteD, secondD = t1.get_hour(), t1.get_minute(), t1.get_second()
-
-        yearP, monthP, dayP = d2.get_year(), d2.get_month(), d2.get_day()
-        hourP, minuteP, secondP = t2.get_hour(), t2.get_minute(), t2.get_second()
-
-        if secondP < secondD:
-            secondP += 60
-            minuteP -= 1
-        secondDiff = secondP - secondD
-
-        if minuteP < minuteD:
-            minuteP += 60
-            hourP -= 1
-        minuteDiff = minuteP - minuteD
-
-        if hourP < hourD:
-            hourP += 24
-            dayP -= 1
-        hourDiff = hourP - hourD
-
-        if dayP < dayD:
-            monthP -= 1
-            if monthP < 1:
-                monthP = 12
-                yearP -= 1
-            dayP += WaktuHelper.days_in_month(yearP, monthP)
-        dayDiff = dayP - dayD
-
-        if monthP < monthD:
-            monthP += 12
-            yearP -= 1
-        monthDiff = monthP - monthD
-
-        yearDiff = yearP - yearD
-
-        return Waktu(Time(hourDiff, minuteDiff, secondDiff), Date(yearDiff, monthDiff, dayDiff))
 
 class ParkedVehicle:
     def __init__(self, no_kendaraan, kendaraan, status, datang, pulang):
@@ -159,7 +78,6 @@ class ParkedVehicle:
     def get_pulang(self):
         return self.__pulang
 
-
 class ParkedVehicleHelper:
     @staticmethod
     def get_pay(vehicle, total_jam, total_hari):
@@ -178,8 +96,41 @@ def parse_date(s):
     y, m, d = map(int, s.split("/"))
     return Date(y, m, d)
 
+def calculate_total_time(datang, pulang):
+    datang_dt = datetime(
+        datang.get_date().get_year(),
+        datang.get_date().get_month(),
+        datang.get_date().get_day(),
+        datang.get_time().get_hour(),
+        datang.get_time().get_minute(),
+        datang.get_time().get_second()
+    )
+    pulang_dt = datetime(
+        pulang.get_date().get_year(),
+        pulang.get_date().get_month(),
+        pulang.get_date().get_day(),
+        pulang.get_time().get_hour(),
+        pulang.get_time().get_minute(),
+        pulang.get_time().get_second()
+    )
 
-def print_vehicle_summary(pv, diff, total_hari, total_jam, pay):
+    diff = pulang_dt - datang_dt
+    total_detik = diff.total_seconds()
+    if total_detik < 0:
+        total_detik += 86400
+
+    total_hari = total_detik // 86400 
+    sisa_detik = total_detik % 86400
+    total_jam = sisa_detik // 3600
+    if sisa_detik % 3600 > 0:
+        total_jam += 1
+    total_jam += total_hari * 24
+    if total_hari >= 1 and sisa_detik == 0:
+        total_jam = int(total_hari * 24)
+
+    return int(total_hari), int(total_jam)
+
+def print_vehicle_summary(pv, total_hari, total_jam, pay):
     print("\n--- RINCIAN KENDARAAN ---")
     print("Nomor Kendaraan :", pv.get_no_kendaraan())
     print("Jenis Kendaraan :", pv.get_kendaraan())
@@ -188,12 +139,9 @@ def print_vehicle_summary(pv, diff, total_hari, total_jam, pay):
     print("Tanggal Pulang  :", pv.get_pulang().get_date())
     print("Jam Datang      :", pv.get_datang().get_time())
     print("Jam Pulang      :", pv.get_pulang().get_time())
-    print("Selisih Tanggal :", diff.get_date())
-    print("Selisih Waktu   :", diff.get_time())
     print("Total Hari      :", total_hari)
     print("Total Jam       :", total_jam)
     print("Biaya           : Rp", pay)
-
 
 def main():
     parked_vehicles = []
@@ -224,22 +172,13 @@ def main():
         parked_vehicles.append(pv)
 
     for pv in parked_vehicles:
-        diff = WaktuHelper.calculate_time_difference(pv.get_datang(), pv.get_pulang())
-        time_diff = diff.get_time()
-        date_diff = diff.get_date()
-
-        total_hari = date_diff.get_day()
-        total_jam = time_diff.get_hour()
-        if time_diff.get_minute() > 0 or time_diff.get_second() > 0:
-            total_jam += 1
-
+        total_hari, total_jam = calculate_total_time(pv.get_datang(), pv.get_pulang())
         pay = ParkedVehicleHelper.get_pay(pv, total_jam, total_hari)
         total_pay += pay
 
-        print_vehicle_summary(pv, diff, total_hari, total_jam, pay)
+        print_vehicle_summary(pv, total_hari, total_jam, pay)
 
     print("\nTotal Bayar Keseluruhan :", total_pay)
-
 
 if __name__ == "__main__":
     main()

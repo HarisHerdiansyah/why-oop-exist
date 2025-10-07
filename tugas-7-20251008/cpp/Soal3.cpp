@@ -1,8 +1,9 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include <vector>
 #include <sstream>
+#include <vector>
+#include <cmath>
 using namespace std;
 
 // === ENUMS ===
@@ -13,6 +14,7 @@ enum Status { REGULAR, MENGINAP };
 class Time {
 private:
     int hour, minute, second;
+
 public:
     Time() : hour(0), minute(0), second(0) {}
     Time(int h, int m, int s) : hour(h), minute(m), second(s) {}
@@ -38,6 +40,7 @@ public:
 class Date {
 private:
     int year, month, day;
+
 public:
     Date() : year(0), month(0), day(0) {}
     Date(int y, int m, int d) : year(y), month(m), day(d) {}
@@ -59,11 +62,12 @@ public:
     }
 };
 
-// === CLASS WAKTU (GABUNGAN DATE + TIME) ===
+// === CLASS WAKTU (gabungan DATE + TIME) ===
 class Waktu {
 private:
     Time time;
     Date date;
+
 public:
     Waktu() {}
     Waktu(Time t, Date d) : time(t), date(d) {}
@@ -73,79 +77,6 @@ public:
 
     void setTime(Time t) { time = t; }
     void setDate(Date d) { date = d; }
-};
-
-// === HELPER UNTUK PERHITUNGAN WAKTU ===
-class WaktuHelper {
-private:
-    static bool isLeapYear(int year) {
-        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
-    }
-
-    static int daysInMonth(int year, int month) {
-        int days[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-        if (month == 2 && isLeapYear(year)) return 29;
-        return days[month - 1];
-    }
-
-public:
-    static Waktu calculateTimeDifference(const Waktu& datang, const Waktu& pulang) {
-        Date d1 = datang.getDate();
-        Time t1 = datang.getTime();
-        Date d2 = pulang.getDate();
-        Time t2 = pulang.getTime();
-
-        int yearD = d1.getYear(), monthD = d1.getMonth(), dayD = d1.getDay();
-        int hourD = t1.getHour(), minuteD = t1.getMinute(), secondD = t1.getSecond();
-
-        int yearP = d2.getYear(), monthP = d2.getMonth(), dayP = d2.getDay();
-        int hourP = t2.getHour(), minuteP = t2.getMinute(), secondP = t2.getSecond();
-
-        // 1. Seconds
-        if (secondP < secondD) {
-            secondP += 60;
-            minuteP -= 1;
-        }
-        int secondDiff = secondP - secondD;
-
-        // 2. Minutes
-        if (minuteP < minuteD) {
-            minuteP += 60;
-            hourP -= 1;
-        }
-        int minuteDiff = minuteP - minuteD;
-
-        // 3. Hours
-        if (hourP < hourD) {
-            hourP += 24;
-            dayP -= 1;
-        }
-        int hourDiff = hourP - hourD;
-
-        // 4. Days
-        if (dayP < dayD) {
-            monthP -= 1;
-            if (monthP < 1) {
-                monthP = 12;
-                yearP -= 1;
-            }
-            dayP += daysInMonth(yearP, monthP);
-        }
-        int dayDiff = dayP - dayD;
-
-        // 5. Months
-        if (monthP < monthD) {
-            monthP += 12;
-            yearP -= 1;
-        }
-        int monthDiff = monthP - monthD;
-
-        // 6. Years
-        int yearDiff = yearP - yearD;
-
-        return Waktu(Time(hourDiff, minuteDiff, secondDiff),
-                     Date(yearDiff, monthDiff, dayDiff));
-    }
 };
 
 // === CLASS PARKED VEHICLE ===
@@ -167,24 +98,56 @@ public:
     Waktu getPulang() const { return pulang; }
 };
 
-// === HELPER UNTUK HITUNG BAYAR ===
-class ParkedVehicleHelper {
+// === HELPER: Hitung selisih waktu (dalam hari & jam) ===
+class WaktuHelper {
 public:
-    static int getPay(const ParkedVehicle& v, int totalJam, int totalHari) {
-        int pay = 0;
-        if (v.getStatus() == MENGINAP) {
-            int rate = (v.getKendaraan() == MOTOR) ? 15000 : 25000;
-            pay = rate * totalHari;
-        } else {
-            int rate = (v.getKendaraan() == MOTOR) ? 2000 : 3000;
-            pay = rate * totalJam;
-        }
-        return pay;
+    static void calculateTotalTime(const Waktu &datang, const Waktu &pulang, int &totalHari, int &totalJam) {
+        tm datang_tm = {};
+        datang_tm.tm_year = datang.getDate().getYear() - 1900;
+        datang_tm.tm_mon = datang.getDate().getMonth() - 1;
+        datang_tm.tm_mday = datang.getDate().getDay();
+        datang_tm.tm_hour = datang.getTime().getHour();
+        datang_tm.tm_min = datang.getTime().getMinute();
+        datang_tm.tm_sec = datang.getTime().getSecond();
+
+        tm pulang_tm = {};
+        pulang_tm.tm_year = pulang.getDate().getYear() - 1900;
+        pulang_tm.tm_mon = pulang.getDate().getMonth() - 1;
+        pulang_tm.tm_mday = pulang.getDate().getDay();
+        pulang_tm.tm_hour = pulang.getTime().getHour();
+        pulang_tm.tm_min = pulang.getTime().getMinute();
+        pulang_tm.tm_sec = pulang.getTime().getSecond();
+
+        time_t datang_time = mktime(&datang_tm);
+        time_t pulang_time = mktime(&pulang_tm);
+
+        double diff_seconds = difftime(pulang_time, datang_time);
+        if (diff_seconds < 0) diff_seconds += 86400;
+
+        totalHari = diff_seconds / 86400;
+        double sisa = fmod(diff_seconds, 86400);
+        totalJam = sisa / 3600;
+        if (fmod(sisa, 3600) > 0) totalJam += 1;
+        totalJam += totalHari * 24;
     }
 };
 
-// === FUNGSI PARSER UNTUK INPUT ===
-Time parseTime(const string& s) {
+// === HELPER: Hitung biaya ===
+class ParkedVehicleHelper {
+public:
+    static int getPay(const ParkedVehicle &v, int totalJam, int totalHari) {
+        if (v.getStatus() == MENGINAP) {
+            int rate = (v.getKendaraan() == MOTOR) ? 15000 : 25000;
+            return rate * max(totalHari, 1);
+        } else {
+            int rate = (v.getKendaraan() == MOTOR) ? 2000 : 3000;
+            return rate * totalJam;
+        }
+    }
+};
+
+// === PARSER ===
+Time parseTime(const string &s) {
     int h, m, sec;
     char sep;
     istringstream iss(s);
@@ -192,7 +155,7 @@ Time parseTime(const string& s) {
     return Time(h, m, sec);
 }
 
-Date parseDate(const string& s) {
+Date parseDate(const string &s) {
     int y, m, d;
     char sep;
     istringstream iss(s);
@@ -200,35 +163,33 @@ Date parseDate(const string& s) {
     return Date(y, m, d);
 }
 
-// === OUTPUT RINCIAN KENDARAAN ===
-void printVehicleSummary(const ParkedVehicle& pv, const Waktu& diff, int totalHari, int totalJam, int pay) {
+// === OUTPUT ===
+void printVehicleSummary(const ParkedVehicle &pv, int totalHari, int totalJam, int pay) {
     cout << "\n--- RINCIAN KENDARAAN ---\n";
     cout << "Nomor Kendaraan : " << pv.getNoKendaraan() << endl;
     cout << "Jenis Kendaraan : " << (pv.getKendaraan() == MOTOR ? "Motor" : "Mobil") << endl;
     cout << "Status Parkir   : " << (pv.getStatus() == REGULAR ? "Regular" : "Menginap") << endl;
     cout << "Tanggal Datang  : " << pv.getDatang().getDate().toString() << endl;
-    cout << "Tanggal Pulang  : " << pv.getPulang().getDate().toString() << endl;
     cout << "Jam Datang      : " << pv.getDatang().getTime().toString() << endl;
+    cout << "Tanggal Pulang  : " << pv.getPulang().getDate().toString() << endl;
     cout << "Jam Pulang      : " << pv.getPulang().getTime().toString() << endl;
-    cout << "Selisih Tanggal : " << diff.getDate().toString() << endl;
-    cout << "Selisih Waktu   : " << diff.getTime().toString() << endl;
     cout << "Total Hari      : " << totalHari << endl;
     cout << "Total Jam       : " << totalJam << endl;
-    cout << "Biaya           : " << pay << endl;
+    cout << "Biaya           : Rp " << pay << endl;
 }
 
-// === MAIN PROGRAM ===
+// === MAIN ===
 int main() {
     int n;
     cout << "Masukkan jumlah kendaraan: ";
     cin >> n;
     cin.ignore();
 
-    vector<ParkedVehicle> parkedVehicles;
+    vector<ParkedVehicle> vehicles;
     int totalPay = 0;
 
     for (int i = 0; i < n; i++) {
-        cout << "\n--- Data Kendaraan ke-" << (i + 1) << " ---\n";
+        cout << "\n--- Data Kendaraan ke-" << i + 1 << " ---\n";
         string no, datangTgl, datangJam, pulangTgl, pulangJam;
         int jenis, stat;
 
@@ -255,27 +216,21 @@ int main() {
         Waktu datang(parseTime(datangJam), parseDate(datangTgl));
         Waktu pulang(parseTime(pulangJam), parseDate(pulangTgl));
 
-        JenisKendaraan kendaraan = (jenis == 0) ? MOTOR : MOBIL;
-        Status status = (stat == 0) ? REGULAR : MENGINAP;
+        JenisKendaraan jk = (jenis == 0) ? MOTOR : MOBIL;
+        Status st = (stat == 0) ? REGULAR : MENGINAP;
 
-        parkedVehicles.push_back(ParkedVehicle(no, kendaraan, status, datang, pulang));
+        vehicles.emplace_back(no, jk, st, datang, pulang);
     }
 
-    for (auto& pv : parkedVehicles) {
-        Waktu diff = WaktuHelper::calculateTimeDifference(pv.getDatang(), pv.getPulang());
-        Time tDiff = diff.getTime();
-        Date dDiff = diff.getDate();
-
-        int totalHari = dDiff.getDay();
-        int totalJam = tDiff.getHour();
-        if (tDiff.getMinute() > 0 || tDiff.getSecond() > 0) totalJam++;
-
+    for (auto &pv : vehicles) {
+        int totalHari, totalJam;
+        WaktuHelper::calculateTotalTime(pv.getDatang(), pv.getPulang(), totalHari, totalJam);
         int pay = ParkedVehicleHelper::getPay(pv, totalJam, totalHari);
         totalPay += pay;
 
-        printVehicleSummary(pv, diff, totalHari, totalJam, pay);
+        printVehicleSummary(pv, totalHari, totalJam, pay);
     }
 
-    cout << "\nTotal Bayar Keseluruhan: " << totalPay << endl;
+    cout << "\nTotal Bayar Keseluruhan : Rp " << totalPay << endl;
     return 0;
 }
