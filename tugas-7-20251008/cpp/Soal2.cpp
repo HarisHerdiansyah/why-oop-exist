@@ -174,7 +174,7 @@ map<string, string> calculateGrade(Mahasiswa mhs){
 }
 
 void outputBuilder (Mahasiswa mhs, map<string, string> hasil){
-    cout << "\nUjian Lari\n";
+    cout << "\n=== Ujian Lari ===\n";
     cout << "Nama Mahasiswa: " << mhs.getName() << endl;
     cout << "NPM Mahasiswa: " << mhs.getNpm() << endl;
     cout << "Huruf Mutu: " << hasil["HM"] << endl;
