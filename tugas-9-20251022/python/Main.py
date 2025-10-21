@@ -1,3 +1,17 @@
+"""
+Nama - NPM    : ~ Raissa Christabel Sebayang - 140810240008
+                ~ Abraham Gomes Samosir - 140810240044
+                ~ Haris Herdiansyah - 140810240074
+Kelas         : B
+Nama File     : Main.java
+Deskripsi     : program inheritance dengan Java, C++ dan python masalah Parkir  di suatu pelabuhan:
+                Class : 
+                Waktu (date, time)   perhatikan kabisat
+                Person/ pemilik, 
+                Kendaraan  : (mobil, motor, truk), dll  --> inheritance
+                Buat selengkap mungkin (Data array)
+"""
+
 from enum import Enum
 from datetime import datetime, timedelta
 from typing import List, Dict
