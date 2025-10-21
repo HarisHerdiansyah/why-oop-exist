@@ -212,6 +212,7 @@ public:
 
 namespace Main {
 	std::vector<Kendaraan> daftar_kendaraan = {};
+	
 }
 
 int main() {
