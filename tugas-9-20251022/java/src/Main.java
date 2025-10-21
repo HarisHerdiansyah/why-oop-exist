@@ -317,7 +317,7 @@ public class Main {
         System.out.println("Biaya Parkir: " + hitungBiayaParkir(k));
     }
 
-    static void main() {
+    public static void main(String[] args) {
         System.out.print("Jumlah kendaraan: ");
         int n = Integer.parseInt(sc.nextLine());
         for (int i = 1; i <= n ; i++) {
