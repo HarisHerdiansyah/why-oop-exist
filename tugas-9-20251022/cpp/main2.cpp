@@ -3,28 +3,29 @@ Nama - NPM    : ~ Raissa Christabel Sebayang - 140810240008
                 ~ Abraham Gomes Samosir - 140810240044
                 ~ Haris Herdiansyah - 140810240074
 Kelas         : B
-Nama File     : Main.java
-Deskripsi     : program inheritance dengan Java, C++ dan python masalah Parkir  di suatu pelabuhan:
-                Class : 
-                Waktu (date, time)   perhatikan kabisat
-                Person/ pemilik, 
-                Kendaraan  : (mobil, motor, truk), dll  --> inheritance
-                Buat selengkap mungkin (Data array)
+Nama File     : Main.cpp
+Deskripsi     : Program Inheritance Parkir Pelabuhan
+                Kelas:
+                - Waktu (Date, Time)
+                - Pemilik
+                - Kendaraan (Mobil, Motor, Truk) -> inheritance
+                - Input waktu bisa manual atau otomatis (dari sistem)
 */
 
 #include <iostream>
 #include <string>
 #include <vector>
 #include <ctime>
-#include <chrono>
-#include <sstream>
 #include <iomanip>
+#include <sstream>
+#include <cmath>
 #include <map>
 
 using namespace std;
 
 class JenisKendaraan {
 private:
+    string nama;
     int tarif_per_jam, tarif_menginap;
 
 public:
@@ -32,16 +33,17 @@ public:
     static const JenisKendaraan MOTOR;
     static const JenisKendaraan TRUK;
 
-    JenisKendaraan(int tarif_per_jam, int tarif_menginap)
-        : tarif_per_jam(tarif_per_jam), tarif_menginap(tarif_menginap) {}
+    JenisKendaraan(string nama = "", int tarif_per_jam = 0, int tarif_menginap = 0)
+        : nama(nama), tarif_per_jam(tarif_per_jam), tarif_menginap(tarif_menginap) {}
 
+    string get_nama() const { return nama; }
     int get_tarif_per_jam() const { return tarif_per_jam; }
     int get_tarif_menginap() const { return tarif_menginap; }
 };
 
-const JenisKendaraan JenisKendaraan::MOBIL(15000, 30000);
-const JenisKendaraan JenisKendaraan::MOTOR(7000, 15000);
-const JenisKendaraan JenisKendaraan::TRUK(40000, 80000);
+const JenisKendaraan JenisKendaraan::MOBIL("MOBIL", 15000, 30000);
+const JenisKendaraan JenisKendaraan::MOTOR("MOTOR", 7000, 15000);
+const JenisKendaraan JenisKendaraan::TRUK("TRUK", 40000, 80000);
 
 class Time {
 private:
@@ -55,13 +57,10 @@ public:
     int get_minute() const { return minute; }
     int get_seconds() const { return seconds; }
 
-    void set_hour(int h) { hour = h; }
-    void set_minute(int m) { minute = m; }
-    void set_seconds(int s) { seconds = s; }
-
     string to_attr_string() const {
         ostringstream ss;
-        ss << "Time{" << hour << ":" << minute << ":" << seconds << "}";
+        ss << setw(2) << setfill('0') << hour << ":"
+           << setw(2) << setfill('0') << minute;
         return ss.str();
     }
 };
@@ -78,13 +77,10 @@ public:
     int get_month() const { return month; }
     int get_day() const { return day; }
 
-    void set_year(int y) { year = y; }
-    void set_month(int m) { month = m; }
-    void set_day(int d) { day = d; }
-
     string to_attr_string() const {
         ostringstream ss;
-        ss << "Dates{" << year << "/" << month << "/" << day << "}";
+        ss << year << "/" << setw(2) << setfill('0') << month
+           << "/" << setw(2) << setfill('0') << day;
         return ss.str();
     }
 };
@@ -126,36 +122,65 @@ public:
     Waktu get_waktu_masuk() const { return waktu_masuk; }
     Waktu get_waktu_keluar() const { return waktu_keluar; }
     string get_no_kendaraan() const { return no_kendaraan; }
+
+    int hitungTarif() const {
+        tm in = {}, out = {};
+        Dates dIn = waktu_masuk.get_dates();
+        Dates dOut = waktu_keluar.get_dates();
+        Time tIn = waktu_masuk.get_time();
+        Time tOut = waktu_keluar.get_time();
+
+        in.tm_year = dIn.get_year() - 1900;
+        in.tm_mon = dIn.get_month() - 1;
+        in.tm_mday = dIn.get_day();
+        in.tm_hour = tIn.get_hour();
+        in.tm_min = tIn.get_minute();
+        in.tm_sec = 0;
+
+        out.tm_year = dOut.get_year() - 1900;
+        out.tm_mon = dOut.get_month() - 1;
+        out.tm_mday = dOut.get_day();
+        out.tm_hour = tOut.get_hour();
+        out.tm_min = tOut.get_minute();
+        out.tm_sec = 0;
+
+        time_t tInSec = mktime(&in);
+        time_t tOutSec = mktime(&out);
+        double diffHour = difftime(tOutSec, tInSec) / 3600.0;
+
+        if (diffHour >= 24)
+            return jenis_kendaraan.get_tarif_menginap();
+        else
+            return ceil(diffHour) * jenis_kendaraan.get_tarif_per_jam();
+    }
 };
 
 class Mobil : public Kendaraan {
 public:
-    Mobil(JenisKendaraan jk, Pemilik p, Waktu wm, Waktu wk, string nk)
-        : Kendaraan(jk, p, wm, wk, nk) {}
+    Mobil(Pemilik p, Waktu wm, Waktu wk, string nk)
+        : Kendaraan(JenisKendaraan::MOBIL, p, wm, wk, nk) {}
 };
 class Motor : public Kendaraan {
 public:
-    Motor(JenisKendaraan jk, Pemilik p, Waktu wm, Waktu wk, string nk)
-        : Kendaraan(jk, p, wm, wk, nk) {}
+    Motor(Pemilik p, Waktu wm, Waktu wk, string nk)
+        : Kendaraan(JenisKendaraan::MOTOR, p, wm, wk, nk) {}
 };
 class Truk : public Kendaraan {
 public:
-    Truk(JenisKendaraan jk, Pemilik p, Waktu wm, Waktu wk, string nk)
-        : Kendaraan(jk, p, wm, wk, nk) {}
+    Truk(Pemilik p, Waktu wm, Waktu wk, string nk)
+        : Kendaraan(JenisKendaraan::TRUK, p, wm, wk, nk) {}
 };
 
 namespace MainProgram {
     vector<Kendaraan> daftar_kendaraan;
 
-    // Fungsi parsing waktu manual seperti Java
-    tm parseDateTime(const string& input) {
+    tm parseDateTime(const string &input) {
         tm t = {};
         istringstream ss(input);
-        ss >> get_time(&t, "%Y/%m/%d %H:%M:%S");
+        ss >> get_time(&t, "%Y/%m/%d %H:%M");
         return t;
     }
 
-    // Fungsi ambil waktu sistem (sekarang)
     tm getSystemTime() {
         time_t now = time(nullptr);
         tm localTime;
@@ -171,20 +196,21 @@ namespace MainProgram {
         map<string, tm> dateMap;
         string input;
 
-        if (option == 1) {
-            cout << "Waktu masuk (Tekan enter): ";
+        if (option == 1) { 
+            cout << "Tekan Enter untuk catat waktu masuk...";
             cin.ignore();
             cin.get();
             dateMap["in"] = getSystemTime();
-            cout << "Waktu keluar (Tekan enter): ";
+
+            cout << "Tekan Enter untuk catat waktu keluar...";
             cin.get();
             dateMap["out"] = getSystemTime();
-        } else if (option == 2) {
-            cout << "Waktu masuk (yyyy/MM/dd HH:mm:ss): ";
-            cin.ignore();
+        } else { 
+            cout << "Waktu masuk (YYYY/MM/DD HH:MM): ";
             getline(cin, input);
             dateMap["in"] = parseDateTime(input);
-            cout << "Waktu keluar (yyyy/MM/dd HH:mm:ss): ";
+
+            cout << "Waktu keluar (YYYY/MM/DD HH:MM): ";
             getline(cin, input);
             dateMap["out"] = parseDateTime(input);
         }
@@ -195,44 +221,76 @@ namespace MainProgram {
         string nama, jenis, nomor;
         int option;
 
-        cout << "Nama pemilik: ";
+        cout << "Nama Pemilik: ";
         getline(cin, nama);
-        cout << "Jenis kendaraan (MOBIL/MOTOR/TRUK): ";
+        cout << "Jenis Kendaraan (MOBIL/MOTOR/TRUK): ";
         getline(cin, jenis);
-        cout << "Nomor kendaraan: ";
+        cout << "Nomor Kendaraan: ";
         getline(cin, nomor);
-        cout << "Opsi masukkan waktu, (1) Sistem; (2) Manual: ";
-        cin >> option;
 
-        map<string, tm> userDateTime = inputDateTime(option);
-        tm in = userDateTime["in"];
-        tm out = userDateTime["out"];
+        cout << "Opsi waktu: (1) Otomatis  (2) Manual : ";
+        cin >> option;
+        cin.ignore();
+
+        map<string, tm> waktuMap = inputDateTime(option);
+        tm in = waktuMap["in"];
+        tm out = waktuMap["out"];
 
         Dates dIn(in.tm_year + 1900, in.tm_mon + 1, in.tm_mday);
-        Time tIn(in.tm_hour, in.tm_min, in.tm_sec);
+        Time tIn(in.tm_hour, in.tm_min);
         Dates dOut(out.tm_year + 1900, out.tm_mon + 1, out.tm_mday);
-        Time tOut(out.tm_hour, out.tm_min, out.tm_sec);
+        Time tOut(out.tm_hour, out.tm_min);
 
         Waktu waktuMasuk(dIn, tIn);
         Waktu waktuKeluar(dOut, tOut);
         Pemilik pemilik(nama);
 
         if (jenis == "MOBIL")
-            return Mobil(JenisKendaraan::MOBIL, pemilik, waktuMasuk, waktuKeluar, nomor);
+            return Mobil(pemilik, waktuMasuk, waktuKeluar, nomor);
         else if (jenis == "MOTOR")
-            return Motor(JenisKendaraan::MOTOR, pemilik, waktuMasuk, waktuKeluar, nomor);
+            return Motor(pemilik, waktuMasuk, waktuKeluar, nomor);
         else
-            return Truk(JenisKendaraan::TRUK, pemilik, waktuMasuk, waktuKeluar, nomor);
+            return Truk(pemilik, waktuMasuk, waktuKeluar, nomor);
     }
 
-    void output(const Kendaraan& k) {
-        cout << "\nNo. Kendaraan: " << k.get_no_kendaraan();
-        cout << "\nNama Pemilik: " << k.get_pemilik().get_name();
-        cout << "\nWaktu Masuk: " << k.get_waktu_masuk().get_dates().to_attr_string()
-             << " " << k.get_waktu_masuk().get_time().to_attr_string();
-        cout << "\nWaktu Keluar: " << k.get_waktu_keluar().get_dates().to_attr_string()
-             << " " << k.get_waktu_keluar().get_time().to_attr_string();
-        cout << "\n";
+    void outputTable() {
+        cout << "+----+------------------+-------+--------------+------------------+------------------+--------------+\n";
+        cout << "| No | Nama Pemilik     | Jenis | No Kendaraan | Waktu Masuk      | Waktu Keluar     | Tarif (Rp)   |\n";
+        cout << "+----+------------------+-------+--------------+------------------+------------------+--------------+\n";
+
+        int totalPendapatan = 0;
+        for (size_t i = 0; i < daftar_kendaraan.size(); i++) {
+            const auto &k = daftar_kendaraan[i];
+            
+            string namaPemilik = k.get_pemilik().get_name();
+            if (namaPemilik.length() > 16) {
+                namaPemilik = namaPemilik.substr(0, 13) + "...";
+            }
+            
+            string noKendaraan = k.get_no_kendaraan();
+            if (noKendaraan.length() > 12) {
+                noKendaraan = noKendaraan.substr(0, 9) + "...";
+            }
+            
+            string waktuMasuk = k.get_waktu_masuk().get_dates().to_attr_string() + " " + 
+                               k.get_waktu_masuk().get_time().to_attr_string();
+            string waktuKeluar = k.get_waktu_keluar().get_dates().to_attr_string() + " " + 
+                                k.get_waktu_keluar().get_time().to_attr_string();
+            
+            cout << "| " << setw(2) << right << (i + 1) << " "
+                 << "| " << left << setw(16) << namaPemilik << " "
+                 << "| " << left << setw(5) << k.get_jenis_kendaraan().get_nama() << " "
+                 << "| " << left << setw(12) << noKendaraan << " "
+                 << "| " << left << setw(16) << waktuMasuk << " "
+                 << "| " << left << setw(16) << waktuKeluar << " "
+                 << "| " << right << setw(12) << k.hitungTarif() << " |\n";
+            
+            totalPendapatan += k.hitungTarif();
+        }
+
+        cout << "+----+------------------+-------+--------------+------------------+------------------+--------------+\n";
+        cout << "| Total Pendapatan:" << setw(79) << right << totalPendapatan << " |\n";
+        cout << "+----+------------------+-------+--------------+------------------+------------------+--------------+\n";
     }
 
     void main() {
@@ -246,9 +304,8 @@ namespace MainProgram {
             daftar_kendaraan.push_back(inputObject());
         }
 
-        for (int i = 0; i < n; i++) {
-            output(daftar_kendaraan[i]);
-        }
+        cout << "\n";
+        outputTable();
     }
 }
 
