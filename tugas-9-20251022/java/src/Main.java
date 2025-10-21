@@ -308,13 +308,29 @@ public class Main {
         return totalJam * k.getJenisKendaraan().getTarifPerJam();
     }
 
-    static void output(Kendaraan k) {
-        System.out.println("\nNo. Kendaraan: " + k.getNoKendaraan());
-        System.out.println("Nama Pemilik: " + k.getPemilik().getName());
-        System.out.println("Jenis Kendaraan: " + k.getJenisKendaraan());
-        System.out.println("Waktu Masuk: " + k.getWaktuMasuk().getDates() + k.getWaktuMasuk().getTime());
-        System.out.println("Waktu Keluar: " + k.getWaktuKeluar().getDates() + k.getWaktuKeluar().getTime());
-        System.out.println("Biaya Parkir: " + hitungBiayaParkir(k));
+    static void outputTable(List<Kendaraan> list) {
+        // Table header
+    String fmtHeader = "%-4s | %-12s | %-20s | %-8s | %-19s | %-19s | %12s";
+    String fmtRow = "%-4d | %-12s | %-20s | %-8s | %-19s | %-19s | %12d";
+
+        System.out.println();
+        System.out.println(String.format(fmtHeader, "No", "No Kendaraan", "Nama Pemilik", "Jenis", "Waktu Masuk", "Waktu Keluar", "Biaya Parkir"));
+    System.out.println("----+--------------+----------------------+----------+---------------------+---------------------+--------------");
+
+        long total = 0;
+        for (int i = 0; i < list.size(); i++) {
+            Kendaraan k = list.get(i);
+            String waktuMasuk = toLocalDateTime(k.getWaktuMasuk()).toString().replace('T',' ');
+            String waktuKeluar = toLocalDateTime(k.getWaktuKeluar()).toString().replace('T',' ');
+            int biaya = hitungBiayaParkir(k);
+            total += biaya;
+
+            System.out.println(String.format(fmtRow, i + 1, k.getNoKendaraan(), k.getPemilik().getName(), k.getJenisKendaraan(), waktuMasuk, waktuKeluar, biaya));
+        }
+
+        // Total row
+        System.out.println("----+--------------+----------------------+----------+---------------------+---------------------+--------------");
+        System.out.println(String.format("%-66s %12d", "Total Biaya:", total));
     }
 
     public static void main(String[] args) {
@@ -325,8 +341,6 @@ public class Main {
             daftarKendaraan.add(inputObject());
         }
 
-        for (int i = 1; i <= n; i++) {
-            output(daftarKendaraan.get(i - 1));
-        }
+        outputTable(daftarKendaraan);
     }
 }
