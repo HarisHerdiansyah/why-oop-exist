@@ -9,7 +9,6 @@ int main() {
 	std::cout << "end time via enter: "; std::getline(std::cin, temp);
 	auto end_time = std::chrono::system_clock::now();
 	
-	
 	std::time_t st = std::chrono::system_clock::to_time_t(start_time);
 	std::time_t et = std::chrono::system_clock::to_time_t(end_time);
 	

@@ -1,25 +1,31 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 class JenisKendaraan {
 private:
-	int tarif_per_jam;
+	int tarif_per_jam, tarif_menginap;
 
 public:
 	static const JenisKendaraan MOBIL;
 	static const JenisKendaraan MOTOR;
 	static const JenisKendaraan TRUK;
 	
-	JenisKendaraan(int tarif_per_jam): tarif_per_jam(tarif_per_jam) {}
+	JenisKendaraan(int tarif_per_jam, int tarif_menginap): 
+		tarif_per_jam(tarif_per_jam), tarif_menginap(tarif_menginap) {}
 	
 	int get_tarif_per_jam () const {
 		return this->tarif_per_jam;
 	}
+	
+	int get_tarif_menginap() const {
+		return this->tarif_menginap;
+	}
 };
 
-const JenisKendaraan JenisKendaraan::MOBIL(15000);
-const JenisKendaraan JenisKendaraan::MOTOR(7000);
-const JenisKendaraan JenisKendaraan::TRUK(40000);
+const JenisKendaraan JenisKendaraan::MOBIL(15000, 30000);
+const JenisKendaraan JenisKendaraan::MOTOR(7000, 15000);
+const JenisKendaraan JenisKendaraan::TRUK(40000, 80000);
 
 class Time {
 private:
@@ -50,6 +56,10 @@ public:
 	
 	void set_seconds(int seconds) {
 		this->seconds = seconds;
+	}
+	
+	std::string to_attr_string() {
+		return "Time{hour=" + hour + ", minute=" + minute + ", seconds=" + seconds + "}";
 	}
 };
 
@@ -82,6 +92,10 @@ public:
 	
 	void set_day(int day) {
 		this->day = day;
+	}
+	
+	std::string to_attr_string() {
+		return "Dates{year=" + year + ", month=" + month + ", day=" + day + "}";
 	}
 };
 
@@ -195,6 +209,10 @@ public:
 	Truk(JenisKendaraan jk, Pemilik p, Waktu wm, Waktu wk, std::string nk):
 		Kendaraan(jk, p, wm, wk, nk) {}
 };
+
+namespace Main {
+	std::vector<Kendaraan> daftar_kendaraan = {};
+}
 
 int main() {
 	return 0;
