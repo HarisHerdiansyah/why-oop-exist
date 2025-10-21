@@ -1,27 +1,24 @@
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Scanner;
+import javax.xml.crypto.dsig.keyinfo.KeyName;
+import java.util.*;
+import java.time.*;
 
 enum JenisKendaraan {
-    MOBIL(15000),
-    MOTOR(7000),
-    TRUK(40000);
+    MOBIL(15000, 30000),
+    MOTOR(7000, 15000),
+    TRUK(40000, 80000);
 
-    private int tarifPerJam;
+    private final int tarifPerJam, tarifMenginap;
 
-    JenisKendaraan(int tarifPerJam) {
+    JenisKendaraan(int tarifPerJam, int tarifMenginap) {
         this.tarifPerJam = tarifPerJam;
+        this.tarifMenginap = tarifMenginap;
     }
 
     public int getTarifPerJam() {
         return tarifPerJam;
     }
 
-    public void setTarifPerJam(int tarifPerJam) {
-        this.tarifPerJam = tarifPerJam;
-    }
+    public int getTarifMenginap() { return tarifMenginap; }
 }
 
 class Time {
@@ -56,6 +53,15 @@ class Time {
     public void setSeconds(int seconds) {
         this.seconds = seconds;
     }
+
+    @Override
+    public String toString() {
+        return "Time{" +
+                "hour=" + hour +
+                ", minute=" + minute +
+                ", seconds=" + seconds +
+                '}';
+    }
 }
 
 class Dates {
@@ -89,6 +95,15 @@ class Dates {
 
     public void setDay(int day) {
         this.day = day;
+    }
+
+    @Override
+    public String toString() {
+        return "Dates{" +
+                "year=" + year +
+                ", month=" + month +
+                ", day=" + day +
+                '}';
     }
 }
 
@@ -208,8 +223,37 @@ class Truk extends Kendaraan {
 }
 
 public class Main {
-    private static final Scanner sc = new Scanner(System.in);
-    private static final List<Kendaraan> daftarKendaraan = new ArrayList<>();
+    static final Scanner sc = new Scanner(System.in);
+    static final List<Kendaraan> daftarKendaraan = new ArrayList<>();
+
+    static LocalDateTime dateTimeParser(String dateTime) {
+        String[] dt = dateTime.split(" ");
+        String[] d = dt[0].split("/");
+        String[] t = dt[1].split(":");
+        return LocalDateTime.of(
+                Integer.parseInt(d[0]), Integer.parseInt(d[1]), Integer.parseInt(d[2]),
+                Integer.parseInt(t[0]), Integer.parseInt(t[1]), Integer.parseInt(t[2])
+        );
+    }
+
+    static Map<String, LocalDateTime> inputDateTime(int option) {
+        Map<String, LocalDateTime> dateMap = new HashMap<>();
+
+        // datetime sistem
+        if (option == 1) {
+            System.out.print("Waktu masuk (Tekan enter): "); sc.nextLine();
+            dateMap.put("in", LocalDateTime.now());
+            System.out.print("Waktu keluar (Tekan enter): "); sc.nextLine();
+            dateMap.put("out", LocalDateTime.now());
+        } else if (option == 2) { // datetime manual
+            System.out.print("Waktu masuk (yyyy/MM/dd HH:mm:ss): ");
+            dateMap.put("in", dateTimeParser(sc.nextLine()));
+            System.out.print("Waktu keluar (yyyy/MM/dd HH:mm:ss): ");
+            dateMap.put("out", dateTimeParser(sc.nextLine()));
+        }
+
+        return dateMap;
+    }
 
     static Kendaraan inputObject() {
         System.out.print("Nama pemilik: ");
@@ -218,12 +262,12 @@ public class Main {
         JenisKendaraan jenisKendaraan = JenisKendaraan.valueOf(sc.nextLine().toUpperCase());
         System.out.print("Nomor kendaraan: ");
         String nomorKendaraan = sc.nextLine();
-        System.out.print("Waktu masuk (Tekan enter): ");
-        sc.nextLine();
-        LocalDateTime timeIn = LocalDateTime.now();
-        System.out.print("Waktu keluar (Tekan enter): ");
-        sc.nextLine();
-        LocalDateTime timeOut = LocalDateTime.now();
+        System.out.print("Opsi masukkan waktu, (1) Sistem; (2) Manual: ");
+        int option = Integer.parseInt(sc.nextLine());
+
+        Map<String, LocalDateTime> userDateTime = inputDateTime(option);
+        LocalDateTime timeIn = userDateTime.get("in");
+        LocalDateTime timeOut = userDateTime.get("out");
 
         Pemilik pemilik = new Pemilik(nama);
         Waktu waktuMasuk = new Waktu(new Dates(timeIn.getYear(), timeIn.getMonthValue(), timeIn.getDayOfMonth()),
@@ -238,20 +282,23 @@ public class Main {
         };
     }
 
-    static Duration selisih(Waktu m, Waktu k) {
-        LocalDateTime masuk = LocalDateTime.of(
-                m.getDates().getYear(), m.getDates().getMonth(), m.getDates().getDay(),
-                m.getTime().getHour(), m.getTime().getMinute(), m.getTime().getSeconds()
+    static LocalDateTime toLocalDateTime(Waktu w) {
+        return LocalDateTime.of(
+                w.getDates().getYear(), w.getDates().getMonth(), w.getDates().getDay(),
+                w.getTime().getHour(), w.getTime().getMinute(), w.getTime().getSeconds()
         );
-        LocalDateTime keluar = LocalDateTime.of(
-                k.getDates().getYear(), k.getDates().getMonth(), k.getDates().getDay(),
-                k.getTime().getHour(), k.getTime().getMinute(), k.getTime().getSeconds()
-        );
-        return Duration.between(masuk, keluar);
     }
 
     static int hitungBiayaParkir(Kendaraan k) {
-        Duration sel = selisih(k.getWaktuMasuk(), k.getWaktuKeluar());
+        LocalDateTime waktuMasuk = toLocalDateTime(k.getWaktuMasuk());
+        LocalDateTime waktuKeluar = toLocalDateTime(k.getWaktuKeluar());
+
+        if (!waktuKeluar.toLocalDate().equals(waktuMasuk.toLocalDate())) {
+            long selisihHari = java.time.temporal.ChronoUnit.DAYS.between(waktuMasuk.toLocalDate(), waktuKeluar.toLocalDate());
+            return (int) selisihHari * k.getJenisKendaraan().getTarifMenginap();
+        }
+
+        Duration sel = Duration.between(waktuMasuk, waktuKeluar);
         long selisihDetik = sel.getSeconds();
         if (selisihDetik <= 0) return 0;
 
@@ -261,12 +308,25 @@ public class Main {
         return totalJam * k.getJenisKendaraan().getTarifPerJam();
     }
 
+    static void output(Kendaraan k) {
+        System.out.println("\nNo. Kendaraan: " + k.getNoKendaraan());
+        System.out.println("Nama Pemilik: " + k.getPemilik().getName());
+        System.out.println("Jenis Kendaraan: " + k.getJenisKendaraan());
+        System.out.println("Waktu Masuk: " + k.getWaktuMasuk().getDates() + k.getWaktuMasuk().getTime());
+        System.out.println("Waktu Keluar: " + k.getWaktuKeluar().getDates() + k.getWaktuKeluar().getTime());
+        System.out.println("Biaya Parkir: " + hitungBiayaParkir(k));
+    }
+
     static void main() {
         System.out.print("Jumlah kendaraan: ");
         int n = Integer.parseInt(sc.nextLine());
         for (int i = 1; i <= n ; i++) {
             System.out.println("\nKendaraan ke-" + i);
             daftarKendaraan.add(inputObject());
+        }
+
+        for (int i = 1; i <= n; i++) {
+            output(daftarKendaraan.get(i - 1));
         }
     }
 }
