@@ -8,7 +8,6 @@ Deskripsi     : Membuat program untuk menghitung nilai ujian lari mahasiswa
                 berdasarkan waktu mulai dan selesai lari menggunakan konsep OOP.
 """
 
-
 class Waktu:
     def __init__(self, jam, menit, detik):
         self.jam = jam

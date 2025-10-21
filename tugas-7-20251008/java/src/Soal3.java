@@ -9,244 +9,235 @@ Deskripsi     : Membuat program untuk menghitung biaya parkir kendaraan
 */
 
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
 
 enum JenisKendaraan {MOTOR, MOBIL}
 
 enum Status {REGULAR, MENGINAP}
 
 class Time {
-   private int hour, minute, second;
+    private int hour, minute, second;
 
-   public Time() {
-   }
+    public Time() {
+    }
 
-   public Time(int hour, int minute, int second) {
-       this.hour = hour;
-       this.minute = minute;
-       this.second = second;
-   }
+    public Time(int hour, int minute, int second) {
+        this.hour = hour;
+        this.minute = minute;
+        this.second = second;
+    }
 
-   public int getHour() {
-       return hour;
-   }
+    public int getHour() {
+        return hour;
+    }
 
-   public void setHour(int hour) {
-       this.hour = hour;
-   }
+    public void setHour(int hour) {
+        this.hour = hour;
+    }
 
-   public int getMinute() {
-       return minute;
-   }
+    public int getMinute() {
+        return minute;
+    }
 
-   public void setMinute(int minute) {
-       this.minute = minute;
-   }
+    public void setMinute(int minute) {
+        this.minute = minute;
+    }
 
-   public int getSecond() {
-       return second;
-   }
+    public int getSecond() {
+        return second;
+    }
 
-   public void setSecond(int second) {
-       this.second = second;
-   }
+    public void setSecond(int second) {
+        this.second = second;
+    }
 
-   @Override
-   public String toString() {
-       return String.format("%02d:%02d:%02d", hour, minute, second);
-   }
+    public int totalTimeInSecond() {
+        return (hour * 3600) + (minute * 60) + second;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%02d:%02d:%02d", hour, minute, second);
+    }
 }
 
 class Date {
-   private int year, month, day;
+    private int year, month, day;
 
-   public Date() {
-   }
+    public Date() {
+    }
 
-   public Date(int year, int month, int day) {
-       this.year = year;
-       this.month = month;
-       this.day = day;
-   }
+    public Date(int year, int month, int day) {
+        this.year = year;
+        this.month = month;
+        this.day = day;
+    }
 
-   public int getYear() {
-       return year;
-   }
+    public int getYear() {
+        return year;
+    }
 
-   public void setYear(int year) {
-       this.year = year;
-   }
+    public void setYear(int year) {
+        this.year = year;
+    }
 
-   public int getMonth() {
-       return month;
-   }
+    public int getMonth() {
+        return month;
+    }
 
-   public void setMonth(int month) {
-       this.month = month;
-   }
+    public void setMonth(int month) {
+        this.month = month;
+    }
 
-   public int getDay() {
-       return day;
-   }
+    public int getDay() {
+        return day;
+    }
 
-   public void setDay(int day) {
-       this.day = day;
-   }
+    public void setDay(int day) {
+        this.day = day;
+    }
 
-   @Override
-   public String toString() {
-       return String.format("%04d/%02d/%02d", year, month, day);
-   }
+    @Override
+    public String toString() {
+        return String.format("%04d/%02d/%02d", year, month, day);
+    }
 }
 
 class Waktu {
-   private Time time;
-   private Date date;
+    private Time time;
+    private Date date;
 
-   public Waktu() {
-   }
+    public Waktu() {
+    }
 
-   public Waktu(Time time, Date date) {
-       this.time = time;
-       this.date = date;
-   }
+    public Waktu(Time time, Date date) {
+        this.time = time;
+        this.date = date;
+    }
 
-   public Time getTime() {
-       return time;
-   }
+    public Time getTime() {
+        return time;
+    }
 
-   public void setTime(Time time) {
-       this.time = time;
-   }
+    public void setTime(Time time) {
+        this.time = time;
+    }
 
-   public Date getDate() {
-       return date;
-   }
+    public Date getDate() {
+        return date;
+    }
 
-   public void setDate(Date date) {
-       this.date = date;
-   }
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }
 
 class WaktuHelper {
-   private static boolean isLeapYear(int year) {
-       return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
-   }
+    private static boolean isLeapYear(int year) {
+        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+    }
 
-   private static int daysInMonth(int year, int month) {
-       int[] days = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-       if (month == 2 && isLeapYear(year)) return 29;
-       return days[month - 1];
-   }
+    private static int daysInMonth(int year, int month) {
+        int[] days = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        if (month == 2 && isLeapYear(year)) return 29;
+        return days[month - 1];
+    }
 
-   public static Waktu calculateTimeDifference(Waktu datang, Waktu pulang) {
-       Date d1 = datang.getDate();
-       Time t1 = datang.getTime();
-       Date d2 = pulang.getDate();
-       Time t2 = pulang.getTime();
+    public static Waktu calculateTimeDifference(Waktu datang, Waktu pulang) {
+        int year = pulang.getDate().getYear() - datang.getDate().getYear();
+        int month = pulang.getDate().getMonth() - datang.getDate().getMonth();
+        int day = pulang.getDate().getDay() - datang.getDate().getDay();
+        int hour = pulang.getTime().getHour() - datang.getTime().getHour();
+        int minute = pulang.getTime().getMinute() - datang.getTime().getMinute();
+        int second = pulang.getTime().getSecond() - datang.getTime().getSecond();
 
-       int yearD = d1.getYear(), monthD = d1.getMonth(), dayD = d1.getDay();
-       int hourD = t1.getHour(), minuteD = t1.getMinute(), secondD = t1.getSecond();
+        if (second < 0) {
+            second += 60;
+            minute -= 1;
+        }
 
-       int yearP = d2.getYear(), monthP = d2.getMonth(), dayP = d2.getDay();
-       int hourP = t2.getHour(), minuteP = t2.getMinute(), secondP = t2.getSecond();
+        if (minute < 0) {
+            minute += 60;
+            hour -= 1;
+        }
 
-       // 1. Seconds
-       if (secondP < secondD) {
-           secondP += 60;
-           minuteP -= 1;
-       }
-       int secondDiff = secondP - secondD;
+        if (hour < 0) {
+            hour += 24;
+            day -= 1;
+        }
 
-       // 2. Minutes
-       if (minuteP < minuteD) {
-           minuteP += 60;
-           hourP -= 1;
-       }
-       int minuteDiff = minuteP - minuteD;
+        if (day < 0) {
+            month -= 1;
+            int prevMonth = pulang.getDate().getMonth() - 1;
+            int yearPrevMonth = pulang.getDate().getYear();
+            if (prevMonth <= 0) {
+                prevMonth += 12;
+                yearPrevMonth -= 1;
+            }
+            day += daysInMonth(yearPrevMonth, prevMonth);
+        }
 
-       // 3. Hours
-       if (hourP < hourD) {
-           hourP += 24;
-           dayP -= 1;
-       }
-       int hourDiff = hourP - hourD;
+        if (month < 0) {
+            month += 12;
+            year -= 1;
+        }
 
-       // 4. Days
-       if (dayP < dayD) {
-           monthP -= 1;
-           if (monthP < 1) {
-               monthP = 12;
-               yearP -= 1;
-           }
-           dayP += daysInMonth(yearP, monthP);
-       }
-       int dayDiff = dayP - dayD;
-
-       // 5. Months
-       if (monthP < monthD) {
-           monthP += 12;
-           yearP -= 1;
-       }
-       int monthDiff = monthP - monthD;
-
-       // 6. Years
-       int yearDiff = yearP - yearD;
-
-       return new Waktu(new Time(hourDiff, minuteDiff, secondDiff), new Date(yearDiff, monthDiff, dayDiff));
-   }
+        return new Waktu(new Time(hour, minute, second), new Date(year, month, day));
+    }
 }
 
 class ParkedVehicle {
-   private final String noKendaraan;
-   private final JenisKendaraan kendaraan;
-   private final Status status;
-   private final Waktu datang, pulang;
+    private final String noKendaraan;
+    private final JenisKendaraan kendaraan;
+    private final Status status;
+    private final Waktu datang, pulang;
 
-   public ParkedVehicle(String noKendaraan, JenisKendaraan kendaraan, Status status, Waktu datang, Waktu pulang) {
-       this.noKendaraan = noKendaraan;
-       this.kendaraan = kendaraan;
-       this.status = status;
-       this.datang = datang;
-       this.pulang = pulang;
-   }
+    public ParkedVehicle(String noKendaraan, JenisKendaraan kendaraan, Status status, Waktu datang, Waktu pulang) {
+        this.noKendaraan = noKendaraan;
+        this.kendaraan = kendaraan;
+        this.status = status;
+        this.datang = datang;
+        this.pulang = pulang;
+    }
 
-   public String getNoKendaraan() {
-       return noKendaraan;
-   }
+    public String getNoKendaraan() {
+        return noKendaraan;
+    }
 
-   public JenisKendaraan getKendaraan() {
-       return kendaraan;
-   }
+    public JenisKendaraan getKendaraan() {
+        return kendaraan;
+    }
 
-   public Status getStatus() {
-       return status;
-   }
+    public Status getStatus() {
+        return status;
+    }
 
-   public Waktu getDatang() {
-       return datang;
-   }
+    public Waktu getDatang() {
+        return datang;
+    }
 
-   public Waktu getPulang() {
-       return pulang;
-   }
+    public Waktu getPulang() {
+        return pulang;
+    }
 }
 
 class ParkedVehicleHelper {
-   public static int getPay(ParkedVehicle vehicle, int totalJam, int totalHari) {
-       int multiplier = 0;
-       int pay = 0;
+    public static int getPay(ParkedVehicle vehicle, Waktu diff) {
+        int multiplier = 0;
+        int pay = 0;
 
-       if (vehicle.getStatus() == Status.MENGINAP) {
-           multiplier = (vehicle.getKendaraan() == JenisKendaraan.MOTOR) ? 15000 : 25000;
-           pay = multiplier * totalHari;
-       } else {
-           multiplier = (vehicle.getKendaraan() == JenisKendaraan.MOTOR) ? 2000 : 3000;
-           pay = multiplier * totalJam;
-       }
-       return pay;
-   }
+        if (vehicle.getStatus() == Status.MENGINAP) {
+            multiplier = (vehicle.getKendaraan() == JenisKendaraan.MOTOR) ? 15000 : 25000;
+            pay = multiplier * diff.getDate().getDay();
+        } else {
+            multiplier = (vehicle.getKendaraan() == JenisKendaraan.MOTOR) ? 2000 : 3000;
+            if (diff.getTime().totalTimeInSecond() % 3600 > 0) {
+                pay = multiplier * (diff.getTime().getHour() + 1);
+            } else {
+                pay = multiplier * diff.getTime().getHour();
+            }
+        }
+        return pay;
+    }
 }
 
 class LarikParkedVehicle {
@@ -255,141 +246,136 @@ class LarikParkedVehicle {
     private int indexPointer = 0;
 
     public LarikParkedVehicle(int size) {
-         this.daftarKendaraan = new ParkedVehicle[size];
-         this.size = size;
+        this.daftarKendaraan = new ParkedVehicle[size];
+        this.size = size;
     }
 
-    public void add(ParkedVehicle pv) {
-         if (indexPointer < size) {
-              daftarKendaraan[indexPointer++] = pv;
-         } else {
-              System.out.println("Larik penuh, tidak dapat menambah kendaraan lagi.");
-         }
-    }
-
-    public ParkedVehicle get(int index) {
-         if (index >= 0 && index < indexPointer) {
-              return daftarKendaraan[index];
-         }
-         return null;
+    public ParkedVehicle[] getDaftarKendaraan() {
+        return daftarKendaraan;
     }
 
     public int getSize() {
-         return indexPointer;
+        return size;
+    }
+
+    public int getIndexPointer() {
+        return indexPointer;
+    }
+
+    public void setIndexPointer(int indexPointer) {
+        this.indexPointer = indexPointer;
+    }
+
+    public ParkedVehicle getVehicleAt(int index) {
+        return daftarKendaraan[index];
+    }
+
+    public void push(ParkedVehicle vehicle) {
+        if (indexPointer >= size) {
+            System.out.println("Maximum size of array exceeded.");
+            return;
+        }
+
+        daftarKendaraan[indexPointer] = vehicle;
+        indexPointer += 1;
+    }
+
+    public ParkedVehicle deleteAt(int index) {
+        ParkedVehicle vehicle = daftarKendaraan[index];
+
+        for (int i = index + 1; i < indexPointer; i++) {
+            daftarKendaraan[i - 1] = daftarKendaraan[i];
+        }
+        indexPointer -= 1;
+        daftarKendaraan[indexPointer] = null;
+
+        return vehicle;
+    }
+
+    public ParkedVehicle pop() {
+        return deleteAt(0);
     }
 }
 
 public class Soal3 {
-   private static final Scanner SCANNER = new Scanner(System.in);
-   private static final List<ParkedVehicle> parkedVehicles = new ArrayList<>();
-   private static int totalPay = 0;
+    private static final Scanner SCANNER = new Scanner(System.in);
 
-   private static Time parseTime(String s) {
-       String[] p = s.split(":");
-       return new Time(Integer.parseInt(p[0]), Integer.parseInt(p[1]), Integer.parseInt(p[2]));
-   }
+    private static Time parseTime(String s) {
+        String[] p = s.split(":");
+        return new Time(Integer.parseInt(p[0]), Integer.parseInt(p[1]), Integer.parseInt(p[2]));
+    }
 
-   private static Date parseDate(String s) {
-       String[] p = s.split("/");
-       return new Date(Integer.parseInt(p[0]), Integer.parseInt(p[1]), Integer.parseInt(p[2]));
-   }
+    private static Date parseDate(String s) {
+        String[] p = s.split("/");
+        return new Date(Integer.parseInt(p[0]), Integer.parseInt(p[1]), Integer.parseInt(p[2]));
+    }
 
-   private static void printVehicleSummary(ParkedVehicle pv, Waktu diff, int totalHari, int totalJam, int pay) {
-       System.out.println("\n--- RINCIAN KENDARAAN ---");
-       System.out.println("Nomor Kendaraan : " + pv.getNoKendaraan());
-       System.out.println("Jenis Kendaraan : " + pv.getKendaraan());
-       System.out.println("Status Parkir   : " + pv.getStatus());
-       System.out.println("Tanggal Datang  : " + pv.getDatang().getDate());
-       System.out.println("Tanggal Pulang  : " + pv.getPulang().getDate());
-       System.out.println("Jam Datang      : " + pv.getDatang().getTime());
-       System.out.println("Jam Pulang      : " + pv.getPulang().getTime());
-       System.out.println("Total Hari      : " + totalHari);
-       System.out.println("Total Jam       : " + totalJam);
-       System.out.println("Biaya           : " + pay);
-   }
+    private static void outputBuilder(ParkedVehicle vehicle) {
+        String format = "| %-15s | %-15s | %-10s | %-15s | %-15s | %-12s | %-12s | %-10s | %-10s | %-10s |%n";
+        String line = "+-----------------+-----------------+------------+-----------------+-----------------+--------------+--------------+------------+------------+------------+";
 
-   private static void printVehicleSummaryTable(List<ParkedVehicle> vehicles) {
-       String format = "| %-15s | %-15s | %-10s | %-15s | %-15s | %-12s | %-12s | %-10s | %-10s | %-10s |%n";
-       String line = "+-----------------+-----------------+------------+-----------------+-----------------+--------------+--------------+------------+------------+------------+";
-       System.out.println("\n" + line);
-       System.out.printf(format, "No Kendaraan", "Jenis Kendaraan", "Status", "Tanggal Datang", "Tanggal Pulang", "Jam Datang", "Jam Pulang", "Lama Hari", "Lama Jam", "Biaya");
-       System.out.println(line);
-       for (ParkedVehicle pv : vehicles) {
-           Waktu diff = WaktuHelper.calculateTimeDifference(pv.getDatang(), pv.getPulang());
-           int totalHari = diff.getDate().getDay();
-           int totalJam = diff.getTime().getHour();
-           int pay = ParkedVehicleHelper.getPay(pv, totalJam, totalHari);
-           System.out.printf(format,
-               pv.getNoKendaraan(),
-               pv.getKendaraan(),
-               pv.getStatus(),
-               pv.getDatang().getDate(),
-               pv.getPulang().getDate(),
-               pv.getDatang().getTime(),
-               pv.getPulang().getTime(),
-               totalHari,
-               totalJam,
-               pay
-           );
-           System.out.println(line);
-       }
-   }
+        Waktu diff = WaktuHelper.calculateTimeDifference(vehicle.getDatang(), vehicle.getPulang());
+        Time temp = new Time(diff.getTime().getHour() + diff.getDate().getDay() * 24, diff.getTime().getMinute(), diff.getTime().getSecond());
+        int pay = ParkedVehicleHelper.getPay(vehicle, diff);
 
-   private static void calculateAndPrint() {
-       for (ParkedVehicle pv : parkedVehicles) {
-           Waktu diff = WaktuHelper.calculateTimeDifference(pv.getDatang(), pv.getPulang());
-           Time timeDiff = diff.getTime();
-           Date dateDiff = diff.getDate();
+        System.out.printf(format,
+                vehicle.getNoKendaraan(),
+                vehicle.getKendaraan(),
+                vehicle.getStatus(),
+                vehicle.getDatang().getDate(),
+                vehicle.getPulang().getDate(),
+                vehicle.getDatang().getTime(),
+                vehicle.getPulang().getTime(),
+                diff.getDate().getDay(),
+                temp,
+                pay
+        );
+        System.out.println(line);
+    }
 
-           int totalHari = dateDiff.getDay();
-           int totalJam = totalHari * 24 + timeDiff.getHour();
-           if (timeDiff.getMinute() > 0 || timeDiff.getSecond() > 0) totalJam++;
+    private static void outputTable(LarikParkedVehicle daftarKendaraan) {
+        String format = "| %-15s | %-15s | %-10s | %-15s | %-15s | %-12s | %-12s | %-10s | %-10s | %-10s |%n";
+        String line = "+-----------------+-----------------+------------+-----------------+-----------------+--------------+--------------+------------+------------+------------+";
+        System.out.println("\n" + line);
+        System.out.printf(format, "No Kendaraan", "Jenis Kendaraan", "Status", "Tanggal Datang", "Tanggal Pulang", "Jam Datang", "Jam Pulang", "Lama Hari", "Lama Jam", "Biaya");
+        System.out.println(line);
+        for (int i = 0 ; i < daftarKendaraan.getSize(); i++) {
+            outputBuilder(daftarKendaraan.getVehicleAt(i));
+        }
+    }
 
-           int pay = ParkedVehicleHelper.getPay(pv, totalJam, totalHari);
-           totalPay += pay;
+    private static ParkedVehicle input(int i) {
+        System.out.println("\n--- Data Kendaraan ke-" + (i + 1) + " ---");
+        System.out.print("Nomor Kendaraan: ");
+        String no = SCANNER.nextLine();
+        System.out.print("Jenis Kendaraan (0: Motor, 1: Mobil): ");
+        int jenis = Integer.parseInt(SCANNER.nextLine());
+        System.out.print("Status Parkir (0: Regular, 1: Menginap): ");
+        int stat = Integer.parseInt(SCANNER.nextLine());
 
-           printVehicleSummary(pv, diff, totalHari, totalJam, pay);
-       }
-       System.out.println("\nTotal Bayar Keseluruhan: " + totalPay);
-   }
+        System.out.print("Waktu Kedatangan (yyyy/MM/dd-HH:mm:ss): ");
+        String[] waktuKedatangan = SCANNER.nextLine().split("-");
+        System.out.print("Waktu Kepulangan (yyyy/MM/dd-HH:mm:ss): ");
+        String[] waktuKepulangan = SCANNER.nextLine().split("-");
 
-   private static void inputVehicle(int n) {
-       for (int i = 0; i < n; i++) {
-           System.out.println("\n--- Data Kendaraan ke-" + (i + 1) + " ---");
-           System.out.print("Nomor Kendaraan: ");
-           String no = SCANNER.nextLine();
-           System.out.print("Jenis Kendaraan (0: Motor, 1: Mobil): ");
-           int jenis = Integer.parseInt(SCANNER.nextLine());
-           System.out.print("Status Parkir (0: Regular, 1: Menginap): ");
-           int stat = Integer.parseInt(SCANNER.nextLine());
+        Waktu datang = new Waktu(parseTime(waktuKedatangan[1]), parseDate(waktuKedatangan[0]));
+        Waktu pulang = new Waktu(parseTime(waktuKepulangan[1]), parseDate(waktuKepulangan[0]));
 
-           System.out.println("\nWaktu Kedatangan");
-           System.out.print("Tanggal (yyyy/MM/dd): ");
-           String datangTgl = SCANNER.nextLine();
-           System.out.print("Jam (HH:mm:ss): ");
-           String datangJam = SCANNER.nextLine();
+        JenisKendaraan kendaraan = (jenis == 0) ? JenisKendaraan.MOTOR : JenisKendaraan.MOBIL;
+        Status status = (stat == 0) ? Status.REGULAR : Status.MENGINAP;
 
-           System.out.println("\nWaktu Kepulangan");
-           System.out.print("Tanggal (yyyy/MM/dd): ");
-           String pulangTgl = SCANNER.nextLine();
-           System.out.print("Jam (HH:mm:ss): ");
-           String pulangJam = SCANNER.nextLine();
+        return new ParkedVehicle(no, kendaraan, status, datang, pulang);
+    }
 
-           Waktu datang = new Waktu(parseTime(datangJam), parseDate(datangTgl));
-           Waktu pulang = new Waktu(parseTime(pulangJam), parseDate(pulangTgl));
+    public static void main(String[] args) {
+        System.out.print("Masukkan jumlah kendaraan: ");
+        int n = Integer.parseInt(SCANNER.nextLine());
+        LarikParkedVehicle daftarKendaraan = new LarikParkedVehicle(n);
 
-           JenisKendaraan kendaraan = (jenis == 0) ? JenisKendaraan.MOTOR : JenisKendaraan.MOBIL;
-           Status status = (stat == 0) ? Status.REGULAR : Status.MENGINAP;
+        for (int i = 0; i < n; i++) {
+            daftarKendaraan.push(input(i));
+        }
 
-           parkedVehicles.add(new ParkedVehicle(no, kendaraan, status, datang, pulang));
-       }
-   }
-
-   public static void main(String[] args) {
-       System.out.print("Masukkan jumlah kendaraan: ");
-       int n = Integer.parseInt(SCANNER.nextLine());
-       inputVehicle(n);
-       calculateAndPrint();
-       printVehicleSummaryTable(parkedVehicles);
-   }
+        outputTable(daftarKendaraan);
+    }
 }

@@ -8,7 +8,6 @@ Deskripsi     : Membuat program untuk menghitung nilai ujian lari mahasiswa
                 berdasarkan waktu mulai dan selesai lari menggunakan konsep OOP.
 */
 
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
