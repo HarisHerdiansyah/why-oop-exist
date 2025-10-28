@@ -1,3 +1,20 @@
+/*
+Nama - NPM    : ~ Raissa Christabel Sebayang - 140810240008
+                ~ Abraham Gomes Samosir - 140810240044
+                ~ Haris Herdiansyah - 140810240074
+Kelas         : B
+Nama File     : LinkedList.java
+Deskripsi     : program primitif list TPB lari
+                1. Insert firt
+                2. insert last
+                3. insert after
+                4. delete first
+                5. delete last
+                6. delete after
+                7. traversal
+                8. searching
+*/
+
 package com.example.linkedlist;
 
 import com.example.mahasiswa.*;

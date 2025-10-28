@@ -1,3 +1,11 @@
+/*
+Nama - NPM    : ~ Raissa Christabel Sebayang - 140810240008
+                ~ Abraham Gomes Samosir - 140810240044
+                ~ Haris Herdiansyah - 140810240074
+Kelas         : B
+Nama File     : Node.java
+*/
+
 package com.example.linkedlist;
 
 import com.example.mahasiswa.*;;

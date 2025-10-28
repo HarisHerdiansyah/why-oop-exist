@@ -20,6 +20,7 @@ Deskripsi     : Program Inheritance Parkir Pelabuhan
 #include <sstream>
 #include <cmath>
 #include <map>
+#include <algorithm>
 
 using namespace std;
 
@@ -45,6 +46,7 @@ const JenisKendaraan JenisKendaraan::MOBIL("MOBIL", 15000, 30000);
 const JenisKendaraan JenisKendaraan::MOTOR("MOTOR", 7000, 15000);
 const JenisKendaraan JenisKendaraan::TRUK("TRUK", 40000, 80000);
 
+// ==================== Class Time ====================
 class Time {
 private:
     int hour, minute, seconds;
@@ -60,11 +62,13 @@ public:
     string to_attr_string() const {
         ostringstream ss;
         ss << setw(2) << setfill('0') << hour << ":"
-           << setw(2) << setfill('0') << minute;
+           << setw(2) << setfill('0') << minute << ":"
+           << setw(2) << setfill('0') << seconds;
         return ss.str();
     }
 };
 
+// ==================== Class Dates ====================
 class Dates {
 private:
     int year, month, day;
@@ -85,6 +89,7 @@ public:
     }
 };
 
+// ==================== Class Waktu ====================
 class Waktu {
 private:
     Dates dates;
@@ -97,6 +102,7 @@ public:
     Time get_time() const { return time; }
 };
 
+// ==================== Class Pemilik ====================
 class Pemilik {
 private:
     string name;
@@ -106,6 +112,7 @@ public:
     string get_name() const { return name; }
 };
 
+// ==================== Class Kendaraan ====================
 class Kendaraan {
 private:
     JenisKendaraan jenis_kendaraan;
@@ -135,14 +142,14 @@ public:
         in.tm_mday = dIn.get_day();
         in.tm_hour = tIn.get_hour();
         in.tm_min = tIn.get_minute();
-        in.tm_sec = 0;
+        in.tm_sec = tIn.get_seconds();
 
         out.tm_year = dOut.get_year() - 1900;
         out.tm_mon = dOut.get_month() - 1;
         out.tm_mday = dOut.get_day();
         out.tm_hour = tOut.get_hour();
         out.tm_min = tOut.get_minute();
-        out.tm_sec = 0;
+        out.tm_sec = tOut.get_seconds();
 
         time_t tInSec = mktime(&in);
         time_t tOutSec = mktime(&out);
@@ -155,6 +162,7 @@ public:
     }
 };
 
+// ==================== Inheritance ====================
 class Mobil : public Kendaraan {
 public:
     Mobil(Pemilik p, Waktu wm, Waktu wk, string nk)
@@ -171,13 +179,14 @@ public:
         : Kendaraan(JenisKendaraan::TRUK, p, wm, wk, nk) {}
 };
 
+// ==================== Main Program ====================
 namespace MainProgram {
     vector<Kendaraan> daftar_kendaraan;
 
     tm parseDateTime(const string &input) {
         tm t = {};
         istringstream ss(input);
-        ss >> get_time(&t, "%Y/%m/%d %H:%M");
+        ss >> get_time(&t, "%Y/%m/%d %H:%M:%S"); 
         return t;
     }
 
@@ -205,16 +214,21 @@ namespace MainProgram {
             cout << "Tekan Enter untuk catat waktu keluar...";
             cin.get();
             dateMap["out"] = getSystemTime();
-        } else { 
-            cout << "Waktu masuk (YYYY/MM/DD HH:MM): ";
+        } else { // manual
+            cout << "Waktu masuk (YYYY/MM/DD HH:MM:SS): ";
             getline(cin, input);
             dateMap["in"] = parseDateTime(input);
 
-            cout << "Waktu keluar (YYYY/MM/DD HH:MM): ";
+            cout << "Waktu keluar (YYYY/MM/DD HH:MM:SS): ";
             getline(cin, input);
             dateMap["out"] = parseDateTime(input);
         }
         return dateMap;
+    }
+
+    string toUpper(string s) {
+        transform(s.begin(), s.end(), s.begin(), ::toupper);
+        return s;
     }
 
     Kendaraan inputObject() {
@@ -225,6 +239,7 @@ namespace MainProgram {
         getline(cin, nama);
         cout << "Jenis Kendaraan (MOBIL/MOTOR/TRUK): ";
         getline(cin, jenis);
+        jenis = toUpper(jenis); 
         cout << "Nomor Kendaraan: ";
         getline(cin, nomor);
 
@@ -237,9 +252,9 @@ namespace MainProgram {
         tm out = waktuMap["out"];
 
         Dates dIn(in.tm_year + 1900, in.tm_mon + 1, in.tm_mday);
-        Time tIn(in.tm_hour, in.tm_min);
+        Time tIn(in.tm_hour, in.tm_min, in.tm_sec);
         Dates dOut(out.tm_year + 1900, out.tm_mon + 1, out.tm_mday);
-        Time tOut(out.tm_hour, out.tm_min);
+        Time tOut(out.tm_hour, out.tm_min, out.tm_sec);
 
         Waktu waktuMasuk(dIn, tIn);
         Waktu waktuKeluar(dOut, tOut);
@@ -261,22 +276,18 @@ namespace MainProgram {
         int totalPendapatan = 0;
         for (size_t i = 0; i < daftar_kendaraan.size(); i++) {
             const auto &k = daftar_kendaraan[i];
-            
+
             string namaPemilik = k.get_pemilik().get_name();
-            if (namaPemilik.length() > 16) {
-                namaPemilik = namaPemilik.substr(0, 13) + "...";
-            }
-            
+            if (namaPemilik.length() > 16) namaPemilik = namaPemilik.substr(0, 13) + "...";
+
             string noKendaraan = k.get_no_kendaraan();
-            if (noKendaraan.length() > 12) {
-                noKendaraan = noKendaraan.substr(0, 9) + "...";
-            }
-            
+            if (noKendaraan.length() > 12) noKendaraan = noKendaraan.substr(0, 9) + "...";
+
             string waktuMasuk = k.get_waktu_masuk().get_dates().to_attr_string() + " " + 
                                k.get_waktu_masuk().get_time().to_attr_string();
             string waktuKeluar = k.get_waktu_keluar().get_dates().to_attr_string() + " " + 
                                 k.get_waktu_keluar().get_time().to_attr_string();
-            
+
             cout << "| " << setw(2) << right << (i + 1) << " "
                  << "| " << left << setw(16) << namaPemilik << " "
                  << "| " << left << setw(5) << k.get_jenis_kendaraan().get_nama() << " "
@@ -284,7 +295,7 @@ namespace MainProgram {
                  << "| " << left << setw(16) << waktuMasuk << " "
                  << "| " << left << setw(16) << waktuKeluar << " "
                  << "| " << right << setw(12) << k.hitungTarif() << " |\n";
-            
+
             totalPendapatan += k.hitungTarif();
         }
 
@@ -309,6 +320,7 @@ namespace MainProgram {
     }
 }
 
+// ==================== MAIN ====================
 int main() {
     MainProgram::main();
     return 0;

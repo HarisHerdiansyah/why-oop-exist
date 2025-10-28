@@ -1,3 +1,12 @@
+/*
+Nama - NPM    : ~ Raissa Christabel Sebayang - 140810240008
+                ~ Abraham Gomes Samosir - 140810240044
+                ~ Haris Herdiansyah - 140810240074
+Kelas         : B
+Nama File     : MhsTPB.java
+Deskripsi     : class Mahasiswa
+*/
+
 package com.example.mahasiswa;
 
 import com.example.waktu.*;
