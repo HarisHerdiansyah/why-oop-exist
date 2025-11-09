@@ -4,13 +4,30 @@
  */
 package parking.view;
 
+import parking.classes.DatesTime;
+import parking.classes.Car;
+import parking.classes.Motorcycle;
+import parking.classes.Truck;
+import parking.classes.Vehicle;
+import parking.classes.VehicleType;
+import parking.service.ParkingService;
+
+import javax.swing.*;
+import java.util.Objects;
+
 /**
- *
- * @author haris
+ * Nama             : Raissa Christabel Sebayang - 140810240008
+ *                    Abraham Gomes Samosir - 140810240044
+ *                    Haris Herdiansyah - 140810240074
+ * Program Utama    : Aplikasi Parkir Pelabuhan
+ * Modul            : ParkingFrame.java
+ * Deskripsi        : Frame utama aplikasi parkir pelabuhan
+ * Tanggal          : 11 November 2025
  */
 public class ParkingFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ParkingFrame.class.getName());
+    private final ParkingService parkingService = new ParkingService();
 
     /**
      * Creates new form ParkingFrame
@@ -31,60 +48,67 @@ public class ParkingFrame extends javax.swing.JFrame {
         rootPanel = new javax.swing.JPanel();
         borderPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        areaOutput = new javax.swing.JTextArea();
+        licensePlateLabel = new javax.swing.JLabel();
+        licensePlateField = new javax.swing.JTextField();
+        vehicleTypeLabel = new javax.swing.JLabel();
+        vehicleTypeComboBox = new javax.swing.JComboBox<>();
+        formatInfo = new javax.swing.JLabel();
+        entryTimeLabel = new javax.swing.JLabel();
+        entryTimeField = new javax.swing.JTextField();
+        exitTimeLabel = new javax.swing.JLabel();
+        exitTimeField = new javax.swing.JTextField();
+        addButton = new javax.swing.JButton();
+        totalLabel = new javax.swing.JLabel();
+        totalValue = new javax.swing.JLabel();
+        terminateBtn = new javax.swing.JButton();
+        resetBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         borderPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Parkir Pelabuhan"));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        areaOutput.setColumns(20);
+        areaOutput.setRows(5);
+        areaOutput.setText("No. Plat\tTipe\tWaktu Masuk\t\tWaktu Keluar\t\tSelisih Waktu\t\tBiaya Parkir");
+        jScrollPane1.setViewportView(areaOutput);
 
-        jLabel6.setText("jLabel6");
+        licensePlateLabel.setText("No. Plat");
 
-        jTextField5.setText("jTextField5");
+        vehicleTypeLabel.setText("Tipe");
 
-        jLabel7.setText("jLabel7");
+        vehicleTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Pilih --", "Mobil", "Motor", "Truk" }));
 
-        jTextField6.setText("jTextField6");
+        formatInfo.setText("Format waktu: yyyy/MM/dd HH:mm:ss");
 
-        jLabel8.setText("jLabel8");
+        entryTimeLabel.setText("Waktu Masuk");
 
-        jTextField7.setText("jTextField7");
+        exitTimeLabel.setText("Waktu Keluar");
 
-        jLabel9.setText("jLabel9");
+        addButton.setText("Tambah");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
 
-        jTextField8.setText("jTextField8");
+        totalLabel.setText("Total :");
 
-        jLabel10.setText("jLabel10");
+        totalValue.setText("Rp0,00");
 
-        jTextField9.setText("jTextField9");
+        terminateBtn.setText("Keluar");
+        terminateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                terminateBtnActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("jButton2");
-
-        jLabel11.setText("jLabel11");
-
-        jLabel12.setText("jLabel12");
-
-        jButton3.setText("jButton3");
-
-        jButton4.setText("jButton4");
+        resetBtn.setText("Reset");
+        resetBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout borderPanelLayout = new javax.swing.GroupLayout(borderPanel);
         borderPanel.setLayout(borderPanelLayout);
@@ -95,39 +119,39 @@ public class ParkingFrame extends javax.swing.JFrame {
                 .addGroup(borderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(borderPanelLayout.createSequentialGroup()
-                        .addGroup(borderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(borderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(borderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-                                .addComponent(jTextField7)))
+                        .addGroup(borderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(borderPanelLayout.createSequentialGroup()
+                                .addGroup(borderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(vehicleTypeLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(licensePlateLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(borderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(licensePlateField, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                                    .addComponent(vehicleTypeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(formatInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE))
                         .addGroup(borderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(borderPanelLayout.createSequentialGroup()
                                 .addGap(48, 48, 48)
                                 .addGroup(borderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(borderPanelLayout.createSequentialGroup()
-                                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(exitTimeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(exitTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(borderPanelLayout.createSequentialGroup()
-                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(entryTimeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(entryTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(borderPanelLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2))))
+                                .addComponent(addButton))))
                     .addGroup(borderPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(totalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(totalValue, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4)
+                        .addComponent(resetBtn)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3)))
+                        .addComponent(terminateBtn)))
                 .addContainerGap(92, Short.MAX_VALUE))
         );
         borderPanelLayout.setVerticalGroup(
@@ -135,30 +159,29 @@ public class ParkingFrame extends javax.swing.JFrame {
             .addGroup(borderPanelLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(borderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(licensePlateLabel)
+                    .addComponent(licensePlateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(entryTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(entryTimeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(borderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(vehicleTypeLabel)
+                    .addComponent(exitTimeLabel)
+                    .addComponent(exitTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(vehicleTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(borderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(formatInfo)
+                    .addComponent(addButton))
                 .addGap(38, 38, 38)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(borderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addGap(71, 71, 71))
+                    .addComponent(totalLabel)
+                    .addComponent(totalValue)
+                    .addComponent(terminateBtn)
+                    .addComponent(resetBtn))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout rootPanelLayout = new javax.swing.GroupLayout(rootPanel);
@@ -175,16 +198,14 @@ public class ParkingFrame extends javax.swing.JFrame {
             .addGroup(rootPanelLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(borderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(rootPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+            .addComponent(rootPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,6 +214,55 @@ public class ParkingFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void resetFieldAction() {
+        licensePlateField.setText("");
+        entryTimeField.setText("");
+        exitTimeField.setText("");
+        vehicleTypeComboBox.setSelectedIndex(0);
+    }
+
+    private void resetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetBtnActionPerformed
+        // TODO add your handling code here
+        resetFieldAction();
+        areaOutput.setText("");
+        totalValue.setText("Rp0,00");
+        parkingService.getVehicleList().clear();
+    }//GEN-LAST:event_resetBtnActionPerformed
+
+    private void terminateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminateBtnActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_terminateBtnActionPerformed
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            String licensePlate = licensePlateField.getText();
+            DatesTime entryTime = parkingService.datesTimeParser(entryTimeField.getText());
+            DatesTime exitTime = parkingService.datesTimeParser(exitTimeField.getText());
+            String vehicleTypeStr = switch ((String) Objects.requireNonNull(vehicleTypeComboBox.getSelectedItem())) {
+                case "Mobil" -> "CAR";
+                case "Motor" -> "MOTORCYCLE";
+                case "Truk" -> "TRUCK";
+                default -> throw new IllegalArgumentException("Tipe kendaraan tidak valid.");
+            };
+            VehicleType vehicleType = VehicleType.valueOf(vehicleTypeStr);
+
+            Vehicle obj = switch (vehicleType) {
+                case CAR -> new Car(licensePlate, entryTime, exitTime);
+                case MOTORCYCLE -> new Motorcycle(licensePlate, entryTime, exitTime);
+                case TRUCK -> new Truck(licensePlate, entryTime, exitTime);
+            };
+
+            parkingService.addVehicle(obj);
+            areaOutput.setText(areaOutput.getText().concat(parkingService.getMappedVehicleList()));
+            totalValue.setText("Rp" + String.format("%,.2f", parkingService.calculateTotalRevenue()));
+            resetFieldAction();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_addButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,24 +290,23 @@ public class ParkingFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
+    private javax.swing.JTextArea areaOutput;
     private javax.swing.JPanel borderPanel;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField entryTimeField;
+    private javax.swing.JLabel entryTimeLabel;
+    private javax.swing.JTextField exitTimeField;
+    private javax.swing.JLabel exitTimeLabel;
+    private javax.swing.JLabel formatInfo;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField licensePlateField;
+    private javax.swing.JLabel licensePlateLabel;
+    private javax.swing.JButton resetBtn;
     private javax.swing.JPanel rootPanel;
+    private javax.swing.JButton terminateBtn;
+    private javax.swing.JLabel totalLabel;
+    private javax.swing.JLabel totalValue;
+    private javax.swing.JComboBox<String> vehicleTypeComboBox;
+    private javax.swing.JLabel vehicleTypeLabel;
     // End of variables declaration//GEN-END:variables
 }

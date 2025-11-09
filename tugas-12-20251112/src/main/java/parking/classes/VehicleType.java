@@ -1,3 +1,13 @@
+/**
+ * Nama             : Raissa Christabel Sebayang - 140810240008
+ *                    Abraham Gomes Samosir - 140810240044
+ *                    Haris Herdiansyah - 140810240074
+ * Program Utama    : Aplikasi Parkir Pelabuhan
+ * Modul            : VehicleType.java
+ * Deskripsi        : Enum yang merepresentasikan jenis kendaraan beserta tarif parkirnya.
+ * Tanggal          : 11 November 2025
+ */
+
 package parking.classes;
 
 public enum VehicleType {
@@ -18,5 +28,14 @@ public enum VehicleType {
 
     public double getCostPerDay() {
         return costPerDay;
+    }
+
+    @Override
+    public String toString() {
+        return switch (this) {
+            case CAR -> "Mobil";
+            case MOTORCYCLE -> "Motor";
+            case TRUCK -> "Truk";
+        };
     }
 }

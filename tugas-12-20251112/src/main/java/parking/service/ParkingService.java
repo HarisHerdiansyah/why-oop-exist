@@ -1,8 +1,21 @@
+/**
+ * Nama             : Raissa Christabel Sebayang - 140810240008
+ *                    Abraham Gomes Samosir - 140810240044
+ *                    Haris Herdiansyah - 140810240074
+ * Program Utama    : Aplikasi Parkir Pelabuhan
+ * Modul            : ParkingService.java
+ * Deskripsi        : Kelas untuk menangani logika bisnis aplikasi parkir pelabuhan.
+ * Tanggal          : 11 November 2025
+ */
+
 package parking.service;
 
+import parking.classes.DatesTime;
 import parking.classes.Vehicle;
+import parking.utils.DatesTimeValidator;
 
 import java.time.Duration;
+import java.time.Period;
 import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
@@ -13,6 +26,32 @@ public class ParkingService {
 
     public ParkingService() {
         this.vehicleList = new ArrayList<>();
+    }
+
+    public DatesTime datesTimeParser(String dateTimeStr) throws IllegalArgumentException {
+        String[] parts = dateTimeStr.split(" ");
+        String[] dateParts = parts[0].split("/");
+        String[] timeParts = parts[1].split(":");
+
+        int year = Integer.parseInt(dateParts[0]);
+        DatesTimeValidator.validateYear(year);
+
+        int month = Integer.parseInt(dateParts[1]);
+        DatesTimeValidator.validateMonth(month);
+
+        int day = Integer.parseInt(dateParts[2]);
+        DatesTimeValidator.validateDay(year, month, day);
+
+        int hour = Integer.parseInt(timeParts[0]);
+        DatesTimeValidator.validateHours(hour);
+
+        int minute = Integer.parseInt(timeParts[1]);
+        DatesTimeValidator.validateMinutes(minute);
+
+        int second = Integer.parseInt(timeParts[2]);
+        DatesTimeValidator.validateSeconds(second);
+
+        return new DatesTime(year, month, day, hour, minute, second);
     }
 
     public List<Vehicle> getVehicleList() {
@@ -58,5 +97,37 @@ public class ParkingService {
             total += calculateParkingCost(v);
         }
         return total;
+    }
+
+    public DatesTime datesTimeDiff(Vehicle v) {
+        LocalDateTime entryTime = v.getEntryTime().toLocalDateTime();
+        LocalDateTime exitTime = v.getExitTime().toLocalDateTime();
+
+        Period period = Period.between(entryTime.toLocalDate(), exitTime.toLocalDate());
+
+        LocalDateTime temp = entryTime.plus(period);
+        Duration duration = Duration.between(temp, exitTime);
+
+        return new DatesTime(
+                period.getYears(),
+                period.getMonths(),
+                period.getDays(),
+                duration.toHoursPart(),
+                duration.toMinutesPart(),
+                duration.toSecondsPart());
+    }
+
+    public String getMappedVehicleList() {
+        StringBuilder sb = new StringBuilder();
+        for (Vehicle v : vehicleList) {
+            sb.append(String.format("\n%s\t %s\t %s\t %s\t %s\t %s",
+                    v.getLicensePlate(),
+                    v.getVehicleType().toString(),
+                    v.getEntryTime().toString(),
+                    v.getExitTime().toString(),
+                    datesTimeDiff(v).toString(),
+                    calculateParkingCost(v)));
+        }
+        return sb.toString();
     }
 }

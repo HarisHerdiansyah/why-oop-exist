@@ -1,3 +1,13 @@
+/**
+ * Nama             : Raissa Christabel Sebayang - 140810240008
+ *                    Abraham Gomes Samosir - 140810240044
+ *                    Haris Herdiansyah - 140810240074
+ * Program Utama    : Aplikasi Parkir Pelabuhan
+ * Modul            : Vehicle.java
+ * Deskripsi        : Kelas abstrak yang merepresentasikan kendaraan umum yang diparkirkan.
+ * Tanggal          : 11 November 2025
+ */
+
 package parking.classes;
 
 public abstract class Vehicle {

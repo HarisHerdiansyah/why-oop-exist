@@ -1,3 +1,13 @@
+/**
+ * Nama             : Raissa Christabel Sebayang - 140810240008
+ *                    Abraham Gomes Samosir - 140810240044
+ *                    Haris Herdiansyah - 140810240074
+ * Program Utama    : Aplikasi Parkir Pelabuhan
+ * Modul            : DatesTimeValidator.java
+ * Deskripsi        : Kelas untuk melakukan unit test pada DatesTimeValidator.
+ * Tanggal          : 11 November 2025
+ */
+
 package parking.utils;
 
 import org.junit.jupiter.api.DisplayName;

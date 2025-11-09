@@ -1,3 +1,13 @@
+/**
+ * Nama             : Raissa Christabel Sebayang - 140810240008
+ *                    Abraham Gomes Samosir - 140810240044
+ *                    Haris Herdiansyah - 140810240074
+ * Program Utama    : Aplikasi Parkir Pelabuhan
+ * Modul            : DatesTime.java
+ * Deskripsi        : Kelas yang merepresentasikan tanggal dan waktu.
+ * Tanggal          : 11 November 2025
+ */
+
 package parking.classes;
 
 import java.time.LocalDateTime;
@@ -36,5 +46,10 @@ public class DatesTime {
                 this.time.getMinute(),
                 this.time.getSecond()
         );
+    }
+
+    @Override
+    public String toString() {
+        return date.toString() + " " + time.toString();
     }
 }
