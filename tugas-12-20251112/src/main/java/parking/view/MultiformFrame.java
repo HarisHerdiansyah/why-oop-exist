@@ -1,7 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+/**
+ * Nama             : Raissa Christabel Sebayang - 140810240008
+ *                    Abraham Gomes Samosir - 140810240044
+ *                    Haris Herdiansyah - 140810240074
+ * Program Utama    : Aplikasi Parkir Pelabuhan
+ * Modul            : MultiformFrame.java
+ * Deskripsi        : Kelas untuk menampilkan frame pemilihan jenis kendaraan.
+ * Tanggal          : 11 November 2025
  */
+
 package parking.view;
 
 import parking.classes.VehicleType;
@@ -10,14 +16,14 @@ import parking.classes.VehicleType;
  *
  * @author haris
  */
-public class MenuFrame extends javax.swing.JFrame {
+public class MultiformFrame extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MenuFrame.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MultiformFrame.class.getName());
 
     /**
-     * Creates new form MenuFrame
+     * Creates new form MultiformFrame
      */
-    public MenuFrame() {
+    public MultiformFrame() {
         initComponents();
     }
 
@@ -35,7 +41,7 @@ public class MenuFrame extends javax.swing.JFrame {
         carViewer = new javax.swing.JButton();
         motorcycleViewer = new javax.swing.JButton();
         truckViewer = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        copyright = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,55 +72,47 @@ public class MenuFrame extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(truckViewer, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(motorcycleViewer, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-                        .addComponent(carViewer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(115, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(truckViewer, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(motorcycleViewer, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(carViewer, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(117, 117, 117))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(carViewer, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addComponent(carViewer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(motorcycleViewer, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(motorcycleViewer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(truckViewer, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addComponent(truckViewer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Keluar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        copyright.setText("Copyright @ Raissa (08) - Abraham (44) - Haris (74)");
 
         javax.swing.GroupLayout rootPanelLayout = new javax.swing.GroupLayout(rootPanel);
         rootPanel.setLayout(rootPanelLayout);
         rootPanelLayout.setHorizontalGroup(
             rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(rootPanelLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rootPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(25, 25, 25))
+                .addGap(28, 28, 28)
+                .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(copyright, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         rootPanelLayout.setVerticalGroup(
             rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(rootPanelLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(26, 26, 26)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(copyright)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -132,26 +130,19 @@ public class MenuFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void carViewerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carViewerActionPerformed
-        // TODO add your handling code here
-        new ParkingFrame(VehicleType.CAR).setVisible(true);
-        dispose();
+        // TODO add your handling code here:
+        new ParkingUIFrame(VehicleType.CAR).setVisible(true); dispose();
     }//GEN-LAST:event_carViewerActionPerformed
 
     private void motorcycleViewerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motorcycleViewerActionPerformed
         // TODO add your handling code here:
-        new ParkingFrame(VehicleType.MOTORCYCLE).setVisible(true);
-        dispose();
+        new ParkingUIFrame(VehicleType.MOTORCYCLE).setVisible(true); dispose();
     }//GEN-LAST:event_motorcycleViewerActionPerformed
 
     private void truckViewerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_truckViewerActionPerformed
         // TODO add your handling code here:
-        new ParkingFrame(VehicleType.TRUCK).setVisible(true);
-        dispose();
+        new ParkingUIFrame(VehicleType.TRUCK).setVisible(true); dispose();
     }//GEN-LAST:event_truckViewerActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,12 +166,12 @@ public class MenuFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new MenuFrame().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new MultiformFrame().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton carViewer;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel copyright;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton motorcycleViewer;
     private javax.swing.JPanel rootPanel;

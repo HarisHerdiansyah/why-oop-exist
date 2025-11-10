@@ -22,10 +22,18 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class ParkingService {
+    private static ParkingService instance;
     private final List<Vehicle> vehicleList;
 
-    public ParkingService() {
+    private ParkingService() {
         this.vehicleList = new ArrayList<>();
+    }
+
+    public static ParkingService getInstance() {
+        if (instance == null) {
+            instance = new ParkingService();
+        }
+        return instance;
     }
 
     public DatesTime datesTimeParser(String dateTimeStr) throws IllegalArgumentException {
