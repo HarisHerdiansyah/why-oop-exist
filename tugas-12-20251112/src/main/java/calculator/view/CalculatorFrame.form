@@ -260,6 +260,9 @@
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="inputFieldKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="outputField">
           <Properties>
@@ -649,7 +652,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="copyrightLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Copyright"/>
+            <Property name="text" type="java.lang.String" value="Copyright @ Raissa (08) - Abraham (44) - Haris (74)"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="piPad">
