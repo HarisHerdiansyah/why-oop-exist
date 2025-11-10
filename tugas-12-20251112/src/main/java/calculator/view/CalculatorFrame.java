@@ -1,3 +1,13 @@
+/**
+ * Nama             : Raissa Christabel Sebayang - 140810240008
+ *                    Abraham Gomes Samosir - 140810240044
+ *                    Haris Herdiansyah - 140810240074
+ * Program Utama    : Aplikasi Kalkulator Scientific
+ * Modul            : CalculatorFrame.java
+ * Deskripsi        : Kelas tampilan utama dari aplikasi kalkulator scientific.
+ * Tanggal          : 11 November 2025
+ */
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
