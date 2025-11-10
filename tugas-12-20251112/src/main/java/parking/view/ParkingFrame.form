@@ -40,8 +40,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+<<<<<<< HEAD
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="backBtn" min="-2" max="-2" attributes="0"/>
+=======
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel1" min="-2" pref="296" max="-2" attributes="0"/>
+>>>>>>> f2c7b747770c43cbfdf4f54b999457ae41b7a10f
                       <Component id="borderPanel" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="31" max="32767" attributes="0"/>
@@ -53,9 +58,15 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Component id="borderPanel" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="backBtn" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="44" max="32767" attributes="0"/>
+=======
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="8" max="32767" attributes="0"/>
+>>>>>>> f2c7b747770c43cbfdf4f54b999457ae41b7a10f
               </Group>
           </Group>
         </DimensionLayout>
@@ -248,6 +259,7 @@
             </Component>
           </SubComponents>
         </Container>
+<<<<<<< HEAD
         <Component class="javax.swing.JButton" name="backBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Kembali"/>
@@ -255,6 +267,12 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backBtnActionPerformed"/>
           </Events>
+=======
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Copyright @ Raissa (08) - Abraham (44) - Haris (74)"/>
+          </Properties>
+>>>>>>> f2c7b747770c43cbfdf4f54b999457ae41b7a10f
         </Component>
       </SubComponents>
     </Container>
