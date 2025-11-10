@@ -182,6 +182,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="licensePlateField">
+              <Events>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="licensePlateFieldKeyPressed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="vehicleTypeLabel">
               <Properties>
@@ -199,6 +202,9 @@
                   </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="vehicleTypeComboBoxKeyPressed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
@@ -214,6 +220,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="entryTimeField">
+              <Events>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="entryTimeFieldKeyPressed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="exitTimeLabel">
               <Properties>
@@ -221,13 +230,18 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="exitTimeField">
+              <Events>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="exitTimeFieldKeyPressed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="addButton">
               <Properties>
+                <Property name="mnemonic" type="int" value="116"/>
                 <Property name="text" type="java.lang.String" value="Tambah"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addButtonActionPerformed"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="addButtonKeyPressed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="totalLabel">
@@ -242,6 +256,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="terminateBtn">
               <Properties>
+                <Property name="mnemonic" type="int" value="107"/>
                 <Property name="text" type="java.lang.String" value="Keluar"/>
               </Properties>
               <Events>
@@ -250,6 +265,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="resetBtn">
               <Properties>
+                <Property name="mnemonic" type="int" value="114"/>
                 <Property name="text" type="java.lang.String" value="Reset"/>
               </Properties>
               <Events>

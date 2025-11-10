@@ -75,20 +75,49 @@ public class ParkingFrame extends javax.swing.JFrame {
 
         licensePlateLabel.setText("No. Plat");
 
+        licensePlateField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                licensePlateFieldKeyPressed(evt);
+            }
+        });
+
         vehicleTypeLabel.setText("Tipe");
 
         vehicleTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Pilih --", "Mobil", "Motor", "Truk" }));
+        vehicleTypeComboBox.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                vehicleTypeComboBoxKeyPressed(evt);
+            }
+        });
 
         formatInfo.setText("Format waktu: yyyy/MM/dd HH:mm:ss");
 
         entryTimeLabel.setText("Waktu Masuk");
 
+        entryTimeField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                entryTimeFieldKeyPressed(evt);
+            }
+        });
+
         exitTimeLabel.setText("Waktu Keluar");
 
+        exitTimeField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                exitTimeFieldKeyPressed(evt);
+            }
+        });
+
+        addButton.setMnemonic('t');
         addButton.setText("Tambah");
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addButtonActionPerformed(evt);
+            }
+        });
+        addButton.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                addButtonKeyPressed(evt);
             }
         });
 
@@ -96,6 +125,7 @@ public class ParkingFrame extends javax.swing.JFrame {
 
         totalValue.setText("Rp0,00");
 
+        terminateBtn.setMnemonic('k');
         terminateBtn.setText("Keluar");
         terminateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,6 +133,7 @@ public class ParkingFrame extends javax.swing.JFrame {
             }
         });
 
+        resetBtn.setMnemonic('r');
         resetBtn.setText("Reset");
         resetBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -267,6 +298,34 @@ public class ParkingFrame extends javax.swing.JFrame {
             resetFieldAction();
         }
     }//GEN-LAST:event_addButtonActionPerformed
+
+    private void licensePlateFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_licensePlateFieldKeyPressed
+        if(evt.getKeyCode() == 0x0A){
+            vehicleTypeComboBox.requestFocus();
+        }
+    }//GEN-LAST:event_licensePlateFieldKeyPressed
+
+    private void vehicleTypeComboBoxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_vehicleTypeComboBoxKeyPressed
+        if(evt.getKeyCode() == 0x0A){
+            entryTimeField.requestFocus();
+        }
+    }//GEN-LAST:event_vehicleTypeComboBoxKeyPressed
+
+    private void entryTimeFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_entryTimeFieldKeyPressed
+        if(evt.getKeyCode() == 0x0A){
+            exitTimeField.requestFocus();
+        }
+    }//GEN-LAST:event_entryTimeFieldKeyPressed
+
+    private void exitTimeFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_exitTimeFieldKeyPressed
+        if(evt.getKeyCode() == 0x0A){
+            addButton.requestFocus();
+        }
+    }//GEN-LAST:event_exitTimeFieldKeyPressed
+
+    private void addButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_addButtonKeyPressed
+        
+    }//GEN-LAST:event_addButtonKeyPressed
 
     /**
      * @param args the command line arguments
