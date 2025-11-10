@@ -12,6 +12,7 @@ package parking.service;
 
 import parking.classes.DatesTime;
 import parking.classes.Vehicle;
+import parking.classes.VehicleType;
 import parking.utils.DatesTimeValidator;
 
 import java.time.Duration;
@@ -130,6 +131,22 @@ public class ParkingService {
                     v.getExitTime().toString(),
                     datesTimeDiff(v).toString(),
                     calculateParkingCost(v)));
+        }
+        return sb.toString();
+    }
+
+    public String getMappedVehicleList(VehicleType type) {
+        StringBuilder sb = new StringBuilder();
+        for (Vehicle v : vehicleList) {
+            if (v.getVehicleType().equals(type)) {
+                sb.append(String.format("\n%s\t %s\t %s\t %s\t %s\t %s",
+                        v.getLicensePlate(),
+                        v.getVehicleType().toString(),
+                        v.getEntryTime().toString(),
+                        v.getExitTime().toString(),
+                        datesTimeDiff(v).toString(),
+                        calculateParkingCost(v)));
+            }
         }
         return sb.toString();
     }

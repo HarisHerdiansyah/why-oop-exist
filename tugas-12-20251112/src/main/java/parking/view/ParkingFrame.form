@@ -40,7 +40,10 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                  <Component id="borderPanel" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="backBtn" min="-2" max="-2" attributes="0"/>
+                      <Component id="borderPanel" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace pref="31" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -50,7 +53,9 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Component id="borderPanel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="30" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="backBtn" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="44" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -75,17 +80,11 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="vehicleTypeLabel" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="licensePlateLabel" alignment="0" pref="75" max="32767" attributes="0"/>
-                                      </Group>
+                                      <Component id="licensePlateLabel" min="-2" pref="75" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="licensePlateField" pref="125" max="32767" attributes="0"/>
-                                          <Component id="vehicleTypeComboBox" max="32767" attributes="0"/>
-                                      </Group>
+                                      <Component id="licensePlateField" min="-2" pref="125" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="formatInfo" pref="206" max="32767" attributes="0"/>
+                                  <Component id="formatInfo" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
@@ -135,10 +134,8 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="vehicleTypeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="exitTimeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="exitTimeField" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="vehicleTypeComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -185,29 +182,6 @@
               <Events>
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="licensePlateFieldKeyPressed"/>
               </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="vehicleTypeLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Tipe"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="vehicleTypeComboBox">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="-- Pilih --"/>
-                    <StringItem index="1" value="Mobil"/>
-                    <StringItem index="2" value="Motor"/>
-                    <StringItem index="3" value="Truk"/>
-                  </StringArray>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="vehicleTypeComboBoxKeyPressed"/>
-              </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="formatInfo">
               <Properties>
@@ -274,6 +248,14 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JButton" name="backBtn">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Kembali"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backBtnActionPerformed"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

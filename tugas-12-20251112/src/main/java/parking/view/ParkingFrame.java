@@ -28,11 +28,14 @@ public class ParkingFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ParkingFrame.class.getName());
     private final ParkingService parkingService = new ParkingService();
+    private VehicleType selectedType;
 
     /**
      * Creates new form ParkingFrame
      */
-    public ParkingFrame() {
+    public ParkingFrame(VehicleType selectedType) {
+        this.selectedType = selectedType;
+        
         initComponents();
     }
 
@@ -51,8 +54,6 @@ public class ParkingFrame extends javax.swing.JFrame {
         areaOutput = new javax.swing.JTextArea();
         licensePlateLabel = new javax.swing.JLabel();
         licensePlateField = new javax.swing.JTextField();
-        vehicleTypeLabel = new javax.swing.JLabel();
-        vehicleTypeComboBox = new javax.swing.JComboBox<>();
         formatInfo = new javax.swing.JLabel();
         entryTimeLabel = new javax.swing.JLabel();
         entryTimeField = new javax.swing.JTextField();
@@ -63,6 +64,7 @@ public class ParkingFrame extends javax.swing.JFrame {
         totalValue = new javax.swing.JLabel();
         terminateBtn = new javax.swing.JButton();
         resetBtn = new javax.swing.JButton();
+        backBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,15 +80,6 @@ public class ParkingFrame extends javax.swing.JFrame {
         licensePlateField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 licensePlateFieldKeyPressed(evt);
-            }
-        });
-
-        vehicleTypeLabel.setText("Tipe");
-
-        vehicleTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Pilih --", "Mobil", "Motor", "Truk" }));
-        vehicleTypeComboBox.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                vehicleTypeComboBoxKeyPressed(evt);
             }
         });
 
@@ -108,7 +101,6 @@ public class ParkingFrame extends javax.swing.JFrame {
             }
         });
 
-        addButton.setMnemonic('t');
         addButton.setText("Tambah");
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,7 +117,6 @@ public class ParkingFrame extends javax.swing.JFrame {
 
         totalValue.setText("Rp0,00");
 
-        terminateBtn.setMnemonic('k');
         terminateBtn.setText("Keluar");
         terminateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,7 +124,6 @@ public class ParkingFrame extends javax.swing.JFrame {
             }
         });
 
-        resetBtn.setMnemonic('r');
         resetBtn.setText("Reset");
         resetBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,14 +142,10 @@ public class ParkingFrame extends javax.swing.JFrame {
                     .addGroup(borderPanelLayout.createSequentialGroup()
                         .addGroup(borderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(borderPanelLayout.createSequentialGroup()
-                                .addGroup(borderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(vehicleTypeLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(licensePlateLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
+                                .addComponent(licensePlateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(borderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(licensePlateField, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-                                    .addComponent(vehicleTypeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(formatInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE))
+                                .addComponent(licensePlateField, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(formatInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(borderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(borderPanelLayout.createSequentialGroup()
                                 .addGap(48, 48, 48)
@@ -196,10 +182,8 @@ public class ParkingFrame extends javax.swing.JFrame {
                     .addComponent(entryTimeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(borderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(vehicleTypeLabel)
                     .addComponent(exitTimeLabel)
-                    .addComponent(exitTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vehicleTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(exitTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(borderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(formatInfo)
@@ -215,13 +199,22 @@ public class ParkingFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        backBtn.setText("Kembali");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout rootPanelLayout = new javax.swing.GroupLayout(rootPanel);
         rootPanel.setLayout(rootPanelLayout);
         rootPanelLayout.setHorizontalGroup(
             rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(rootPanelLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addComponent(borderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(backBtn)
+                    .addComponent(borderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         rootPanelLayout.setVerticalGroup(
@@ -229,7 +222,9 @@ public class ParkingFrame extends javax.swing.JFrame {
             .addGroup(rootPanelLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(borderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(backBtn)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -250,7 +245,7 @@ public class ParkingFrame extends javax.swing.JFrame {
         licensePlateField.setText("");
         entryTimeField.setText("");
         exitTimeField.setText("");
-        vehicleTypeComboBox.setSelectedIndex(0);
+//        vehicleTypeComboBox.setSelectedIndex(0);
     }
 
     private void resetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetBtnActionPerformed
@@ -272,15 +267,15 @@ public class ParkingFrame extends javax.swing.JFrame {
             String licensePlate = licensePlateField.getText();
             DatesTime entryTime = parkingService.datesTimeParser(entryTimeField.getText());
             DatesTime exitTime = parkingService.datesTimeParser(exitTimeField.getText());
-            String vehicleTypeStr = switch ((String) Objects.requireNonNull(vehicleTypeComboBox.getSelectedItem())) {
-                case "Mobil" -> "CAR";
-                case "Motor" -> "MOTORCYCLE";
-                case "Truk" -> "TRUCK";
-                default -> throw new IllegalArgumentException("Tipe kendaraan tidak valid.");
-            };
-            VehicleType vehicleType = VehicleType.valueOf(vehicleTypeStr);
+//            String vehicleTypeStr = switch ((String) Objects.requireNonNull(vehicleTypeComboBox.getSelectedItem())) {
+//                case "Mobil" -> "CAR";
+//                case "Motor" -> "MOTORCYCLE";
+//                case "Truk" -> "TRUCK";
+//                default -> throw new IllegalArgumentException("Tipe kendaraan tidak valid.");
+//            };
+//            VehicleType vehicleType = VehicleType.valueOf(vehicleTypeStr);
 
-            Vehicle obj = switch (vehicleType) {
+            Vehicle obj = switch (selectedType) {
                 case CAR -> new Car(licensePlate, entryTime, exitTime);
                 case MOTORCYCLE -> new Motorcycle(licensePlate, entryTime, exitTime);
                 case TRUCK -> new Truck(licensePlate, entryTime, exitTime);
@@ -290,7 +285,7 @@ public class ParkingFrame extends javax.swing.JFrame {
 
             String areaOutputHeader = "No. Plat\tTipe\tWaktu Masuk\t\tWaktu Keluar\t\tSelisih Waktu\t\tBiaya Parkir";
             areaOutput.setText("");
-            areaOutput.setText(areaOutputHeader.concat(parkingService.getMappedVehicleList()));
+            areaOutput.setText(areaOutputHeader.concat(parkingService.getMappedVehicleList(selectedType)));
             totalValue.setText("Rp" + String.format("%,.2f", parkingService.calculateTotalRevenue()));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -300,16 +295,10 @@ public class ParkingFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void licensePlateFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_licensePlateFieldKeyPressed
-        if(evt.getKeyCode() == 0x0A){
-            vehicleTypeComboBox.requestFocus();
-        }
+//        if(evt.getKeyCode() == 0x0A){
+//            vehicleTypeComboBox.requestFocus();
+//        }
     }//GEN-LAST:event_licensePlateFieldKeyPressed
-
-    private void vehicleTypeComboBoxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_vehicleTypeComboBoxKeyPressed
-        if(evt.getKeyCode() == 0x0A){
-            entryTimeField.requestFocus();
-        }
-    }//GEN-LAST:event_vehicleTypeComboBoxKeyPressed
 
     private void entryTimeFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_entryTimeFieldKeyPressed
         if(evt.getKeyCode() == 0x0A){
@@ -326,6 +315,12 @@ public class ParkingFrame extends javax.swing.JFrame {
     private void addButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_addButtonKeyPressed
         
     }//GEN-LAST:event_addButtonKeyPressed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        // TODO add your handling code here:
+        new MenuFrame().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_backBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -349,12 +344,13 @@ public class ParkingFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ParkingFrame().setVisible(true));
+//        java.awt.EventQueue.invokeLater(() -> new ParkingFrame().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JTextArea areaOutput;
+    private javax.swing.JButton backBtn;
     private javax.swing.JPanel borderPanel;
     private javax.swing.JTextField entryTimeField;
     private javax.swing.JLabel entryTimeLabel;
@@ -369,7 +365,5 @@ public class ParkingFrame extends javax.swing.JFrame {
     private javax.swing.JButton terminateBtn;
     private javax.swing.JLabel totalLabel;
     private javax.swing.JLabel totalValue;
-    private javax.swing.JComboBox<String> vehicleTypeComboBox;
-    private javax.swing.JLabel vehicleTypeLabel;
     // End of variables declaration//GEN-END:variables
 }
