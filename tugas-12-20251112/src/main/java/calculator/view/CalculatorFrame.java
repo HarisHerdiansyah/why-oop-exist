@@ -6,6 +6,9 @@ package calculator.view;
 
 import calculator.service.CalculatorService;
 
+import javax.swing.*;
+import java.awt.event.KeyEvent;
+
 /**
  *
  * @author haris
@@ -87,6 +90,11 @@ public class CalculatorFrame extends javax.swing.JFrame {
 
         inputField.setEditable(false);
         inputField.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        inputField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputFieldKeyPressed(evt);
+            }
+        });
 
         outputField.setEditable(false);
         outputField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -365,7 +373,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
-        copyrightLabel.setText("Copyright");
+        copyrightLabel.setText("Copyright @ Raissa (08) - Abraham (44) - Haris (74)");
 
         piPad.setText("PI");
         piPad.setPreferredSize(new java.awt.Dimension(50, 50));
@@ -630,7 +638,13 @@ public class CalculatorFrame extends javax.swing.JFrame {
     private void equalPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equalPadActionPerformed
         // TODO add your handling code here:
         double result = calculatorService.calculateExpression(inputField.getText());
-        outputField.setText(Double.toString(result));
+
+        if (Double.isNaN(result)) {
+            JOptionPane.showMessageDialog(this, "Invalid Expression", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            outputField.setText(Double.toString(result));
+        }
+
     }//GEN-LAST:event_equalPadActionPerformed
 
     private void onePadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onePadActionPerformed
@@ -906,6 +920,19 @@ public class CalculatorFrame extends javax.swing.JFrame {
             inputField.requestFocus();
         }
     }//GEN-LAST:event_toRightPadActionPerformed
+
+    private void inputFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputFieldKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            double result = calculatorService.calculateExpression(inputField.getText());
+
+            if (Double.isNaN(result)) {
+                JOptionPane.showMessageDialog(this, "Invalid Expression", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                outputField.setText(Double.toString(result));
+            }
+        }
+    }//GEN-LAST:event_inputFieldKeyPressed
 
 
     /**
