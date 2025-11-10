@@ -4,6 +4,8 @@
  */
 package calculator.view;
 
+import calculator.service.CalculatorService;
+
 /**
  *
  * @author haris
@@ -11,11 +13,14 @@ package calculator.view;
 public class CalculatorFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CalculatorFrame.class.getName());
+    private final CalculatorService calculatorService;
 
     /**
      * Creates new form CalculatorFrame
      */
     public CalculatorFrame() {
+        this.calculatorService = new CalculatorService();
+
         initComponents();
     }
 
@@ -30,605 +35,538 @@ public class CalculatorFrame extends javax.swing.JFrame {
 
         rootPanel = new javax.swing.JPanel();
         inputField = new javax.swing.JTextField();
-        numpadPanel = new javax.swing.JPanel();
-        numpadDot = new javax.swing.JButton();
-        numpad0 = new javax.swing.JButton();
-        numpadEqual = new javax.swing.JButton();
-        numpad1 = new javax.swing.JButton();
-        numpad2 = new javax.swing.JButton();
-        numpad3 = new javax.swing.JButton();
-        numpad4 = new javax.swing.JButton();
-        numpad5 = new javax.swing.JButton();
-        numpad6 = new javax.swing.JButton();
-        numpad7 = new javax.swing.JButton();
-        numpad8 = new javax.swing.JButton();
-        numpad9 = new javax.swing.JButton();
-        operatorPanel = new javax.swing.JPanel();
-        numpadPlus = new javax.swing.JButton();
-        numpadMinus = new javax.swing.JButton();
-        numpadMultiply = new javax.swing.JButton();
-        numpadDivide = new javax.swing.JButton();
-        numpadPower = new javax.swing.JButton();
-        numpadRoot2 = new javax.swing.JButton();
-        numpadRoot3 = new javax.swing.JButton();
-        numpadFact = new javax.swing.JButton();
-        numpadExp = new javax.swing.JButton();
-        numpadLog = new javax.swing.JButton();
-        numpadPerm = new javax.swing.JButton();
-        numpadComb = new javax.swing.JButton();
-        numpadSin = new javax.swing.JButton();
-        numpadCos = new javax.swing.JButton();
-        numpadTan = new javax.swing.JButton();
-        numpadPI = new javax.swing.JButton();
-        numpadClearAll = new javax.swing.JButton();
-        numpadBackspace = new javax.swing.JButton();
-        numpadBL = new javax.swing.JButton();
-        numpadBR = new javax.swing.JButton();
+        outputField = new javax.swing.JTextField();
+        decimalPad = new javax.swing.JButton();
+        zeroPad = new javax.swing.JButton();
+        equalPad = new javax.swing.JButton();
+        onePad = new javax.swing.JButton();
+        twoPad = new javax.swing.JButton();
+        threePad = new javax.swing.JButton();
+        fourPad = new javax.swing.JButton();
+        fivePad = new javax.swing.JButton();
+        sixPad = new javax.swing.JButton();
+        sevenPad = new javax.swing.JButton();
+        eightPad = new javax.swing.JButton();
+        ninePad = new javax.swing.JButton();
+        deletePad = new javax.swing.JButton();
+        allClearPad = new javax.swing.JButton();
+        multiplyPad = new javax.swing.JButton();
+        dividePad = new javax.swing.JButton();
+        plusPad = new javax.swing.JButton();
+        minusPad = new javax.swing.JButton();
+        leftBracesPad = new javax.swing.JButton();
+        rightBracesPad = new javax.swing.JButton();
+        sinPad = new javax.swing.JButton();
+        cosPad = new javax.swing.JButton();
+        tanPad = new javax.swing.JButton();
+        factPad = new javax.swing.JButton();
+        permutationPad = new javax.swing.JButton();
+        combinationPad = new javax.swing.JButton();
+        eulerPad = new javax.swing.JButton();
+        lnPad = new javax.swing.JButton();
+        log10Pad = new javax.swing.JButton();
+        logPad = new javax.swing.JButton();
+        cbrtPad = new javax.swing.JButton();
+        modPad = new javax.swing.JButton();
+        expPad = new javax.swing.JButton();
+        sqrtPad = new javax.swing.JButton();
+        copyrightLabel = new javax.swing.JLabel();
+        piPad = new javax.swing.JButton();
+        decimalPad1 = new javax.swing.JButton();
+        zeroPad1 = new javax.swing.JButton();
+        piPad1 = new javax.swing.JButton();
+        modeLabel = new javax.swing.JLabel();
+        modeValue = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        inputField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        inputField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        rootPanel.setBackground(new java.awt.Color(250, 250, 250));
+
         inputField.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         inputField.setEnabled(false);
 
-        numpadDot.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        numpadDot.setText(".");
-        numpadDot.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpadDot.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpadDot.setName(""); // NOI18N
-        numpadDot.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpadDot.addActionListener(new java.awt.event.ActionListener() {
+        outputField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        outputField.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        outputField.setEnabled(false);
+
+        decimalPad.setText(".");
+        decimalPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        decimalPad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpadDotActionPerformed(evt);
+                decimalPadActionPerformed(evt);
             }
         });
 
-        numpad0.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numpad0.setText("0");
-        numpad0.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpad0.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpad0.setName(""); // NOI18N
-        numpad0.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpad0.addActionListener(new java.awt.event.ActionListener() {
+        zeroPad.setText("0");
+        zeroPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        zeroPad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpad0ActionPerformed(evt);
+                zeroPadActionPerformed(evt);
             }
         });
 
-        numpadEqual.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        numpadEqual.setText("=");
-        numpadEqual.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpadEqual.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpadEqual.setName(""); // NOI18N
-        numpadEqual.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpadEqual.addActionListener(new java.awt.event.ActionListener() {
+        equalPad.setText("=");
+        equalPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        equalPad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpadEqualActionPerformed(evt);
+                equalPadActionPerformed(evt);
             }
         });
 
-        numpad1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numpad1.setText("1");
-        numpad1.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpad1.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpad1.setName(""); // NOI18N
-        numpad1.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpad1.addActionListener(new java.awt.event.ActionListener() {
+        onePad.setText("1");
+        onePad.setPreferredSize(new java.awt.Dimension(50, 50));
+        onePad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpad1ActionPerformed(evt);
+                onePadActionPerformed(evt);
             }
         });
 
-        numpad2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numpad2.setText("2");
-        numpad2.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpad2.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpad2.setName(""); // NOI18N
-        numpad2.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpad2.addActionListener(new java.awt.event.ActionListener() {
+        twoPad.setText("2");
+        twoPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        twoPad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpad2ActionPerformed(evt);
+                twoPadActionPerformed(evt);
             }
         });
 
-        numpad3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numpad3.setText("3");
-        numpad3.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpad3.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpad3.setName(""); // NOI18N
-        numpad3.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpad3.addActionListener(new java.awt.event.ActionListener() {
+        threePad.setText("3");
+        threePad.setPreferredSize(new java.awt.Dimension(50, 50));
+        threePad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpad3ActionPerformed(evt);
+                threePadActionPerformed(evt);
             }
         });
 
-        numpad4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numpad4.setText("4");
-        numpad4.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpad4.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpad4.setName(""); // NOI18N
-        numpad4.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpad4.addActionListener(new java.awt.event.ActionListener() {
+        fourPad.setText("4");
+        fourPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        fourPad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpad4ActionPerformed(evt);
+                fourPadActionPerformed(evt);
             }
         });
 
-        numpad5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numpad5.setText("5");
-        numpad5.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpad5.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpad5.setName(""); // NOI18N
-        numpad5.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpad5.addActionListener(new java.awt.event.ActionListener() {
+        fivePad.setText("5");
+        fivePad.setPreferredSize(new java.awt.Dimension(50, 50));
+        fivePad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpad5ActionPerformed(evt);
+                fivePadActionPerformed(evt);
             }
         });
 
-        numpad6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numpad6.setText("6");
-        numpad6.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpad6.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpad6.setName(""); // NOI18N
-        numpad6.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpad6.addActionListener(new java.awt.event.ActionListener() {
+        sixPad.setText("6");
+        sixPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        sixPad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpad6ActionPerformed(evt);
+                sixPadActionPerformed(evt);
             }
         });
 
-        numpad7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numpad7.setText("7");
-        numpad7.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpad7.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpad7.setName(""); // NOI18N
-        numpad7.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpad7.addActionListener(new java.awt.event.ActionListener() {
+        sevenPad.setText("7");
+        sevenPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        sevenPad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpad7ActionPerformed(evt);
+                sevenPadActionPerformed(evt);
             }
         });
 
-        numpad8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numpad8.setText("8");
-        numpad8.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpad8.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpad8.setName(""); // NOI18N
-        numpad8.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpad8.addActionListener(new java.awt.event.ActionListener() {
+        eightPad.setText("8");
+        eightPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        eightPad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpad8ActionPerformed(evt);
+                eightPadActionPerformed(evt);
             }
         });
 
-        numpad9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numpad9.setText("9");
-        numpad9.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpad9.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpad9.setName(""); // NOI18N
-        numpad9.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpad9.addActionListener(new java.awt.event.ActionListener() {
+        ninePad.setText("9");
+        ninePad.setPreferredSize(new java.awt.Dimension(50, 50));
+        ninePad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpad9ActionPerformed(evt);
+                ninePadActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout numpadPanelLayout = new javax.swing.GroupLayout(numpadPanel);
-        numpadPanel.setLayout(numpadPanelLayout);
-        numpadPanelLayout.setHorizontalGroup(
-            numpadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 198, Short.MAX_VALUE)
-            .addGroup(numpadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(numpadPanelLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(numpadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(numpadPanelLayout.createSequentialGroup()
-                            .addComponent(numpad7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(numpad8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(numpad9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(numpadPanelLayout.createSequentialGroup()
-                            .addGroup(numpadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(numpadDot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(numpad4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(numpad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addGroup(numpadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(numpadPanelLayout.createSequentialGroup()
-                                    .addComponent(numpad0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(numpadEqual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(numpadPanelLayout.createSequentialGroup()
-                                    .addComponent(numpad5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(numpad6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(numpadPanelLayout.createSequentialGroup()
-                                    .addComponent(numpad2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(numpad3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        numpadPanelLayout.setVerticalGroup(
-            numpadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(numpadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(numpadPanelLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(numpadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(numpad7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(numpad8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(numpad9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(18, 18, 18)
-                    .addGroup(numpadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(numpad4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(numpad5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(numpad6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(18, 18, 18)
-                    .addGroup(numpadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(numpad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(numpad2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(numpad3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(18, 18, 18)
-                    .addGroup(numpadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(numpadDot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(numpad0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(numpadEqual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-
-        numpadPlus.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        numpadPlus.setText("+");
-        numpadPlus.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpadPlus.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpadPlus.setName(""); // NOI18N
-        numpadPlus.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpadPlus.addActionListener(new java.awt.event.ActionListener() {
+        deletePad.setText("D");
+        deletePad.setPreferredSize(new java.awt.Dimension(50, 50));
+        deletePad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpadPlusActionPerformed(evt);
+                deletePadActionPerformed(evt);
             }
         });
 
-        numpadMinus.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        numpadMinus.setText("-");
-        numpadMinus.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpadMinus.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpadMinus.setName(""); // NOI18N
-        numpadMinus.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpadMinus.addActionListener(new java.awt.event.ActionListener() {
+        allClearPad.setText("AC");
+        allClearPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        allClearPad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpadMinusActionPerformed(evt);
+                allClearPadActionPerformed(evt);
             }
         });
 
-        numpadMultiply.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        numpadMultiply.setText("*");
-        numpadMultiply.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpadMultiply.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpadMultiply.setName(""); // NOI18N
-        numpadMultiply.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpadMultiply.addActionListener(new java.awt.event.ActionListener() {
+        multiplyPad.setText("*");
+        multiplyPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        multiplyPad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpadMultiplyActionPerformed(evt);
+                multiplyPadActionPerformed(evt);
             }
         });
 
-        numpadDivide.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numpadDivide.setText("/");
-        numpadDivide.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpadDivide.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpadDivide.setName(""); // NOI18N
-        numpadDivide.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpadDivide.addActionListener(new java.awt.event.ActionListener() {
+        dividePad.setText("/");
+        dividePad.setPreferredSize(new java.awt.Dimension(50, 50));
+        dividePad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpadDivideActionPerformed(evt);
+                dividePadActionPerformed(evt);
             }
         });
 
-        numpadPower.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        numpadPower.setText("^");
-        numpadPower.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpadPower.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpadPower.setName(""); // NOI18N
-        numpadPower.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpadPower.addActionListener(new java.awt.event.ActionListener() {
+        plusPad.setText("+");
+        plusPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        plusPad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpadPowerActionPerformed(evt);
+                plusPadActionPerformed(evt);
             }
         });
 
-        numpadRoot2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numpadRoot2.setText("√2");
-        numpadRoot2.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpadRoot2.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpadRoot2.setName(""); // NOI18N
-        numpadRoot2.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpadRoot2.addActionListener(new java.awt.event.ActionListener() {
+        minusPad.setText("-");
+        minusPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        minusPad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpadRoot2ActionPerformed(evt);
+                minusPadActionPerformed(evt);
             }
         });
 
-        numpadRoot3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numpadRoot3.setText("√3");
-        numpadRoot3.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpadRoot3.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpadRoot3.setName(""); // NOI18N
-        numpadRoot3.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpadRoot3.addActionListener(new java.awt.event.ActionListener() {
+        leftBracesPad.setText("(");
+        leftBracesPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        leftBracesPad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpadRoot3ActionPerformed(evt);
+                leftBracesPadActionPerformed(evt);
             }
         });
 
-        numpadFact.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numpadFact.setText("n!");
-        numpadFact.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpadFact.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpadFact.setName(""); // NOI18N
-        numpadFact.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpadFact.addActionListener(new java.awt.event.ActionListener() {
+        rightBracesPad.setText(")");
+        rightBracesPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        rightBracesPad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpadFactActionPerformed(evt);
+                rightBracesPadActionPerformed(evt);
             }
         });
 
-        numpadExp.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numpadExp.setText("exp");
-        numpadExp.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpadExp.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpadExp.setName(""); // NOI18N
-        numpadExp.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpadExp.addActionListener(new java.awt.event.ActionListener() {
+        sinPad.setText("sin");
+        sinPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        sinPad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpadExpActionPerformed(evt);
+                sinPadActionPerformed(evt);
             }
         });
 
-        numpadLog.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numpadLog.setText("log");
-        numpadLog.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpadLog.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpadLog.setName(""); // NOI18N
-        numpadLog.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpadLog.addActionListener(new java.awt.event.ActionListener() {
+        cosPad.setText("cos");
+        cosPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        cosPad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpadLogActionPerformed(evt);
+                cosPadActionPerformed(evt);
             }
         });
 
-        numpadPerm.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numpadPerm.setText("P()");
-        numpadPerm.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpadPerm.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpadPerm.setName(""); // NOI18N
-        numpadPerm.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpadPerm.addActionListener(new java.awt.event.ActionListener() {
+        tanPad.setText("tan");
+        tanPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        tanPad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpadPermActionPerformed(evt);
+                tanPadActionPerformed(evt);
             }
         });
 
-        numpadComb.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numpadComb.setText("C()");
-        numpadComb.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpadComb.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpadComb.setName(""); // NOI18N
-        numpadComb.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpadComb.addActionListener(new java.awt.event.ActionListener() {
+        factPad.setText("n!");
+        factPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        factPad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpadCombActionPerformed(evt);
+                factPadActionPerformed(evt);
             }
         });
 
-        numpadSin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numpadSin.setText("sin");
-        numpadSin.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpadSin.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpadSin.setName(""); // NOI18N
-        numpadSin.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpadSin.addActionListener(new java.awt.event.ActionListener() {
+        permutationPad.setText("P()");
+        permutationPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        permutationPad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpadSinActionPerformed(evt);
+                permutationPadActionPerformed(evt);
             }
         });
 
-        numpadCos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numpadCos.setText("cos");
-        numpadCos.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpadCos.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpadCos.setName(""); // NOI18N
-        numpadCos.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpadCos.addActionListener(new java.awt.event.ActionListener() {
+        combinationPad.setText("C()");
+        combinationPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        combinationPad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpadCosActionPerformed(evt);
+                combinationPadActionPerformed(evt);
             }
         });
 
-        numpadTan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numpadTan.setText("tan");
-        numpadTan.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpadTan.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpadTan.setName(""); // NOI18N
-        numpadTan.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpadTan.addActionListener(new java.awt.event.ActionListener() {
+        eulerPad.setText("exp");
+        eulerPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        eulerPad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpadTanActionPerformed(evt);
+                eulerPadActionPerformed(evt);
             }
         });
 
-        numpadPI.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numpadPI.setText("PI");
-        numpadPI.setMaximumSize(new java.awt.Dimension(75, 75));
-        numpadPI.setMinimumSize(new java.awt.Dimension(75, 75));
-        numpadPI.setName(""); // NOI18N
-        numpadPI.setPreferredSize(new java.awt.Dimension(50, 50));
-        numpadPI.addActionListener(new java.awt.event.ActionListener() {
+        lnPad.setText("ln");
+        lnPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        lnPad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpadPIActionPerformed(evt);
+                lnPadActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout operatorPanelLayout = new javax.swing.GroupLayout(operatorPanel);
-        operatorPanel.setLayout(operatorPanelLayout);
-        operatorPanelLayout.setHorizontalGroup(
-            operatorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(operatorPanelLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(operatorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(operatorPanelLayout.createSequentialGroup()
-                        .addComponent(numpadSin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(numpadCos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(numpadTan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(numpadPI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(operatorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(operatorPanelLayout.createSequentialGroup()
-                            .addComponent(numpadExp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(numpadLog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(numpadPerm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(numpadComb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(operatorPanelLayout.createSequentialGroup()
-                            .addComponent(numpadPower, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(numpadRoot2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(numpadRoot3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(numpadFact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(operatorPanelLayout.createSequentialGroup()
-                            .addComponent(numpadPlus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(numpadMinus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(numpadMultiply, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(numpadDivide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(16, Short.MAX_VALUE))
-        );
-        operatorPanelLayout.setVerticalGroup(
-            operatorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(operatorPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(operatorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(numpadPI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(numpadTan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(numpadCos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(numpadSin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(operatorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(operatorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(numpadComb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(numpadPerm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(numpadLog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(numpadExp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(operatorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(numpadFact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(numpadRoot3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(numpadRoot2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(numpadPower, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addGroup(operatorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(numpadPlus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(numpadMinus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(numpadMultiply, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(numpadDivide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        numpadClearAll.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numpadClearAll.setText("Clear All");
-        numpadClearAll.setMaximumSize(new java.awt.Dimension(75, 100));
-        numpadClearAll.setMinimumSize(new java.awt.Dimension(75, 100));
-        numpadClearAll.setPreferredSize(new java.awt.Dimension(75, 100));
-        numpadClearAll.addActionListener(new java.awt.event.ActionListener() {
+        log10Pad.setText("L10");
+        log10Pad.setPreferredSize(new java.awt.Dimension(50, 50));
+        log10Pad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpadClearAllActionPerformed(evt);
+                log10PadActionPerformed(evt);
             }
         });
 
-        numpadBackspace.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numpadBackspace.setText("Backspace");
-        numpadBackspace.setMaximumSize(new java.awt.Dimension(75, 100));
-        numpadBackspace.setMinimumSize(new java.awt.Dimension(75, 100));
-        numpadBackspace.setPreferredSize(new java.awt.Dimension(75, 100));
-        numpadBackspace.addActionListener(new java.awt.event.ActionListener() {
+        logPad.setText("log");
+        logPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        logPad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpadBackspaceActionPerformed(evt);
+                logPadActionPerformed(evt);
             }
         });
 
-        numpadBL.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numpadBL.setText("(");
-        numpadBL.setMaximumSize(new java.awt.Dimension(75, 100));
-        numpadBL.setMinimumSize(new java.awt.Dimension(75, 100));
-        numpadBL.setPreferredSize(new java.awt.Dimension(75, 100));
-        numpadBL.addActionListener(new java.awt.event.ActionListener() {
+        cbrtPad.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        cbrtPad.setText("cbrt");
+        cbrtPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        cbrtPad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpadBLActionPerformed(evt);
+                cbrtPadActionPerformed(evt);
             }
         });
 
-        numpadBR.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numpadBR.setText(")");
-        numpadBR.setMaximumSize(new java.awt.Dimension(75, 100));
-        numpadBR.setMinimumSize(new java.awt.Dimension(75, 100));
-        numpadBR.setPreferredSize(new java.awt.Dimension(75, 100));
-        numpadBR.addActionListener(new java.awt.event.ActionListener() {
+        modPad.setText("%");
+        modPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        modPad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numpadBRActionPerformed(evt);
+                modPadActionPerformed(evt);
             }
         });
+
+        expPad.setText("^");
+        expPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        expPad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                expPadActionPerformed(evt);
+            }
+        });
+
+        sqrtPad.setText("sqrt");
+        sqrtPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        sqrtPad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sqrtPadActionPerformed(evt);
+            }
+        });
+
+        copyrightLabel.setText("Copyright");
+
+        piPad.setText("PI");
+        piPad.setPreferredSize(new java.awt.Dimension(50, 50));
+        piPad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                piPadActionPerformed(evt);
+            }
+        });
+
+        decimalPad1.setText(",");
+        decimalPad1.setPreferredSize(new java.awt.Dimension(50, 50));
+        decimalPad1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                decimalPad1ActionPerformed(evt);
+            }
+        });
+
+        zeroPad1.setText("rad");
+        zeroPad1.setPreferredSize(new java.awt.Dimension(50, 50));
+        zeroPad1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                zeroPad1ActionPerformed(evt);
+            }
+        });
+
+        piPad1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        piPad1.setText("deg");
+        piPad1.setPreferredSize(new java.awt.Dimension(50, 50));
+        piPad1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                piPad1ActionPerformed(evt);
+            }
+        });
+
+        modeLabel.setText("Mode");
+
+        modeValue.setText(this.calculatorService.isDegree() ? "Degree" : "Radian");
 
         javax.swing.GroupLayout rootPanelLayout = new javax.swing.GroupLayout(rootPanel);
         rootPanel.setLayout(rootPanelLayout);
         rootPanelLayout.setHorizontalGroup(
             rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(rootPanelLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addGap(20, 20, 20)
                 .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rootPanelLayout.createSequentialGroup()
-                        .addComponent(operatorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(numpadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(inputField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(rootPanelLayout.createSequentialGroup()
+                            .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(rootPanelLayout.createSequentialGroup()
+                                    .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(rootPanelLayout.createSequentialGroup()
+                                            .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(fourPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(sevenPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(rootPanelLayout.createSequentialGroup()
+                                                    .addComponent(eightPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addComponent(ninePad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(rootPanelLayout.createSequentialGroup()
+                                                    .addComponent(fivePad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addComponent(sixPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGroup(rootPanelLayout.createSequentialGroup()
+                                            .addComponent(onePad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(twoPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(threePad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(rootPanelLayout.createSequentialGroup()
+                                            .addComponent(decimalPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(zeroPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(piPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGap(33, 33, 33)
+                                    .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(rootPanelLayout.createSequentialGroup()
+                                            .addComponent(multiplyPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(dividePad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(rootPanelLayout.createSequentialGroup()
+                                            .addComponent(plusPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(minusPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(rootPanelLayout.createSequentialGroup()
+                                            .addComponent(leftBracesPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(rightBracesPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(rootPanelLayout.createSequentialGroup()
+                                            .addComponent(modPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(expPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(rootPanelLayout.createSequentialGroup()
+                                    .addComponent(decimalPad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(zeroPad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(piPad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(27, 27, 27)
+                            .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(rootPanelLayout.createSequentialGroup()
+                                    .addComponent(lnPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(log10Pad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(logPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(rootPanelLayout.createSequentialGroup()
+                                    .addComponent(factPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(permutationPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(combinationPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(rootPanelLayout.createSequentialGroup()
+                                    .addComponent(sinPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(cosPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(tanPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(rootPanelLayout.createSequentialGroup()
+                                    .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(rootPanelLayout.createSequentialGroup()
+                                            .addComponent(eulerPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(sqrtPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(rootPanelLayout.createSequentialGroup()
+                                            .addComponent(deletePad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(allClearPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(equalPad, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cbrtPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(outputField)
+                        .addComponent(inputField)
+                        .addComponent(copyrightLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(rootPanelLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(numpadClearAll, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(numpadBackspace, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
-                        .addComponent(numpadBL, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(modeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(numpadBR, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                        .addComponent(modeValue, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         rootPanelLayout.setVerticalGroup(
             rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(rootPanelLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(inputField, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(numpadPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(operatorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(numpadClearAll, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(numpadBackspace, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(numpadBL, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(numpadBR, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addComponent(modeLabel)
+                    .addComponent(modeValue))
+                .addGap(4, 4, 4)
+                .addComponent(inputField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(outputField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sevenPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(eightPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ninePad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sinPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cosPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tanPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(modPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(expPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fourPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fivePad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sixPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(multiplyPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dividePad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(factPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(permutationPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(combinationPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(onePad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(twoPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(threePad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(plusPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(minusPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lnPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(log10Pad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(logPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(decimalPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(zeroPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rightBracesPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(leftBracesPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sqrtPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(eulerPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(piPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbrtPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(equalPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(allClearPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deletePad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(decimalPad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(zeroPad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(piPad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(copyrightLabel)
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -645,227 +583,242 @@ public class CalculatorFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void numpad5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpad5ActionPerformed
+    private void continueOperationHandling() {
+        if (!outputField.getText().isEmpty()) {
+            inputField.setText(outputField.getText());
+            outputField.setText("");
+        }
+    }
+
+    private void decimalPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decimalPadActionPerformed
         // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("5"));
-        }
-    }//GEN-LAST:event_numpad5ActionPerformed
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("."));
+    }//GEN-LAST:event_decimalPadActionPerformed
 
-    private void numpad8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpad8ActionPerformed
+    private void zeroPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zeroPadActionPerformed
         // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("8"));
-        }
-    }//GEN-LAST:event_numpad8ActionPerformed
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("0"));
+    }//GEN-LAST:event_zeroPadActionPerformed
 
-    private void numpadEqualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpadEqualActionPerformed
+    private void equalPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equalPadActionPerformed
         // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("="));
-        }
-    }//GEN-LAST:event_numpadEqualActionPerformed
+        double result = calculatorService.calculateExpression(inputField.getText());
+        outputField.setText(Double.toString(result));
+    }//GEN-LAST:event_equalPadActionPerformed
 
-    private void numpadCombActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpadCombActionPerformed
+    private void onePadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onePadActionPerformed
         // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("C"));
-        }
-    }//GEN-LAST:event_numpadCombActionPerformed
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("1"));
+    }//GEN-LAST:event_onePadActionPerformed
 
-    private void numpadPermActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpadPermActionPerformed
+    private void twoPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twoPadActionPerformed
         // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("P"));
-        }
-    }//GEN-LAST:event_numpadPermActionPerformed
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("2"));
+    }//GEN-LAST:event_twoPadActionPerformed
 
-    private void numpadLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpadLogActionPerformed
-        // TODO add your handling code here
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("L"));
-        }
-    }//GEN-LAST:event_numpadLogActionPerformed
-
-    private void numpadPowerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpadPowerActionPerformed
+    private void threePadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_threePadActionPerformed
         // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("^"));
-        }
-    }//GEN-LAST:event_numpadPowerActionPerformed
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("3"));
+    }//GEN-LAST:event_threePadActionPerformed
 
-    private void numpadExpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpadExpActionPerformed
+    private void fourPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fourPadActionPerformed
         // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("e"));
-        }
-    }//GEN-LAST:event_numpadExpActionPerformed
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("4"));
+    }//GEN-LAST:event_fourPadActionPerformed
 
-    private void numpadDotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpadDotActionPerformed
+    private void fivePadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fivePadActionPerformed
         // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("."));
-        }
-    }//GEN-LAST:event_numpadDotActionPerformed
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("5"));
+    }//GEN-LAST:event_fivePadActionPerformed
 
-    private void numpad0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpad0ActionPerformed
+    private void sixPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sixPadActionPerformed
         // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("0"));
-        }
-    }//GEN-LAST:event_numpad0ActionPerformed
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("6"));
+    }//GEN-LAST:event_sixPadActionPerformed
 
-    private void numpad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpad1ActionPerformed
+    private void sevenPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sevenPadActionPerformed
         // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("1"));
-        }
-    }//GEN-LAST:event_numpad1ActionPerformed
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("7"));
+    }//GEN-LAST:event_sevenPadActionPerformed
 
-    private void numpad2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpad2ActionPerformed
+    private void eightPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eightPadActionPerformed
         // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("2"));
-        }
-    }//GEN-LAST:event_numpad2ActionPerformed
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("8"));
+    }//GEN-LAST:event_eightPadActionPerformed
 
-    private void numpad3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpad3ActionPerformed
+    private void ninePadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ninePadActionPerformed
         // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("3"));
-        }
-    }//GEN-LAST:event_numpad3ActionPerformed
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("9"));
+    }//GEN-LAST:event_ninePadActionPerformed
 
-    private void numpad4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpad4ActionPerformed
+    private void deletePadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePadActionPerformed
         // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("4"));
+        String currentText = inputField.getText();
+        if (!currentText.isEmpty() && outputField.getText().isEmpty()) {
+            inputField.setText(currentText.substring(0, currentText.length() - 1));
         }
-    }//GEN-LAST:event_numpad4ActionPerformed
 
-    private void numpad6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpad6ActionPerformed
+        if (!currentText.isEmpty() && outputField.getText().isEmpty()) {
+            inputField.setText("");
+            outputField.setText("");
+        }
+    }//GEN-LAST:event_deletePadActionPerformed
+
+    private void allClearPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allClearPadActionPerformed
         // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("6"));
-        }
-    }//GEN-LAST:event_numpad6ActionPerformed
-
-    private void numpad7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpad7ActionPerformed
-        // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("7"));
-        }
-    }//GEN-LAST:event_numpad7ActionPerformed
-
-    private void numpad9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpad9ActionPerformed
-        // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("9"));
-        }
-    }//GEN-LAST:event_numpad9ActionPerformed
-
-    private void numpadPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpadPlusActionPerformed
-        // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("+"));
-        }
-    }//GEN-LAST:event_numpadPlusActionPerformed
-
-    private void numpadMinusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpadMinusActionPerformed
-        // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("-"));
-        }
-    }//GEN-LAST:event_numpadMinusActionPerformed
-
-    private void numpadMultiplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpadMultiplyActionPerformed
-        // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("*"));
-        }
-    }//GEN-LAST:event_numpadMultiplyActionPerformed
-
-    private void numpadDivideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpadDivideActionPerformed
-        // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("/"));
-        }
-    }//GEN-LAST:event_numpadDivideActionPerformed
-
-    private void numpadBLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpadBLActionPerformed
-        // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("("));
-        }
-    }//GEN-LAST:event_numpadBLActionPerformed
-
-    private void numpadBRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpadBRActionPerformed
-        // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat(")"));
-        }
-    }//GEN-LAST:event_numpadBRActionPerformed
-
-    private void numpadClearAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpadClearAllActionPerformed
-        // TODO add your handling code here
         inputField.setText("");
-    }//GEN-LAST:event_numpadClearAllActionPerformed
+        outputField.setText("");
+    }//GEN-LAST:event_allClearPadActionPerformed
 
-    private void numpadRoot2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpadRoot2ActionPerformed
+    private void multiplyPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiplyPadActionPerformed
         // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("sq"));
-        }
-    }//GEN-LAST:event_numpadRoot2ActionPerformed
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("*"));
+    }//GEN-LAST:event_multiplyPadActionPerformed
 
-    private void numpadRoot3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpadRoot3ActionPerformed
+    private void dividePadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dividePadActionPerformed
         // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("cb"));
-        }
-    }//GEN-LAST:event_numpadRoot3ActionPerformed
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("/"));
+    }//GEN-LAST:event_dividePadActionPerformed
 
-    private void numpadFactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpadFactActionPerformed
+    private void plusPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plusPadActionPerformed
         // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("F"));
-        }
-    }//GEN-LAST:event_numpadFactActionPerformed
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("+"));
+    }//GEN-LAST:event_plusPadActionPerformed
 
-    private void numpadSinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpadSinActionPerformed
+    private void minusPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minusPadActionPerformed
         // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("sin"));
-        }
-    }//GEN-LAST:event_numpadSinActionPerformed
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("-"));
+    }//GEN-LAST:event_minusPadActionPerformed
 
-    private void numpadCosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpadCosActionPerformed
+    private void leftBracesPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leftBracesPadActionPerformed
         // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("cos"));
-        }
-    }//GEN-LAST:event_numpadCosActionPerformed
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("("));
+    }//GEN-LAST:event_leftBracesPadActionPerformed
 
-    private void numpadTanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpadTanActionPerformed
+    private void rightBracesPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rightBracesPadActionPerformed
         // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("tan"));
-        }
-    }//GEN-LAST:event_numpadTanActionPerformed
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat(")"));
+    }//GEN-LAST:event_rightBracesPadActionPerformed
 
-    private void numpadPIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpadPIActionPerformed
+    private void sinPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sinPadActionPerformed
         // TODO add your handling code here:
-        if (inputField.getText().length() < 20) {
-            inputField.setText(inputField.getText().concat("3.14"));
-        }
-    }//GEN-LAST:event_numpadPIActionPerformed
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("sin"));
+    }//GEN-LAST:event_sinPadActionPerformed
 
-    private void numpadBackspaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numpadBackspaceActionPerformed
+    private void cosPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cosPadActionPerformed
         // TODO add your handling code here:
-        if (!inputField.getText().isEmpty()) {
-            inputField.setText(inputField.getText().substring(0, inputField.getText().length() - 1));
-        }
-    }//GEN-LAST:event_numpadBackspaceActionPerformed
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("cos"));
+    }//GEN-LAST:event_cosPadActionPerformed
+
+    private void tanPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tanPadActionPerformed
+        // TODO add your handling code here:
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("tan"));
+    }//GEN-LAST:event_tanPadActionPerformed
+
+    private void factPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_factPadActionPerformed
+        // TODO add your handling code here:
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("!"));
+    }//GEN-LAST:event_factPadActionPerformed
+
+    private void permutationPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_permutationPadActionPerformed
+        // TODO add your handling code here:
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("P("));
+    }//GEN-LAST:event_permutationPadActionPerformed
+
+    private void combinationPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combinationPadActionPerformed
+        // TODO add your handling code here:
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("C("));
+    }//GEN-LAST:event_combinationPadActionPerformed
+
+    private void eulerPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eulerPadActionPerformed
+        // TODO add your handling code here:
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("exp("));
+    }//GEN-LAST:event_eulerPadActionPerformed
+
+    private void lnPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lnPadActionPerformed
+        // TODO add your handling code here:
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("ln("));
+    }//GEN-LAST:event_lnPadActionPerformed
+
+    private void cbrtPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbrtPadActionPerformed
+        // TODO add your handling code here:
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("root(3, "));
+    }//GEN-LAST:event_cbrtPadActionPerformed
+
+    private void modPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modPadActionPerformed
+        // TODO add your handling code here:
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("mod("));
+    }//GEN-LAST:event_modPadActionPerformed
+
+    private void expPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expPadActionPerformed
+        // TODO add your handling code here:
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("^"));
+    }//GEN-LAST:event_expPadActionPerformed
+
+    private void sqrtPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sqrtPadActionPerformed
+        // TODO add your handling code here:
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("sqrt("));
+    }//GEN-LAST:event_sqrtPadActionPerformed
+
+    private void piPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_piPadActionPerformed
+        // TODO add your handling code here:
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("pi"));
+    }//GEN-LAST:event_piPadActionPerformed
+
+    private void log10PadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_log10PadActionPerformed
+        // TODO add your handling code here:
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("log10("));
+    }//GEN-LAST:event_log10PadActionPerformed
+
+    private void logPadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logPadActionPerformed
+        // TODO add your handling code here:
+        continueOperationHandling();
+        inputField.setText(inputField.getText().concat("log("));
+    }//GEN-LAST:event_logPadActionPerformed
+
+    private void decimalPad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decimalPad1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_decimalPad1ActionPerformed
+
+    private void zeroPad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zeroPad1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_zeroPad1ActionPerformed
+
+    private void piPad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_piPad1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_piPad1ActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -893,41 +846,49 @@ public class CalculatorFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton allClearPad;
+    private javax.swing.JButton cbrtPad;
+    private javax.swing.JButton combinationPad;
+    private javax.swing.JLabel copyrightLabel;
+    private javax.swing.JButton cosPad;
+    private javax.swing.JButton decimalPad;
+    private javax.swing.JButton decimalPad1;
+    private javax.swing.JButton deletePad;
+    private javax.swing.JButton dividePad;
+    private javax.swing.JButton eightPad;
+    private javax.swing.JButton equalPad;
+    private javax.swing.JButton eulerPad;
+    private javax.swing.JButton expPad;
+    private javax.swing.JButton factPad;
+    private javax.swing.JButton fivePad;
+    private javax.swing.JButton fourPad;
     private javax.swing.JTextField inputField;
-    private javax.swing.JButton numpad0;
-    private javax.swing.JButton numpad1;
-    private javax.swing.JButton numpad2;
-    private javax.swing.JButton numpad3;
-    private javax.swing.JButton numpad4;
-    private javax.swing.JButton numpad5;
-    private javax.swing.JButton numpad6;
-    private javax.swing.JButton numpad7;
-    private javax.swing.JButton numpad8;
-    private javax.swing.JButton numpad9;
-    private javax.swing.JButton numpadBL;
-    private javax.swing.JButton numpadBR;
-    private javax.swing.JButton numpadBackspace;
-    private javax.swing.JButton numpadClearAll;
-    private javax.swing.JButton numpadComb;
-    private javax.swing.JButton numpadCos;
-    private javax.swing.JButton numpadDivide;
-    private javax.swing.JButton numpadDot;
-    private javax.swing.JButton numpadEqual;
-    private javax.swing.JButton numpadExp;
-    private javax.swing.JButton numpadFact;
-    private javax.swing.JButton numpadLog;
-    private javax.swing.JButton numpadMinus;
-    private javax.swing.JButton numpadMultiply;
-    private javax.swing.JButton numpadPI;
-    private javax.swing.JPanel numpadPanel;
-    private javax.swing.JButton numpadPerm;
-    private javax.swing.JButton numpadPlus;
-    private javax.swing.JButton numpadPower;
-    private javax.swing.JButton numpadRoot2;
-    private javax.swing.JButton numpadRoot3;
-    private javax.swing.JButton numpadSin;
-    private javax.swing.JButton numpadTan;
-    private javax.swing.JPanel operatorPanel;
+    private javax.swing.JButton leftBracesPad;
+    private javax.swing.JButton lnPad;
+    private javax.swing.JButton log10Pad;
+    private javax.swing.JButton logPad;
+    private javax.swing.JButton minusPad;
+    private javax.swing.JButton modPad;
+    private javax.swing.JLabel modeLabel;
+    private javax.swing.JLabel modeValue;
+    private javax.swing.JButton multiplyPad;
+    private javax.swing.JButton ninePad;
+    private javax.swing.JButton onePad;
+    private javax.swing.JTextField outputField;
+    private javax.swing.JButton permutationPad;
+    private javax.swing.JButton piPad;
+    private javax.swing.JButton piPad1;
+    private javax.swing.JButton plusPad;
+    private javax.swing.JButton rightBracesPad;
     private javax.swing.JPanel rootPanel;
+    private javax.swing.JButton sevenPad;
+    private javax.swing.JButton sinPad;
+    private javax.swing.JButton sixPad;
+    private javax.swing.JButton sqrtPad;
+    private javax.swing.JButton tanPad;
+    private javax.swing.JButton threePad;
+    private javax.swing.JButton twoPad;
+    private javax.swing.JButton zeroPad;
+    private javax.swing.JButton zeroPad1;
     // End of variables declaration//GEN-END:variables
 }

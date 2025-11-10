@@ -256,11 +256,15 @@ public class ParkingFrame extends javax.swing.JFrame {
             };
 
             parkingService.addVehicle(obj);
-            areaOutput.setText(areaOutput.getText().concat(parkingService.getMappedVehicleList()));
+
+            String areaOutputHeader = "No. Plat\tTipe\tWaktu Masuk\t\tWaktu Keluar\t\tSelisih Waktu\t\tBiaya Parkir";
+            areaOutput.setText("");
+            areaOutput.setText(areaOutputHeader.concat(parkingService.getMappedVehicleList()));
             totalValue.setText("Rp" + String.format("%,.2f", parkingService.calculateTotalRevenue()));
-            resetFieldAction();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            resetFieldAction();
         }
     }//GEN-LAST:event_addButtonActionPerformed
 

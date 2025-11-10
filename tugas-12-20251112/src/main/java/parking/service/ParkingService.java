@@ -16,10 +16,9 @@ import parking.utils.DatesTimeValidator;
 
 import java.time.Duration;
 import java.time.Period;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ArrayList;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 
 public class ParkingService {
     private final List<Vehicle> vehicleList;
@@ -78,12 +77,12 @@ public class ParkingService {
         LocalDateTime exitTime = v.getExitTime().toLocalDateTime();
 
         if (!exitTime.toLocalDate().equals(entryTime.toLocalDate())) {
-            long daysBetween = ChronoUnit.DAYS.between(entryTime, exitTime);
-            return daysBetween * v.getVehicleType().getCostPerDay();
+            Period period = Period.between(entryTime.toLocalDate(), exitTime.toLocalDate());
+            return period.getDays() * v.getVehicleType().getCostPerDay();
         }
 
         Duration duration = Duration.between(entryTime, exitTime);
-        long secondsBetween = duration.getSeconds();
+        long secondsBetween = duration.toSeconds();
 
         if (secondsBetween == 0) return 0.0;
 
@@ -108,13 +107,17 @@ public class ParkingService {
         LocalDateTime temp = entryTime.plus(period);
         Duration duration = Duration.between(temp, exitTime);
 
+        int hour = duration.toHoursPart() < 0 ? duration.toHoursPart() + 24 : duration.toHoursPart();
+        int min = duration.toMinutesPart() < 0 ? duration.toMinutesPart() + 60 : duration.toMinutesPart();
+        int sec = duration.toSecondsPart() < 0 ? duration.toSecondsPart() + 60 : duration.toSecondsPart();
+
         return new DatesTime(
                 period.getYears(),
                 period.getMonths(),
                 period.getDays(),
-                duration.toHoursPart(),
-                duration.toMinutesPart(),
-                duration.toSecondsPart());
+                hour,
+                min,
+                sec);
     }
 
     public String getMappedVehicleList() {
