@@ -10,6 +10,7 @@
 
 package parking.service;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import parking.classes.*;
@@ -18,23 +19,30 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("ParkingService unit tests")
 public class ParkingServiceTest {
+
+    @BeforeEach
+    public void setUp() {
+        // Clear singleton state before each test so tests are isolated
+        ParkingService.getInstance().getVehicleList().clear();
+    }
+
     @Test
     @DisplayName("addVehicle_acceptsValidVehicle")
     public void addVehicle_acceptsValidVehicle() {
-        ParkingService service = new ParkingService();
+        ParkingService service = ParkingService.getInstance();
         DatesTime entry = new DatesTime(2023, 1, 1, 10, 0, 0);
         DatesTime exit = new DatesTime(2023, 1, 1, 12, 0, 0);
         Car car = new Car("AB1234", entry, exit);
 
         assertDoesNotThrow(() -> service.addVehicle(car));
         assertEquals(1, service.getVehicleList().size());
-        assertSame(car, service.getVehicleList().getFirst());
+        assertSame(car, service.getVehicleList().get(0));
     }
 
     @Test
     @DisplayName("addVehicle_rejectsDuplicateLicensePlate")
     public void addVehicle_rejectsDuplicateLicensePlate() {
-        ParkingService service = new ParkingService();
+        ParkingService service = ParkingService.getInstance();
         DatesTime e1 = new DatesTime(2023, 1, 1, 8, 0, 0);
         DatesTime x1 = new DatesTime(2023, 1, 1, 10, 0, 0);
         Car car1 = new Car("DUP123", e1, x1);
@@ -50,7 +58,7 @@ public class ParkingServiceTest {
     @Test
     @DisplayName("addVehicle_rejectsExitBeforeOrEqualEntry")
     public void addVehicle_rejectsExitBeforeOrEqualEntry() {
-        ParkingService service = new ParkingService();
+        ParkingService service = ParkingService.getInstance();
 
         // equal times
         DatesTime e = new DatesTime(2023, 1, 2, 9, 0, 0);
@@ -70,7 +78,7 @@ public class ParkingServiceTest {
     public void calculateParkingCost_zeroDuration_returnsZero() {
         DatesTime dt = new DatesTime(2023, 5, 5, 10, 0, 0);
         Car car = new Car("ZER0", dt, dt);
-        ParkingService service = new ParkingService();
+        ParkingService service = ParkingService.getInstance();
 
         double cost = service.calculateParkingCost(car);
         assertEquals(0.0, cost, 0.0001);
@@ -83,7 +91,7 @@ public class ParkingServiceTest {
         DatesTime entry = new DatesTime(2023, 6, 1, 10, 0, 0);
         DatesTime exit = new DatesTime(2023, 6, 1, 10, 30, 0);
         Car car = new Car("HOUR1", entry, exit);
-        ParkingService service = new ParkingService();
+        ParkingService service = ParkingService.getInstance();
 
         double expected = VehicleType.CAR.getCostPerHour() * 1;
         assertEquals(expected, service.calculateParkingCost(car), 0.0001);
@@ -102,30 +110,29 @@ public class ParkingServiceTest {
         DatesTime entry = new DatesTime(2023, 1, 1, 0, 0, 0);
         DatesTime exit = new DatesTime(2023, 1, 3, 0, 0, 0);
         Truck truck = new Truck("TRK1", entry, exit);
-        ParkingService service = new ParkingService();
+        ParkingService service = ParkingService.getInstance();
 
         double expected = 2 * VehicleType.TRUCK.getCostPerDay();
         assertEquals(expected, service.calculateParkingCost(truck), 0.0001);
     }
 
     @Test
-    @DisplayName("calculateParkingCost_multiday_crossMidnight_smallDiff_resultsInZeroAccordingToImplementation")
-    public void calculateParkingCost_multiday_crossMidnight_smallDiff_resultsInZeroAccordingToImplementation() {
-        // entry 23:00 on day1, exit 01:00 on day2 -> toLocalDate differ but ChronoUnit.DAYS.between may be 0
+    @DisplayName("calculateParkingCost_multiday_crossMidnight_smallDiff")
+    public void calculateParkingCost_multiday_crossMidnight_smallDiff() {
+        // entry 23:00 on day1, exit 01:00 on day2 -> treat as 1 day
         DatesTime entry = new DatesTime(2023, 2, 1, 23, 0, 0);
         DatesTime exit = new DatesTime(2023, 2, 2, 1, 0, 0);
         Truck truck = new Truck("TRK2", entry, exit);
-        ParkingService service = new ParkingService();
+        ParkingService service = ParkingService.getInstance();
 
         double cost = service.calculateParkingCost(truck);
-        // current implementation uses ChronoUnit.DAYS.between -> likely 0 for this interval, assert that behavior
-        assertEquals(0.0, cost, 0.0001);
+        assertEquals(50000.0, cost, 0.0001);
     }
 
     @Test
     @DisplayName("calculateTotalRevenue_sumsAllVehicleCosts")
     public void calculateTotalRevenue_sumsAllVehicleCosts() {
-        ParkingService service = new ParkingService();
+        ParkingService service = ParkingService.getInstance();
 
         // Car: 2 hours -> 2 * 15000
         DatesTime cEntry = new DatesTime(2023, 7, 1, 8, 0, 0);

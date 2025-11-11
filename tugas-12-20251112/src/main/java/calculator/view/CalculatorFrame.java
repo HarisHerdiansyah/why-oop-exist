@@ -110,6 +110,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
         outputField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         outputField.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
+        decimalPad.setBackground(new java.awt.Color(204, 204, 204));
+        decimalPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         decimalPad.setText(".");
         decimalPad.setPreferredSize(new java.awt.Dimension(50, 50));
         decimalPad.addActionListener(new java.awt.event.ActionListener() {
@@ -118,6 +120,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        zeroPad.setBackground(new java.awt.Color(204, 204, 204));
+        zeroPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         zeroPad.setText("0");
         zeroPad.setPreferredSize(new java.awt.Dimension(50, 50));
         zeroPad.addActionListener(new java.awt.event.ActionListener() {
@@ -126,6 +130,9 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        equalPad.setBackground(new java.awt.Color(102, 102, 102));
+        equalPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        equalPad.setForeground(new java.awt.Color(255, 255, 255));
         equalPad.setText("=");
         equalPad.setPreferredSize(new java.awt.Dimension(50, 50));
         equalPad.addActionListener(new java.awt.event.ActionListener() {
@@ -134,6 +141,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        onePad.setBackground(new java.awt.Color(204, 204, 204));
+        onePad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         onePad.setText("1");
         onePad.setPreferredSize(new java.awt.Dimension(50, 50));
         onePad.addActionListener(new java.awt.event.ActionListener() {
@@ -142,6 +151,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        twoPad.setBackground(new java.awt.Color(204, 204, 204));
+        twoPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         twoPad.setText("2");
         twoPad.setPreferredSize(new java.awt.Dimension(50, 50));
         twoPad.addActionListener(new java.awt.event.ActionListener() {
@@ -150,6 +161,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        threePad.setBackground(new java.awt.Color(204, 204, 204));
+        threePad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         threePad.setText("3");
         threePad.setPreferredSize(new java.awt.Dimension(50, 50));
         threePad.addActionListener(new java.awt.event.ActionListener() {
@@ -158,6 +171,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        fourPad.setBackground(new java.awt.Color(204, 204, 204));
+        fourPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         fourPad.setText("4");
         fourPad.setPreferredSize(new java.awt.Dimension(50, 50));
         fourPad.addActionListener(new java.awt.event.ActionListener() {
@@ -166,6 +181,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        fivePad.setBackground(new java.awt.Color(204, 204, 204));
+        fivePad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         fivePad.setText("5");
         fivePad.setPreferredSize(new java.awt.Dimension(50, 50));
         fivePad.addActionListener(new java.awt.event.ActionListener() {
@@ -174,6 +191,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        sixPad.setBackground(new java.awt.Color(204, 204, 204));
+        sixPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         sixPad.setText("6");
         sixPad.setPreferredSize(new java.awt.Dimension(50, 50));
         sixPad.addActionListener(new java.awt.event.ActionListener() {
@@ -182,6 +201,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        sevenPad.setBackground(new java.awt.Color(204, 204, 204));
+        sevenPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         sevenPad.setText("7");
         sevenPad.setPreferredSize(new java.awt.Dimension(50, 50));
         sevenPad.addActionListener(new java.awt.event.ActionListener() {
@@ -190,6 +211,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        eightPad.setBackground(new java.awt.Color(204, 204, 204));
+        eightPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         eightPad.setText("8");
         eightPad.setPreferredSize(new java.awt.Dimension(50, 50));
         eightPad.addActionListener(new java.awt.event.ActionListener() {
@@ -198,6 +221,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        ninePad.setBackground(new java.awt.Color(204, 204, 204));
+        ninePad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         ninePad.setText("9");
         ninePad.setPreferredSize(new java.awt.Dimension(50, 50));
         ninePad.addActionListener(new java.awt.event.ActionListener() {
@@ -206,6 +231,9 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        deletePad.setBackground(new java.awt.Color(255, 0, 0));
+        deletePad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        deletePad.setForeground(new java.awt.Color(255, 255, 255));
         deletePad.setText("D");
         deletePad.setPreferredSize(new java.awt.Dimension(50, 50));
         deletePad.addActionListener(new java.awt.event.ActionListener() {
@@ -214,6 +242,9 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        allClearPad.setBackground(new java.awt.Color(255, 0, 0));
+        allClearPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        allClearPad.setForeground(new java.awt.Color(255, 255, 255));
         allClearPad.setText("AC");
         allClearPad.setPreferredSize(new java.awt.Dimension(50, 50));
         allClearPad.addActionListener(new java.awt.event.ActionListener() {
@@ -222,6 +253,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        multiplyPad.setBackground(new java.awt.Color(204, 204, 204));
+        multiplyPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         multiplyPad.setText("*");
         multiplyPad.setPreferredSize(new java.awt.Dimension(50, 50));
         multiplyPad.addActionListener(new java.awt.event.ActionListener() {
@@ -230,6 +263,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        dividePad.setBackground(new java.awt.Color(204, 204, 204));
+        dividePad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         dividePad.setText("/");
         dividePad.setPreferredSize(new java.awt.Dimension(50, 50));
         dividePad.addActionListener(new java.awt.event.ActionListener() {
@@ -238,6 +273,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        plusPad.setBackground(new java.awt.Color(204, 204, 204));
+        plusPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         plusPad.setText("+");
         plusPad.setPreferredSize(new java.awt.Dimension(50, 50));
         plusPad.addActionListener(new java.awt.event.ActionListener() {
@@ -246,6 +283,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        minusPad.setBackground(new java.awt.Color(204, 204, 204));
+        minusPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         minusPad.setText("-");
         minusPad.setPreferredSize(new java.awt.Dimension(50, 50));
         minusPad.addActionListener(new java.awt.event.ActionListener() {
@@ -254,6 +293,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        leftBracesPad.setBackground(new java.awt.Color(204, 204, 204));
+        leftBracesPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         leftBracesPad.setText("(");
         leftBracesPad.setPreferredSize(new java.awt.Dimension(50, 50));
         leftBracesPad.addActionListener(new java.awt.event.ActionListener() {
@@ -262,6 +303,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        rightBracesPad.setBackground(new java.awt.Color(204, 204, 204));
+        rightBracesPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         rightBracesPad.setText(")");
         rightBracesPad.setPreferredSize(new java.awt.Dimension(50, 50));
         rightBracesPad.addActionListener(new java.awt.event.ActionListener() {
@@ -270,6 +313,9 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        sinPad.setBackground(new java.awt.Color(102, 102, 102));
+        sinPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        sinPad.setForeground(new java.awt.Color(255, 255, 255));
         sinPad.setText("sin");
         sinPad.setPreferredSize(new java.awt.Dimension(50, 50));
         sinPad.addActionListener(new java.awt.event.ActionListener() {
@@ -278,6 +324,9 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        cosPad.setBackground(new java.awt.Color(102, 102, 102));
+        cosPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        cosPad.setForeground(new java.awt.Color(255, 255, 255));
         cosPad.setText("cos");
         cosPad.setPreferredSize(new java.awt.Dimension(50, 50));
         cosPad.addActionListener(new java.awt.event.ActionListener() {
@@ -286,6 +335,9 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        tanPad.setBackground(new java.awt.Color(102, 102, 102));
+        tanPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tanPad.setForeground(new java.awt.Color(255, 255, 255));
         tanPad.setText("tan");
         tanPad.setPreferredSize(new java.awt.Dimension(50, 50));
         tanPad.addActionListener(new java.awt.event.ActionListener() {
@@ -294,6 +346,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        factPad.setBackground(new java.awt.Color(255, 204, 51));
+        factPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         factPad.setText("n!");
         factPad.setPreferredSize(new java.awt.Dimension(50, 50));
         factPad.addActionListener(new java.awt.event.ActionListener() {
@@ -302,6 +356,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        permutationPad.setBackground(new java.awt.Color(255, 204, 51));
+        permutationPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         permutationPad.setText("P()");
         permutationPad.setPreferredSize(new java.awt.Dimension(50, 50));
         permutationPad.addActionListener(new java.awt.event.ActionListener() {
@@ -310,6 +366,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        combinationPad.setBackground(new java.awt.Color(255, 204, 51));
+        combinationPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         combinationPad.setText("C()");
         combinationPad.setPreferredSize(new java.awt.Dimension(50, 50));
         combinationPad.addActionListener(new java.awt.event.ActionListener() {
@@ -318,6 +376,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        eulerPad.setBackground(new java.awt.Color(255, 204, 51));
+        eulerPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         eulerPad.setText("exp");
         eulerPad.setPreferredSize(new java.awt.Dimension(50, 50));
         eulerPad.addActionListener(new java.awt.event.ActionListener() {
@@ -326,6 +386,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        lnPad.setBackground(new java.awt.Color(255, 204, 51));
+        lnPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lnPad.setText("ln");
         lnPad.setPreferredSize(new java.awt.Dimension(50, 50));
         lnPad.addActionListener(new java.awt.event.ActionListener() {
@@ -334,6 +396,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        log10Pad.setBackground(new java.awt.Color(255, 204, 51));
         log10Pad.setText("L10");
         log10Pad.setPreferredSize(new java.awt.Dimension(50, 50));
         log10Pad.addActionListener(new java.awt.event.ActionListener() {
@@ -342,6 +405,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        logPad.setBackground(new java.awt.Color(255, 204, 51));
+        logPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         logPad.setText("log");
         logPad.setPreferredSize(new java.awt.Dimension(50, 50));
         logPad.addActionListener(new java.awt.event.ActionListener() {
@@ -350,6 +415,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        cbrtPad.setBackground(new java.awt.Color(255, 204, 51));
         cbrtPad.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         cbrtPad.setText("cbrt");
         cbrtPad.setPreferredSize(new java.awt.Dimension(50, 50));
@@ -359,6 +425,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        modPad.setBackground(new java.awt.Color(204, 204, 204));
+        modPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         modPad.setText("%");
         modPad.setPreferredSize(new java.awt.Dimension(50, 50));
         modPad.addActionListener(new java.awt.event.ActionListener() {
@@ -367,6 +435,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        expPad.setBackground(new java.awt.Color(204, 204, 204));
+        expPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         expPad.setText("^");
         expPad.setPreferredSize(new java.awt.Dimension(50, 50));
         expPad.addActionListener(new java.awt.event.ActionListener() {
@@ -375,6 +445,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        sqrtPad.setBackground(new java.awt.Color(255, 204, 51));
         sqrtPad.setText("sqrt");
         sqrtPad.setPreferredSize(new java.awt.Dimension(50, 50));
         sqrtPad.addActionListener(new java.awt.event.ActionListener() {
@@ -385,6 +456,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
 
         copyrightLabel.setText("Copyright @ Raissa (08) - Abraham (44) - Haris (74)");
 
+        piPad.setBackground(new java.awt.Color(204, 204, 204));
+        piPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         piPad.setText("PI");
         piPad.setPreferredSize(new java.awt.Dimension(50, 50));
         piPad.addActionListener(new java.awt.event.ActionListener() {
@@ -393,6 +466,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        commaPad.setBackground(new java.awt.Color(204, 204, 204));
+        commaPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         commaPad.setText(",");
         commaPad.setPreferredSize(new java.awt.Dimension(50, 50));
         commaPad.addActionListener(new java.awt.event.ActionListener() {
@@ -401,6 +476,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        radianPad.setBackground(new java.awt.Color(51, 51, 255));
+        radianPad.setForeground(new java.awt.Color(255, 255, 255));
         radianPad.setText("rad");
         radianPad.setPreferredSize(new java.awt.Dimension(50, 50));
         radianPad.addActionListener(new java.awt.event.ActionListener() {
@@ -409,7 +486,9 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        degreePad.setBackground(new java.awt.Color(51, 51, 255));
         degreePad.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        degreePad.setForeground(new java.awt.Color(255, 255, 255));
         degreePad.setText("deg");
         degreePad.setPreferredSize(new java.awt.Dimension(50, 50));
         degreePad.addActionListener(new java.awt.event.ActionListener() {
@@ -422,6 +501,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
 
         modeValue.setText(this.calculatorService.isDegree() ? "Degree" : "Radian");
 
+        toLeftPad.setBackground(new java.awt.Color(204, 204, 204));
+        toLeftPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         toLeftPad.setText("<");
         toLeftPad.setPreferredSize(new java.awt.Dimension(50, 50));
         toLeftPad.addActionListener(new java.awt.event.ActionListener() {
@@ -430,6 +511,8 @@ public class CalculatorFrame extends javax.swing.JFrame {
             }
         });
 
+        toRightPad.setBackground(new java.awt.Color(204, 204, 204));
+        toRightPad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         toRightPad.setText(">");
         toRightPad.setPreferredSize(new java.awt.Dimension(50, 50));
         toRightPad.addActionListener(new java.awt.event.ActionListener() {
@@ -474,7 +557,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
                                     .addComponent(zeroPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(piPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(rootPanelLayout.createSequentialGroup()
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rootPanelLayout.createSequentialGroup()
                                     .addComponent(commaPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(radianPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -538,7 +621,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
                                         .addComponent(cbrtPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addComponent(outputField)
                         .addComponent(inputField)
-                        .addComponent(copyrightLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(copyrightLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(rootPanelLayout.createSequentialGroup()
                         .addComponent(modeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -557,57 +640,68 @@ public class CalculatorFrame extends javax.swing.JFrame {
                 .addComponent(outputField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(sevenPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(eightPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ninePad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sinPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cosPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tanPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(modPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(expPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fourPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fivePad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sixPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(multiplyPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dividePad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(factPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(permutationPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(combinationPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(onePad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(twoPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(threePad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(plusPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(minusPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lnPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(log10Pad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(logPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(decimalPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(zeroPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rightBracesPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(leftBracesPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sqrtPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(eulerPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(piPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbrtPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(equalPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(allClearPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deletePad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(expPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(commaPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(radianPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(degreePad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(toLeftPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(toRightPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(degreePad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(rootPanelLayout.createSequentialGroup()
+                        .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(multiplyPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dividePad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(factPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(permutationPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(combinationPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(plusPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(minusPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lnPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(log10Pad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(logPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rightBracesPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(leftBracesPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sqrtPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(eulerPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbrtPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(equalPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(allClearPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(deletePad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(toLeftPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(toRightPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(rootPanelLayout.createSequentialGroup()
+                        .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(sevenPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(eightPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ninePad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(fourPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fivePad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sixPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(onePad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(twoPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(threePad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(rootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(decimalPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(zeroPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(piPad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addComponent(copyrightLabel)
-                .addGap(20, 20, 20))
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

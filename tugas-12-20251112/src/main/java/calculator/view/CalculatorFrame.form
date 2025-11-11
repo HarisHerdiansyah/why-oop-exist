@@ -85,7 +85,7 @@
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="piPad" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
                                       <Component id="commaPad" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="radianPad" min="-2" max="-2" attributes="0"/>
@@ -167,7 +167,7 @@
                           </Group>
                           <Component id="outputField" max="32767" attributes="0"/>
                           <Component id="inputField" max="32767" attributes="0"/>
-                          <Component id="copyrightLabel" alignment="0" max="32767" attributes="0"/>
+                          <Component id="copyrightLabel" alignment="1" min="-2" pref="520" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="modeLabel" min="-2" pref="60" max="-2" attributes="0"/>
@@ -192,62 +192,80 @@
                   <Component id="outputField" min="-2" pref="50" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="sevenPad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="eightPad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="ninePad" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="sinPad" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cosPad" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tanPad" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="modPad" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="expPad" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="fourPad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="fivePad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="sixPad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="multiplyPad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="dividePad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="factPad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="permutationPad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="combinationPad" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="onePad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="twoPad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="threePad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="plusPad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="minusPad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lnPad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="log10Pad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="logPad" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="decimalPad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="zeroPad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="rightBracesPad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="leftBracesPad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="sqrtPad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="eulerPad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="piPad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cbrtPad" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="14" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="equalPad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="allClearPad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="deletePad" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="commaPad" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="radianPad" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="degreePad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="toLeftPad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="toRightPad" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="multiplyPad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="dividePad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="factPad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="permutationPad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="combinationPad" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="plusPad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="minusPad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lnPad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="log10Pad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="logPad" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="rightBracesPad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="leftBracesPad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="sqrtPad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="eulerPad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbrtPad" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="equalPad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="allClearPad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="deletePad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="toLeftPad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="toRightPad" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="sevenPad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="eightPad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ninePad" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="fourPad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="fivePad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="sixPad" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="onePad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="twoPad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="threePad" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="decimalPad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="zeroPad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="piPad" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="6" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="copyrightLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -275,6 +293,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="decimalPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="."/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -286,6 +310,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="zeroPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="0"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -297,6 +327,15 @@
         </Component>
         <Component class="javax.swing.JButton" name="equalPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="66" red="66" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="="/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -308,6 +347,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="onePad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -319,6 +364,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="twoPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="2"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -330,6 +381,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="threePad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="3"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -341,6 +398,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="fourPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="4"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -352,6 +415,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="fivePad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="5"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -363,6 +432,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="sixPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="6"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -374,6 +449,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="sevenPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="7"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -385,6 +466,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="eightPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="8"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -396,6 +483,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="ninePad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="9"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -407,6 +500,15 @@
         </Component>
         <Component class="javax.swing.JButton" name="deletePad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="D"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -418,6 +520,15 @@
         </Component>
         <Component class="javax.swing.JButton" name="allClearPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="AC"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -429,6 +540,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="multiplyPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="*"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -440,6 +557,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="dividePad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="/"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -451,6 +574,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="plusPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="+"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -462,6 +591,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="minusPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="-"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -473,6 +608,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="leftBracesPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="("/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -484,6 +625,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="rightBracesPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value=")"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -495,6 +642,15 @@
         </Component>
         <Component class="javax.swing.JButton" name="sinPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="66" red="66" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="sin"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -506,6 +662,15 @@
         </Component>
         <Component class="javax.swing.JButton" name="cosPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="66" red="66" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="cos"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -517,6 +682,15 @@
         </Component>
         <Component class="javax.swing.JButton" name="tanPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="66" red="66" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="tan"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -528,6 +702,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="factPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="cc" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="n!"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -539,6 +719,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="permutationPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="cc" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="P()"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -550,6 +736,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="combinationPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="cc" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="C()"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -561,6 +753,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="eulerPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="cc" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="exp"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -572,6 +770,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="lnPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="cc" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="ln"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -583,6 +787,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="log10Pad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="cc" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="L10"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -594,6 +801,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="logPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="cc" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="log"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -605,6 +818,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="cbrtPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="cc" red="ff" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="11" style="0"/>
             </Property>
@@ -619,6 +835,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="modPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="%"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -630,6 +852,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="expPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="^"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -641,6 +869,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="sqrtPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="cc" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="sqrt"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -657,6 +888,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="piPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="PI"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -668,6 +905,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="commaPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value=","/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -679,6 +922,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="radianPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="33" red="33" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="rad"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -690,8 +939,14 @@
         </Component>
         <Component class="javax.swing.JButton" name="degreePad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="33" red="33" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="11" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="deg"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -716,6 +971,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="toLeftPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="&lt;"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
@@ -727,6 +988,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="toRightPad">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="&gt;"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 50]"/>
