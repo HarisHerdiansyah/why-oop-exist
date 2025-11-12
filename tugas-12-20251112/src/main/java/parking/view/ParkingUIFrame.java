@@ -283,6 +283,9 @@ public class ParkingUIFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         resetFieldAction();
         areaOutput.setText("No. Plat\tTipe\tWaktu Masuk\t\tWaktu Keluar\t\tLama Parkir\t\tBiaya Parkir");
+        totalValue.setText("Rp0,00");
+        ParkingService service = ParkingService.getInstance();
+        service.resetService();
     }//GEN-LAST:event_resetBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed

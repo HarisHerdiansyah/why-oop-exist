@@ -36,6 +36,10 @@ public class ParkingService {
         return instance;
     }
 
+    public void resetService() {
+        this.vehicleList.clear();
+    }
+
     public DatesTime datesTimeParser(String dateTimeStr) throws IllegalArgumentException {
         String[] parts = dateTimeStr.split(" ");
         String[] dateParts = parts[0].split("/");
