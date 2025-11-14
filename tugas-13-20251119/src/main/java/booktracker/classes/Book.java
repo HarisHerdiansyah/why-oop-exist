@@ -3,6 +3,7 @@ package booktracker.classes;
 import java.time.LocalDate;
 
 public class Book {
+    private int id;
     private String title;
     private BookCategory category;
     private LocalDate startDate;
@@ -10,9 +11,6 @@ public class Book {
     private int currentPage;
     private int totalPages;
     private Status status;
-
-    public Book() {
-    }
 
     public Book(String title, BookCategory category, LocalDate startDate, LocalDate endDate, int currentPage, int totalPages, Status status) {
         this.title = title;
@@ -22,6 +20,21 @@ public class Book {
         this.currentPage = currentPage;
         this.totalPages = totalPages;
         this.status = status;
+    }
+
+    public Book(int id, String title, BookCategory category, LocalDate startDate, LocalDate endDate, int currentPage, int totalPages, Status status) {
+        this.id = id;
+        this.title = title;
+        this.category = category;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.currentPage = currentPage;
+        this.totalPages = totalPages;
+        this.status = status;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getTitle() {

@@ -1,10 +1,16 @@
 package booktracker.classes;
 
 public class BookCategory {
+    private final int id;
     private String name;
 
-    public BookCategory(String name) {
+    public BookCategory(int id, String name) {
+        this.id = id;
         this.name = name;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
