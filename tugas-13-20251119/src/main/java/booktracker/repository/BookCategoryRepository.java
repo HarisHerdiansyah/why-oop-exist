@@ -26,7 +26,7 @@ public class BookCategoryRepository {
         return false;
     }
 
-    public List<BookCategory> getAll(String name) {
+    public List<BookCategory> getAll() {
         List<BookCategory> categories = new ArrayList<>();
         try {
             Conn instance = Conn.getInstance();

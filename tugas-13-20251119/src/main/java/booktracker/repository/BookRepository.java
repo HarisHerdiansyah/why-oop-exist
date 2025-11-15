@@ -6,7 +6,6 @@ import booktracker.classes.Status;
 import module.database.Conn;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
@@ -43,11 +42,11 @@ public class BookRepository {
         try {
             Conn instance = Conn.getInstance();
             Connection conn = instance.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("SELECT b.*, bc.name FROM books b JOIN book_category bc ON b.category = bc.id");
+            PreparedStatement stmt = conn.prepareStatement("SELECT b.*, bc.name FROM books b JOIN book_category bc ON b.category_id = bc.id");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 BookCategory category = new BookCategory(
-                    rs.getInt("category"),
+                    rs.getInt("category_id"),
                     rs.getString("name")
                 );
                 Book book = new Book(
@@ -73,12 +72,12 @@ public class BookRepository {
         try {
             Conn instance = Conn.getInstance();
             Connection conn = instance.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("SELECT b.*, bc.name FROM books b JOIN book_category bc ON b.category = bc.id WHERE b.id = ?");
+            PreparedStatement stmt = conn.prepareStatement("SELECT b.*, bc.name FROM books b JOIN book_category bc ON b.category_id = bc.id WHERE b.id = ?");
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 BookCategory category = new BookCategory(
-                    rs.getInt("category"),
+                    rs.getInt("category_id"),
                     rs.getString("name")
                 );
                 return new Book(

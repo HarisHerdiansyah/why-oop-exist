@@ -37,10 +37,10 @@ class Book {
         - Case 3: When currentPage is higher than totalPages, it will throw an exception.
         - Case 4: User can't set status back to NOT_STARTED.
         - Caes 5: User can't set status to COMPLETED as long as the currentPage is not equal to totalPages.
-    c. Delete a book
-    d. Search for books by title or category
-    e. View all books
-    f. View book details
+    c. Delete a book.
+    d. Search for books by title.
+    e. View all books and can be filtered by category.
+    f. View book details.
 
 ### SQL Schema
 ```MySQL
