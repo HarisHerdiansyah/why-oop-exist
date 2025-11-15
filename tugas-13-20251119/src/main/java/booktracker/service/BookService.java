@@ -15,7 +15,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class BookService {
-    private final BookRepository repo = new BookRepository();
+    private final BookRepository repo;
+
+    public BookService() {
+        this.repo = new BookRepository();
+    }
+
+    public BookService(BookRepository repo) {
+        this.repo = repo;
+    }
 
     public Response<Void> create(String title, BookCategory category, LocalDate startDate, int currentPage, int totalPages) {
         if (title == null || title.trim().isEmpty()) {
@@ -52,29 +60,39 @@ public class BookService {
         if (existing == null) {
             throw new BookNotFoundException("Book not found.");
         }
-        if (book.getCurrentPage() < 0 || book.getTotalPages() <= 0 || book.getCurrentPage() > book.getTotalPages()) {
-            throw new InvalidValueOfPageException("Invalid page values.");
+
+        int current = book.getCurrentPage();
+        int total = book.getTotalPages();
+
+        boolean existingInProgressOrCompleted = existing.getStatus().equals(Status.IN_PROGRESS) || existing.getStatus().equals(Status.COMPLETED);
+        if (existingInProgressOrCompleted && book.getStatus().equals(Status.NOT_STARTED)) {
+            throw new InvalidBookStatusException("Cannot change status back to NOT_STARTED once it is IN_PROGRESS or COMPLETED.");
         }
-        if (book.getStatus() == Status.NOT_STARTED && book.getCurrentPage() > 0) {
-            throw new InvalidBookStatusException("Cannot set status to NOT_STARTED if current page > 0.");
+
+        if (current < total && book.getStatus().equals(Status.COMPLETED)) {
+            throw new InvalidBookStatusException("Cannot set status to COMPLETED if current page is less than total pages.");
         }
-        if (book.getStatus() == Status.COMPLETED && book.getCurrentPage() != book.getTotalPages()) {
-            throw new InvalidBookStatusException("Cannot set status to COMPLETED unless current page equals total pages.");
+
+        if (current > total) {
+            throw new InvalidValueOfPageException("Current page cannot exceed total pages.");
         }
-        // Adjust status based on currentPage
-        if (book.getCurrentPage() == book.getTotalPages()) {
-            book.setStatus(Status.COMPLETED);
-        } else if (book.getCurrentPage() > 0) {
+
+        if ((current > 1 && current < total) && book.getStatus().equals(Status.NOT_STARTED)) {
             book.setStatus(Status.IN_PROGRESS);
-        } else {
-            book.setStatus(Status.NOT_STARTED);
         }
+
+        if (current == total && (book.getStatus().equals(Status.NOT_STARTED) || book.getStatus().equals(Status.IN_PROGRESS))) {
+            book.setStatus(Status.COMPLETED);
+        }
+
         boolean result = repo.update(book);
         if (!result) {
             throw new BookOperationException("Failed to update book.");
         }
+
         return new Response<>(true, "Book updated successfully.");
     }
+
 
     public Response<Void> delete(int id) {
         Book existing = repo.getById(id);

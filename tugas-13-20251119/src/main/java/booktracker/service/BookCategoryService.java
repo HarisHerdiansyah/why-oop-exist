@@ -9,9 +9,17 @@ import booktracker.exception.BookCategoryOperationException;
 import java.util.List;
 
 public class BookCategoryService {
-    private final BookCategoryRepository repo = new BookCategoryRepository();
+    private final BookCategoryRepository repo;
 
-    private boolean isInvalidName(String name) {
+    public BookCategoryService() {
+        this.repo = new BookCategoryRepository();
+    }
+
+    public BookCategoryService(BookCategoryRepository repo) {
+        this.repo = repo;
+    }
+
+    public boolean isInvalidName(String name) {
         return name == null || !name.matches("^[a-zA-Z]{4,20}$");
     }
 
