@@ -37,12 +37,24 @@ public class BookRepository {
         return false;
     }
 
-    public List<Book> getAll() {
+    public List<Book> getAll(String query) {
         List<Book> books = new ArrayList<>();
         try {
             Conn instance = Conn.getInstance();
             Connection conn = instance.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("SELECT b.*, bc.name FROM books b JOIN book_category bc ON b.category_id = bc.id");
+
+            String baseStmt = "SELECT b.*, bc.name FROM books b JOIN book_categories bc ON b.category_id = bc.id";
+            if (query != null && !query.isEmpty()) {
+                baseStmt += " WHERE b.title LIKE ? OR bc.name LIKE ?";
+            }
+
+            PreparedStatement stmt = conn.prepareStatement(baseStmt);
+            if (query != null && !query.isEmpty()) {
+                String likeQuery = "%" + query + "%";
+                stmt.setString(1, likeQuery);
+                stmt.setString(2, likeQuery);
+            }
+
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 BookCategory category = new BookCategory(
@@ -72,7 +84,7 @@ public class BookRepository {
         try {
             Conn instance = Conn.getInstance();
             Connection conn = instance.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("SELECT b.*, bc.name FROM books b JOIN book_category bc ON b.category_id = bc.id WHERE b.id = ?");
+            PreparedStatement stmt = conn.prepareStatement("SELECT b.*, bc.name FROM books b JOIN book_categories bc ON b.category_id = bc.id WHERE b.id = ?");
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {

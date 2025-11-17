@@ -42,7 +42,7 @@ public class BookService {
         Status status;
         if (currentPage == totalPages) {
             status = Status.COMPLETED;
-        } else if (currentPage > 0) {
+        } else if (currentPage > 1) {
             status = Status.IN_PROGRESS;
         } else {
             status = Status.NOT_STARTED;
@@ -106,25 +106,9 @@ public class BookService {
         return new Response<>(true, "Book deleted successfully.");
     }
 
-    public Response<List<Book>> searchByTitle(String title) {
-        List<Book> allBooks = repo.getAll();
-        List<Book> filtered = allBooks.stream()
-            .filter(b -> b.getTitle().toLowerCase().contains(title.toLowerCase()))
-            .collect(Collectors.toList());
-        return new Response<>(true, "Books found.", filtered);
-    }
-
-    public Response<List<Book>> getAll() {
-        List<Book> books = repo.getAll();
+    public Response<List<Book>> getAll(String query) {
+        List<Book> books = repo.getAll(query);
         return new Response<>(true, "Books retrieved successfully.", books);
-    }
-
-    public Response<List<Book>> getByCategory(BookCategory category) {
-        List<Book> allBooks = repo.getAll();
-        List<Book> filtered = allBooks.stream()
-            .filter(b -> b.getCategory().getId() == category.getId())
-            .collect(Collectors.toList());
-        return new Response<>(true, "Books retrieved successfully.", filtered);
     }
 
     public Response<Book> getById(int id) {

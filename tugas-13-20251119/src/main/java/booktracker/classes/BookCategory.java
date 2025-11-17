@@ -4,6 +4,11 @@ public class BookCategory {
     private final int id;
     private String name;
 
+    public BookCategory() {
+        this.id = 0;
+        this.name = "";
+    }
+
     public BookCategory(int id, String name) {
         this.id = id;
         this.name = name;

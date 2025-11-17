@@ -26,12 +26,19 @@ public class BookCategoryRepository {
         return false;
     }
 
-    public List<BookCategory> getAll() {
+    public List<BookCategory> getAll(String query) {
         List<BookCategory> categories = new ArrayList<>();
+        boolean queryProvided = query != null && !query.isEmpty();
         try {
             Conn instance = Conn.getInstance();
             Connection conn = instance.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM book_categories");
+
+            String baseStmt = "SELECT * FROM book_categories";
+            if (queryProvided) baseStmt += " WHERE name LIKE ?";
+
+            PreparedStatement stmt = conn.prepareStatement(baseStmt);
+            if (queryProvided) stmt.setString(1, "%" + query + "%");
+
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 BookCategory category = new BookCategory(
